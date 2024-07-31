@@ -15,31 +15,27 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     Timer(
-        Duration(seconds: 5),
+        Duration(seconds: 3),
         () => Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (BuildContext context) => Log_in()
-            )
-        )
-    );
+            MaterialPageRoute(builder: (BuildContext context) => Log_in())));
 
     var screen = MediaQuery.of(context);
 
     return SafeArea(
-      child: Scaffold(
-        body: Container(
-            height: screen.size.height,
-            width: screen.size.width,
-            decoration: BoxDecoration(
-              color: Color(hex('76CFE2')),
+        child: Scaffold(
+      body: Container(
+          height: screen.size.height,
+          width: screen.size.width,
+          decoration: BoxDecoration(
+            color: Color(hex('76CFE2')),
+          ),
+          child: Center(
+            child: Image.asset(
+              'assets/Logo/logo.png',
+              height: screen.size.height * ht(218),
             ),
-            child: Center(
-              child: Image.asset(
-                'Assets/Logo/logo.png',
-                height: screen.size.height * ht(218),
-              ),
-            )),
-      ),
-    );
+          )),
+    ));
   }
 }
 
