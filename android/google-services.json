@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "3200456624",
+    "project_id": "phymenapp",
+    "storage_bucket": "phymenapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:3200456624:android:a76a6e3cd582f5266aa875",
+        "android_client_info": {
+          "package_name": "com.android.application"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "3200456624-nhm6giae9g9fg9mhscl2hjmmoe4l9g42.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.android.application",
+            "certificate_hash": "44c3468e33bc477403d13cf1d3b6a2cfa8c08698"
+          }
+        },
+        {
+          "client_id": "3200456624-po3kuv2av2hcdskm0fh85v3ae6rc6b5d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnP-fUVo8wY8S_bwlOoHLjVdq6d8UcgRw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "3200456624-po3kuv2av2hcdskm0fh85v3ae6rc6b5d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
