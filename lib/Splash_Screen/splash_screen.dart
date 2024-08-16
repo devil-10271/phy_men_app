@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:phy_men_app/Auth/login.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 // import 'package:phy_men_app/Auth/signup.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -15,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     Timer(
-        Duration(seconds: 3),
+        Duration(seconds: 4),
         () => Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (BuildContext context) => Log_in())));
 
@@ -23,18 +24,32 @@ class _SplashScreenState extends State<SplashScreen> {
 
     return SafeArea(
         child: Scaffold(
-      body: Container(
-          height: screen.size.height,
-          width: screen.size.width,
-          decoration: BoxDecoration(
-            color: Color(hex('76CFE2')),
-          ),
-          child: Center(
-            child: Image.asset(
-              'assets/Logo/logo.png',
-              height: screen.size.height * ht(218),
-            ),
-          )),
+      body: Stack(
+        children: [
+          Container(
+              height: screen.size.height,
+              width: screen.size.width,
+              decoration: BoxDecoration(
+                color: Color(hex('76CFE2')),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Center(
+                    child: Image.asset(
+                      'assets/Logo/logo.png',
+                      height: screen.size.height * ht(218),
+                    ),
+                  ),
+                  LoadingAnimationWidget.threeArchedCircle(
+                      color: Colors.black, size: screen.size.height * ht(70))
+                ],
+              )),
+
+        ],
+
+      ),
     ));
   }
 }
