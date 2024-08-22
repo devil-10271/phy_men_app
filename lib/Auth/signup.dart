@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-
+import 'package:phy_men_app/main.dart';
 import 'package:phy_men_app/Auth/login.dart';
+
+dynamic met=methods();
 
 class Sign_Up extends StatefulWidget {
   const Sign_Up({super.key});
@@ -79,13 +81,13 @@ class _Sign_UpState extends State<Sign_Up> {
                                   enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(40),
                                       borderSide: BorderSide(
-                                          color: Color(hex('76CFE2')))),
+                                          color: Color(met.hex('76CFE2')))),
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: Color(hex('76CFE2')), width: 2),
+                                        color: Color(met.hex('76CFE2')), width: 2),
                                     borderRadius: BorderRadius.circular(20),
                                   ),
-                                  hintText: 'Enter First Name',
+                                  hintText: 'Enter User Name',
                                   hintStyle: TextStyle(
                                     color: Colors.grey,
                                   ),
@@ -96,54 +98,18 @@ class _Sign_UpState extends State<Sign_Up> {
                                 ),
                               ),
                               SizedBox(height: 10),
+
+
                               TextFormField(
                                 style: TextStyle(color: Colors.black),
                                 decoration: InputDecoration(
                                   enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(40),
                                       borderSide: BorderSide(
-                                          color: Color(hex('76CFE2')))),
+                                          color: Color(met.hex('76CFE2')))),
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: Color(hex('76CFE2')), width: 2),
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  hintText: 'Enter Middle Name ',
-                                  hintStyle: TextStyle(
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(height: 10),
-                              TextFormField(
-                                style: TextStyle(color: Colors.black),
-                                decoration: InputDecoration(
-                                  enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(40),
-                                      borderSide: BorderSide(
-                                          color: Color(hex('76CFE2')))),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Color(hex('76CFE2')), width: 2),
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  hintText: 'Enter Last Name ',
-                                  hintStyle: TextStyle(
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(height: 10),
-                              TextFormField(
-                                style: TextStyle(color: Colors.black),
-                                decoration: InputDecoration(
-                                  enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(40),
-                                      borderSide: BorderSide(
-                                          color: Color(hex('76CFE2')))),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Color(hex('76CFE2')), width: 2),
+                                        color: Color(met.hex('76CFE2')), width: 2),
                                     borderRadius: BorderRadius.circular(20),
                                   ),
                                   hintText: 'Enter Email',
@@ -159,10 +125,10 @@ class _Sign_UpState extends State<Sign_Up> {
                                   enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(40),
                                       borderSide: BorderSide(
-                                          color: Color(hex('76CFE2')))),
+                                          color: Color(met.hex('76CFE2')))),
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: Color(hex('76CFE2')), width: 2),
+                                        color: Color(met.hex('76CFE2')), width: 2),
                                     borderRadius: BorderRadius.circular(20),
                                   ),
                                   hintText: 'Enter Password',
@@ -178,10 +144,10 @@ class _Sign_UpState extends State<Sign_Up> {
                                   enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(40),
                                       borderSide: BorderSide(
-                                          color: Color(hex('76CFE2')))),
+                                          color: Color(met.hex('76CFE2')))),
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: Color(hex('76CFE2')), width: 2),
+                                        color: Color(met.hex('76CFE2')), width: 2),
                                     borderRadius: BorderRadius.circular(20),
                                   ),
                                   hintText: 'Enter Confirm Password',
@@ -190,19 +156,19 @@ class _Sign_UpState extends State<Sign_Up> {
                                   ),
                                 ),
                               ),
-                              Row(
-                                children: [
-                                  Checkbox(
-                                      value: isChecked,
-                                      checkColor: Colors.white,
-                                      onChanged: (bool? value) {
-                                        setState(() {
-                                          isChecked = value!;
-                                        });
-                                      }),
-                                  Text('I accept Terms and Conditions..')
-                                ],
-                              ),
+                              // Row(
+                              //   children: [
+                              //     Checkbox(
+                              //         value: isChecked,
+                              //         checkColor: Colors.white,
+                              //         onChanged: (bool? value) {
+                              //           setState(() {
+                              //             isChecked = value!;
+                              //           });
+                              //         }),
+                              //     Text('I accept Terms and Conditions..')
+                              //   ],
+                              // ),
 
                               SizedBox(height: 40),
                               ElevatedButton(
@@ -334,3 +300,6 @@ class _Sign_UpState extends State<Sign_Up> {
     );
   }
 }
+
+
+

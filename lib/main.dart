@@ -25,7 +25,24 @@ class MyApp extends StatelessWidget {
                 colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
                 useMaterial3: true,
               ),
-              home: Log_in());
+              home: SplashScreen());
         });
+  }
+}
+
+class methods{
+  double ht(int a) {
+    return a / 926;
+  }
+
+  double wt(int a) {
+    return a / 428;
+  }
+
+  int hex(String apple) {
+    String c = "0xff" + apple;
+    c = c.replaceAll('#', '');
+    int complete = int.parse(c);
+    return complete;
   }
 }

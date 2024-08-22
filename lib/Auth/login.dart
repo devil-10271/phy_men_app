@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:phy_men_app/Auth/signup.dart';
+import 'package:phy_men_app/main.dart';
+
+dynamic met=methods();
 
 class Log_in extends StatefulWidget {
   const Log_in({super.key});
@@ -72,19 +75,19 @@ class _Log_inState extends State<Log_in> {
                           child: Column(
                             children: [
                               TextFormField(
-                                textAlign: TextAlign.center,
+
                                 style: TextStyle(color: Colors.black),
                                 decoration: InputDecoration(
                                   enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(40),
                                       borderSide: BorderSide(
-                                          color: Color(hex('76CFE2')))),
+                                          color: Color(met.hex('76CFE2')))),
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: Color(hex('76CFE2')), width: 2),
+                                        color: Color(met.hex('76CFE2')), width: 2),
                                     borderRadius: BorderRadius.circular(20),
                                   ),
-                                  hintText: 'Email',
+                                  hintText: 'Enter Email',
                                   hintStyle: TextStyle(
                                     color: Colors.grey,
                                   ),
@@ -94,21 +97,21 @@ class _Log_inState extends State<Log_in> {
                                   // suffixIcon: Icon(Icons.email),
                                 ),
                               ),
-                              SizedBox(height: 20),
+                              SizedBox(height: 10),
                               TextFormField(
-                                textAlign: TextAlign.center,
+
                                 style: TextStyle(color: Colors.black),
                                 decoration: InputDecoration(
                                   enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(40),
                                       borderSide: BorderSide(
-                                          color: Color(hex('76CFE2')))),
+                                          color: Color(met.hex('76CFE2')))),
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: Color(hex('76CFE2')), width: 2),
+                                        color: Color(met.hex('76CFE2')), width: 2),
                                     borderRadius: BorderRadius.circular(20),
                                   ),
-                                  hintText: 'Password',
+                                  hintText: 'Enter Password',
                                   hintStyle: TextStyle(
                                     color: Colors.grey,
                                   ),
@@ -230,9 +233,7 @@ class _Log_inState extends State<Log_in> {
                                 ),
                               ),
                               TextButton(
-                                onPressed: () {
-
-                                },
+                                onPressed: () {},
                                 child: Text(
                                   'Forgot Password?',
                                   style: TextStyle(
@@ -256,9 +257,3 @@ class _Log_inState extends State<Log_in> {
   }
 }
 
-int hex(String apple) {
-  String c = "0xff" + apple;
-  c = c.replaceAll('#', '');
-  int complete = int.parse(c);
-  return complete;
-}
