@@ -17,6 +17,7 @@ class _Log_inState extends State<Log_in> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.white,
         body: SingleChildScrollView(
           // Wrap with SingleChildScrollView
           child: Column(
@@ -78,6 +79,7 @@ class _Log_inState extends State<Log_in> {
 
                                 style: TextStyle(color: Colors.black),
                                 decoration: InputDecoration(
+                                  fillColor: Color(met.hex('76CFE2')),
                                   enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(40),
                                       borderSide: BorderSide(
