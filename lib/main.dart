@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:phy_men_app/Home/Home_page.dart';
+import 'package:phy_men_app/Home/Physical/PhysicalHealth.dart';
+import 'package:phy_men_app/Home/Physical/Yoga/yoga.dart';
+import 'package:phy_men_app/Profile/edit_profile.dart';
 import 'Splash_Screen/splash_screen.dart';
 import 'Auth/login.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -25,21 +29,21 @@ class MyApp extends StatelessWidget {
                 colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
                 useMaterial3: true,
               ),
-              home: SplashScreen());
+              home: Physicalhealth());
         });
   }
 }
 
-class methods{
-  double ht(int a) {
+class methods {
+  static double ht(int a) {
     return a / 926;
   }
 
-  double wt(int a) {
+  static double wt(int a) {
     return a / 428;
   }
 
-  int hex(String apple) {
+  static int hex(String apple) {
     String c = "0xff" + apple;
     c = c.replaceAll('#', '');
     int complete = int.parse(c);

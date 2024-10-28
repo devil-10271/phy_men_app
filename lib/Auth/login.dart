@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:phy_men_app/Auth/signup.dart';
+import 'package:phy_men_app/Home/Home_page.dart';
 import 'package:phy_men_app/main.dart';
-
-dynamic met=methods();
 
 class Log_in extends StatefulWidget {
   const Log_in({super.key});
@@ -76,17 +75,17 @@ class _Log_inState extends State<Log_in> {
                           child: Column(
                             children: [
                               TextFormField(
-
                                 style: TextStyle(color: Colors.black),
                                 decoration: InputDecoration(
-                                  fillColor: Color(met.hex('76CFE2')),
+                                  fillColor: Color(methods.hex('76CFE2')),
                                   enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(40),
                                       borderSide: BorderSide(
-                                          color: Color(met.hex('76CFE2')))),
+                                          color: Color(methods.hex('76CFE2')))),
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: Color(met.hex('76CFE2')), width: 2),
+                                        color: Color(methods.hex('76CFE2')),
+                                        width: 2),
                                     borderRadius: BorderRadius.circular(20),
                                   ),
                                   hintText: 'Enter Email',
@@ -101,16 +100,16 @@ class _Log_inState extends State<Log_in> {
                               ),
                               SizedBox(height: 10),
                               TextFormField(
-
                                 style: TextStyle(color: Colors.black),
                                 decoration: InputDecoration(
                                   enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(40),
                                       borderSide: BorderSide(
-                                          color: Color(met.hex('76CFE2')))),
+                                          color: Color(methods.hex('76CFE2')))),
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: Color(met.hex('76CFE2')), width: 2),
+                                        color: Color(methods.hex('76CFE2')),
+                                        width: 2),
                                     borderRadius: BorderRadius.circular(20),
                                   ),
                                   hintText: 'Enter Password',
@@ -121,7 +120,9 @@ class _Log_inState extends State<Log_in> {
                               ),
                               SizedBox(height: 60),
                               ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage()));
+                                },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor:
                                       Color.fromARGB(255, 129, 218, 250),
@@ -258,4 +259,3 @@ class _Log_inState extends State<Log_in> {
     ;
   }
 }
-

@@ -38,6 +38,7 @@ dependencies:
   animated_text_kit: ^4.2.2
   flutter_screenutil: ^5.9.3
   loading_animation_widget: ^1.2.1
+  image_picker: ^0.8.3+1
 
 dev_dependencies:
   flutter_test:
@@ -61,8 +62,13 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
+     - assets/
      - assets/Logo/
      - assets/Company_icon/
+     - assets/Image/Edit_Profile/
+     - assets/Image/Yoga/
+     - assets/Image/Home/
+     - assets/Image/Physical_Health/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
