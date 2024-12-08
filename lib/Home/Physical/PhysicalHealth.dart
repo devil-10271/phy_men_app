@@ -20,7 +20,7 @@ class _PhysicalhealthState extends State<Physicalhealth> {
             children: [
               //background leaf image
               Container(
-                width:  167,
+                width: 167,
                 height: 926,
                 child: Image.asset(
                   'assets/Image/Physical_Health/back.png',
@@ -277,16 +277,16 @@ class _PhysicalhealthState extends State<Physicalhealth> {
                         Padding(
                           padding: EdgeInsets.only(left: 4, top: 12),
                           child: Container(
-                            width:  ScreenUtil().setWidth(107),
+                            width: ScreenUtil().setWidth(107),
                             height: ScreenUtil().setHeight(36),
                             child: Expanded(
                               child: Text(
                                 'Weight Management',
                                 style: TextStyle(
-                                    color: Colors.black,
-                                    fontFamily: 'Montserrat',
-                                    fontWeight: FontWeight.w700,
-                                   ),
+                                  color: Colors.black,
+                                  fontFamily: 'Montserrat',
+                                  fontWeight: FontWeight.w700,
+                                ),
                                 overflow: TextOverflow.visible,
                               ),
                             ),
@@ -296,13 +296,13 @@ class _PhysicalhealthState extends State<Physicalhealth> {
                           child: Padding(
                             padding: EdgeInsets.only(top: 35, left: 100),
                             child: Container(
-                              width:  ScreenUtil().setWidth(60),
+                              width: ScreenUtil().setWidth(60),
                               height: ScreenUtil().setHeight(60),
                               //color: Colors.amberAccent,
                               child: Center(
                                 child: Image.asset(
                                   'assets/Image/Physical_Health/healthicons_weight-outline.png',
-                                  width:  ScreenUtil().setWidth(44),
+                                  width: ScreenUtil().setWidth(44),
                                   height: ScreenUtil().setHeight(44),
                                 ),
                               ),
@@ -320,7 +320,7 @@ class _PhysicalhealthState extends State<Physicalhealth> {
               Padding(
                 padding: EdgeInsets.only(top: 525),
                 child: Container(
-                  width:  ScreenUtil().setWidth(430),
+                  width: ScreenUtil().setWidth(430),
                   height: ScreenUtil().setHeight(407),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.only(
@@ -333,7 +333,7 @@ class _PhysicalhealthState extends State<Physicalhealth> {
                     padding: EdgeInsets.only(top: 71),
                     child: Image.asset(
                       'assets/Image/Physical_Health/eating.png',
-                      width:  ScreenUtil().setWidth(334),
+                      width: ScreenUtil().setWidth(334),
                       height: ScreenUtil().setHeight(335),
                     ),
                   ),

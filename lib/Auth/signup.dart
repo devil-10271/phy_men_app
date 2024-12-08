@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:phy_men_app/main.dart';
 import 'package:phy_men_app/Auth/login.dart';
+import 'package:phy_men_app/main.dart';
 
 dynamic met=methods();
 
@@ -82,10 +83,10 @@ class _Sign_UpState extends State<Sign_Up> {
                                   enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(40),
                                       borderSide: BorderSide(
-                                          color: Color(met.hex('76CFE2')))),
+                                          color: Color(methods.hex('76CFE2')))),
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: Color(met.hex('76CFE2')), width: 2),
+                                        color: Color(methods.hex('76CFE2')), width: 2),
                                     borderRadius: BorderRadius.circular(20),
                                   ),
                                   hintText: 'Enter User Name',
@@ -107,10 +108,10 @@ class _Sign_UpState extends State<Sign_Up> {
                                   enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(40),
                                       borderSide: BorderSide(
-                                          color: Color(met.hex('76CFE2')))),
+                                          color: Color(methods.hex('76CFE2')))),
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: Color(met.hex('76CFE2')), width: 2),
+                                        color: Color(methods.hex('76CFE2')), width: 2),
                                     borderRadius: BorderRadius.circular(20),
                                   ),
                                   hintText: 'Enter Email',
@@ -126,10 +127,10 @@ class _Sign_UpState extends State<Sign_Up> {
                                   enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(40),
                                       borderSide: BorderSide(
-                                          color: Color(met.hex('76CFE2')))),
+                                          color: Color(methods.hex('76CFE2')))),
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: Color(met.hex('76CFE2')), width: 2),
+                                        color: Color(methods.hex('76CFE2')), width: 2),
                                     borderRadius: BorderRadius.circular(20),
                                   ),
                                   hintText: 'Enter Password',
@@ -145,10 +146,10 @@ class _Sign_UpState extends State<Sign_Up> {
                                   enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(40),
                                       borderSide: BorderSide(
-                                          color: Color(met.hex('76CFE2')))),
+                                          color: Color(methods.hex('76CFE2')))),
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: Color(met.hex('76CFE2')), width: 2),
+                                        color: Color(methods.hex('76CFE2')), width: 2),
                                     borderRadius: BorderRadius.circular(20),
                                   ),
                                   hintText: 'Enter Confirm Password',
