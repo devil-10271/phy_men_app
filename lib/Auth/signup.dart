@@ -1,7 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:phy_men_app/firebase_auth_implementation/firebase_auth_services.dart';
 import 'package:phy_men_app/main.dart';
 import 'package:phy_men_app/Auth/login.dart';
-import 'package:phy_men_app/main.dart';
 
 dynamic met=methods();
 
@@ -14,6 +15,19 @@ class Sign_Up extends StatefulWidget {
 
 class _Sign_UpState extends State<Sign_Up> {
   bool isChecked = false;
+  final FirebaseAuthServices _auth = FirebaseAuthServices();
+  TextEditingController _usernameController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _usernameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    // TODO: implement dispose
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,6 +92,7 @@ class _Sign_UpState extends State<Sign_Up> {
                           child: Column(
                             children: [
                               TextFormField(
+                                controller: _usernameController,
                                 style: TextStyle(color: Colors.black),
                                 decoration: InputDecoration(
                                   enabledBorder: OutlineInputBorder(
@@ -100,9 +115,8 @@ class _Sign_UpState extends State<Sign_Up> {
                                 ),
                               ),
                               SizedBox(height: 10),
-
-
                               TextFormField(
+                                  controller: _emailController,
                                 style: TextStyle(color: Colors.black),
                                 decoration: InputDecoration(
                                   enabledBorder: OutlineInputBorder(
@@ -122,6 +136,7 @@ class _Sign_UpState extends State<Sign_Up> {
                               ),
                               SizedBox(height: 10),
                               TextFormField(
+                                  controller: _passwordController,
                                 style: TextStyle(color: Colors.black),
                                 decoration: InputDecoration(
                                   enabledBorder: OutlineInputBorder(
@@ -140,24 +155,24 @@ class _Sign_UpState extends State<Sign_Up> {
                                 ),
                               ),
                               SizedBox(height: 10),
-                              TextFormField(
-                                style: TextStyle(color: Colors.black),
-                                decoration: InputDecoration(
-                                  enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(40),
-                                      borderSide: BorderSide(
-                                          color: Color(methods.hex('76CFE2')))),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Color(methods.hex('76CFE2')), width: 2),
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  hintText: 'Enter Confirm Password',
-                                  hintStyle: TextStyle(
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                              ),
+                              // TextFormField(
+                              //   style: TextStyle(color: Colors.black),
+                              //   decoration: InputDecoration(
+                              //     enabledBorder: OutlineInputBorder(
+                              //         borderRadius: BorderRadius.circular(40),
+                              //         borderSide: BorderSide(
+                              //             color: Color(methods.hex('76CFE2')))),
+                              //     focusedBorder: OutlineInputBorder(
+                              //       borderSide: BorderSide(
+                              //           color: Color(methods.hex('76CFE2')), width: 2),
+                              //       borderRadius: BorderRadius.circular(20),
+                              //     ),
+                              //     hintText: 'Enter Confirm Password',
+                              //     hintStyle: TextStyle(
+                              //       color: Colors.grey,
+                              //     ),
+                              //   ),
+                              // ),
                               // Row(
                               //   children: [
                               //     Checkbox(
@@ -174,7 +189,9 @@ class _Sign_UpState extends State<Sign_Up> {
 
                               SizedBox(height: 40),
                               ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  _signUp();
+                                },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor:
                                       Color.fromARGB(255, 129, 218, 250),
@@ -300,6 +317,20 @@ class _Sign_UpState extends State<Sign_Up> {
         ),
       ),
     );
+  }
+  void _signUp() async{
+    String email = _emailController.text;
+    String password = _passwordController.text;
+
+    User? user = await _auth.signInWithEmailandPassword(email, password);
+
+    if(user != null)
+      {
+        print("User is successfully created");
+        Navigator.pushNamed(context, "/Home_page");
+      }else{
+      print("Some error happened");
+    }
   }
 }
 

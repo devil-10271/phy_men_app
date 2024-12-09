@@ -1,13 +1,11 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:phy_men_app/Home/Home_page.dart';
-import 'package:phy_men_app/Home/Physical/PhysicalHealth.dart';
-import 'package:phy_men_app/Home/Physical/Yoga/yoga.dart';
-import 'package:phy_men_app/Profile/edit_profile.dart';
 import 'Splash_Screen/splash_screen.dart';
-import 'Auth/login.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -44,7 +42,7 @@ class methods {
   }
 
   static int hex(String apple) {
-    String c = "0xff" + apple;
+    String c = "0xff$apple";
     c = c.replaceAll('#', '');
     int complete = int.parse(c);
     return complete;
