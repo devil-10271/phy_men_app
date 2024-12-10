@@ -1,0 +1,104 @@
+//developed by ayush
+
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:phy_men_app/Home/Physical/BloodPressure/AddBloodPressure.dart';
+
+class Blood extends StatefulWidget {
+  const Blood({super.key});
+
+  @override
+  State<Blood> createState() => _BloodState();
+}
+
+class _BloodState extends State<Blood> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(30),
+          ),
+        ),
+        leading: InkWell(
+          borderRadius: BorderRadius.circular(90),
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Icon(
+            Icons.arrow_back_ios,
+            size: 20,
+          ),
+        ),
+        backgroundColor: Color.fromRGBO(171, 222, 232, 1),
+        foregroundColor: Colors.white,
+        title: Text(
+          "Blood Pressure",
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+        ),
+        centerTitle: true,
+      ),
+      body: Container(
+        //color: Colors.white,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(height: ScreenUtil().setHeight(147)),
+              Center(
+                child: Column(
+                  children: [
+                    Container(
+                      height: ScreenUtil().setHeight(321),
+                      width: ScreenUtil().setWidth(353),
+                      child: Image.asset(
+                        'assets/Image/Physical_Health/checkup-2--health-wellness-checkup.png',
+                      ),
+                    ),
+                    SizedBox(height: ScreenUtil().setHeight(60)),
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: ScreenUtil().setWidth(20)),
+                      child: Container(
+                        height: ScreenUtil().setHeight(54),
+                        width: ScreenUtil().setWidth(388),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            showModalBottomSheet<void>(
+                              isScrollControlled: true,
+                              context: context,
+                              builder: (context) => AddBloodPressure(),
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                            foregroundColor: Colors.white,
+                            backgroundColor: Color.fromRGBO(171, 222, 232, 1),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                  100), // Adjust the radius as needed
+                            ),
+                          ),
+                          child: Text(
+                            'ADD NEW',
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
+                                fontFamily: 'Montserrat'),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
