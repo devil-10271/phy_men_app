@@ -2,7 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:phy_men_app/Home/Physical/BloodPressure/AddBloodPressure.dart';
+import 'package:phy_men_app/Home/Physical/Physical/BloodPressure/AddBloodPressure.dart';
+
 
 class Blood extends StatefulWidget {
   const Blood({super.key});

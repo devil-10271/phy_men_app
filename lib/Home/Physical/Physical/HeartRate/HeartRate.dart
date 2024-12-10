@@ -2,7 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:phy_men_app/Home/Physical/HeartRate/AddHeartRate.dart';
+import 'package:phy_men_app/Home/Physical/Physical/HeartRate/AddHeartRate.dart';
+
 
 class HeartRate extends StatefulWidget {
   const HeartRate({super.key});

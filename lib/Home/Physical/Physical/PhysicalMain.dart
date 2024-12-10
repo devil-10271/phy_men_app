@@ -2,9 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:phy_men_app/Home/Physical/BloodPressure/Blood.dart';
-import 'package:phy_men_app/Home/Physical/HeartRate/HeartRate.dart';
-import 'package:phy_men_app/Home/Physical/WeightLogging/Weight.dart';
+import 'package:phy_men_app/Home/Physical/Physical/BloodPressure/Blood.dart';
+import 'package:phy_men_app/Home/Physical/Physical/WeightLogging/Weight.dart';
+
+import 'HeartRate/HeartRate.dart';
+
 
 class Physicalmain extends StatefulWidget {
   const Physicalmain({super.key});

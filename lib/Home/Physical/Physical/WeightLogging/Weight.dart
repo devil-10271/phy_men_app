@@ -2,7 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:phy_men_app/Home/Physical/WeightLogging/AddWeight.dart';
+import 'package:phy_men_app/Home/Physical/Physical/WeightLogging/AddWeight.dart';
+
 
 class Weight extends StatefulWidget {
   const Weight({super.key});

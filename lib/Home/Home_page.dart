@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:phy_men_app/Home/Physical/Physical/PhysicalMain.dart';
 //developed by ayush
 
 class HomePage extends StatefulWidget {
@@ -150,16 +151,24 @@ class _HomePageState extends State<HomePage> {
                             scrollDirection: Axis.horizontal,
                             child: Row(
                               children: [
-                                Container(
-                                  width: 157,
-                                  height: 239,
-                                  decoration: BoxDecoration(
-                                    color: const Color.fromRGBO(
-                                        118, 207, 226, 0.3),
-                                    borderRadius: BorderRadius.circular(15.0),
-                                  ),
-                                  child: Image.asset(
-                                    'assets/Image/Home/mental_health.png',
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => Physicalmain()),
+                                    );
+                                  },
+                                  child: Container(
+                                    width: 157,
+                                    height: 239,
+                                    decoration: BoxDecoration(
+                                      color: const Color.fromRGBO(
+                                          118, 207, 226, 0.3),
+                                      borderRadius: BorderRadius.circular(15.0),
+                                    ),
+                                    child: Image.asset(
+                                      'assets/Image/Home/mental_health.png',
+                                    ),
                                   ),
                                 ),
                                 const SizedBox(width: 17),
