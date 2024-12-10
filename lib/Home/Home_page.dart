@@ -152,12 +152,7 @@ class _HomePageState extends State<HomePage> {
                             child: Row(
                               children: [
                                 InkWell(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(builder: (context) => Physicalmain()),
-                                    );
-                                  },
+                                  onTap: () {},
                                   child: Container(
                                     width: 157,
                                     height: 239,
@@ -172,34 +167,46 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                 ),
                                 const SizedBox(width: 17),
-                                Container(
-                                  width: 157,
-                                  height: 239,
-                                  decoration: BoxDecoration(
-                                    color: const Color.fromRGBO(
-                                        242, 143, 143, 0.3),
-                                    borderRadius: BorderRadius.circular(15.0),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(top: 80),
-                                    child: Image.asset(
-                                      'assets/Image/Home/physical_health.png',
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                Physicalmain()));
+                                  },
+                                  child: Container(
+                                    width: 157,
+                                    height: 239,
+                                    decoration: BoxDecoration(
+                                      color: const Color.fromRGBO(
+                                          242, 143, 143, 0.3),
+                                      borderRadius: BorderRadius.circular(15.0),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(top: 80),
+                                      child: Image.asset(
+                                        'assets/Image/Home/physical_health.png',
+                                      ),
                                     ),
                                   ),
                                 ),
                                 const SizedBox(width: 17),
-                                Container(
-                                  width: 157,
-                                  height: 239,
-                                  decoration: BoxDecoration(
-                                    color: const Color.fromRGBO(
-                                        146, 227, 169, 0.4),
-                                    borderRadius: BorderRadius.circular(15.0),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(top: 70),
-                                    child: Image.asset(
-                                      'assets/Image/Home/ai.png',
+                                InkWell(
+                                  onTap: () {},
+                                  child: Container(
+                                    width: 157,
+                                    height: 239,
+                                    decoration: BoxDecoration(
+                                      color: const Color.fromRGBO(
+                                          146, 227, 169, 0.4),
+                                      borderRadius: BorderRadius.circular(15.0),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(top: 70),
+                                      child: Image.asset(
+                                        'assets/Image/Home/ai.png',
+                                      ),
                                     ),
                                   ),
                                 ),
