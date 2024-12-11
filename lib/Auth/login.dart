@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:phy_men_app/Auth/Forgot%20Password.dart';
 import 'package:phy_men_app/Auth/signup.dart';
 import 'package:phy_men_app/Home/Home_page.dart';
 import 'package:phy_men_app/main.dart';
@@ -236,7 +237,9 @@ class _Log_inState extends State<Log_in> {
                                 ),
                               ),
                               TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Forgot_Password()));
+                                },
                                 child: Text(
                                   'Forgot Password?',
                                   style: TextStyle(
