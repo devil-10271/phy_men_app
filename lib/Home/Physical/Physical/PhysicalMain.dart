@@ -7,7 +7,6 @@ import 'package:phy_men_app/Home/Physical/Physical/WeightLogging/Weight.dart';
 
 import 'HeartRate/HeartRate.dart';
 
-
 class Physicalmain extends StatefulWidget {
   const Physicalmain({super.key});
 
@@ -23,11 +22,11 @@ class _PhysicalmainState extends State<Physicalmain> {
         body: Column(
           children: [
             Container(
-              //color: Colors.red,
+              // decoration: BoxDecoration(border: Border.all()),
               height: ScreenUtil().setHeight(70),
               width: ScreenUtil().setWidth(370),
               margin: EdgeInsets.only(
-                  top: ScreenUtil().setHeight(77),
+                  top: ScreenUtil().setHeight(70),
                   left: ScreenUtil().setWidth(33),
                   right: ScreenUtil().setWidth(33)),
               child: RichText(
@@ -38,7 +37,7 @@ class _PhysicalmainState extends State<Physicalmain> {
                       fontSize: 27,
                       fontWeight: FontWeight.w700,
                       fontFamily: 'Montserrat'),
-                  children: <TextSpan>[
+                  children: const <TextSpan>[
                     TextSpan(
                       text: 'check',
                       style: TextStyle(
@@ -60,53 +59,59 @@ class _PhysicalmainState extends State<Physicalmain> {
               ),
             ),
             Expanded(
-              child: ListView(
-                padding: EdgeInsets.zero,
-                children: [
-                  buildHealthCard(
-                    title: 'Blood Pressure',
-                    description: 'Check your blood pressure',
-                    buttonColor: Color.fromRGBO(190, 227, 246, 1),
-                    assetImagePath: 'assets/Image/Physical_Health/bp.png',
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Blood()),
-                      );
-                    },
+              child: Padding(
+                padding: const EdgeInsets.only(top: 30.0),
+                child: Container(
+                  child: ListView(
+                    padding: EdgeInsets.zero,
+                    children: [
+                      buildHealthCard(
+                        title: 'Blood Pressure',
+                        description: 'Check your blood pressure',
+                        buttonColor: Color.fromRGBO(190, 227, 246, 1),
+                        assetImagePath: 'assets/Image/Physical_Health/bp.png',
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => Blood()),
+                          );
+                        },
+                      ),
+                      buildHealthCard(
+                        title: 'Heart Rate',
+                        description: 'Check your heart rate',
+                        buttonColor: Color.fromRGBO(245, 91, 110, 0.75),
+                        assetImagePath:
+                            'assets/Image/Physical_Health/heart_rate.png',
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => HeartRate()),
+                          );
+                        },
+                      ),
+                      buildHealthCard(
+                        title: 'Weight Logging',
+                        description: 'Check your weight',
+                        buttonColor: Color.fromRGBO(118, 207, 226, 1),
+                        assetImagePath: 'assets/Image/Physical_Health/eating.png',
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => Weight()),
+                          );
+                        },
+                      ),
+                      buildHealthCard(
+                        title: 'Exercise',
+                        description: 'Track your exercise',
+                        buttonColor: Color.fromRGBO(211, 201, 225, 1),
+                        assetImagePath: 'assets/Image/Physical_Health/exercise.png',
+                        onPressed: () {},
+                      ),
+                    ],
                   ),
-                  buildHealthCard(
-                    title: 'Heart Rate',
-                    description: 'Check your heart rate',
-                    buttonColor: Color.fromRGBO(245, 91, 110, 0.75),
-                    assetImagePath: 'assets/Image/Physical_Health/heart_rate.png',
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => HeartRate()),
-                      );
-                    },
-                  ),
-                  buildHealthCard(
-                    title: 'Weight Logging',
-                    description: 'Check your weight',
-                    buttonColor: Color.fromRGBO(118, 207, 226, 1),
-                    assetImagePath: 'assets/Image/Physical_Health/eating.png',
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Weight()),
-                      );
-                    },
-                  ),
-                  buildHealthCard(
-                    title: 'Exercise',
-                    description: 'Track your exercise',
-                    buttonColor: Color.fromRGBO(211, 201, 225, 1),
-                    assetImagePath: 'assets/Image/Physical_Health/exercise.png',
-                    onPressed: () {},
-                  ),
-                ],
+                ),
               ),
             ),
           ],
@@ -124,94 +129,91 @@ Widget buildHealthCard({
   required VoidCallback onPressed,
 }) {
   return Padding(
-    padding: EdgeInsets.only(left: ScreenUtil().setWidth(37), right: ScreenUtil().setWidth(26)),
-    child: Container(
-      margin: EdgeInsets.symmetric(vertical: ScreenUtil().setWidth(26)),
-      height: ScreenUtil().setHeight(157),
-      width: ScreenUtil().setWidth(387),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(15),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
-            spreadRadius: 2,
-            blurRadius: 5,
-            offset: Offset(0, 3),
-          ),
-        ],
-      ),
-      child: Row(
-        children: [
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.only(left: ScreenUtil().setWidth(37)),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: ScreenUtil().setHeight(33)),
-                  Text(
-                    title,
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black,
-                      fontFamily: 'Montserrat',
+    padding: const EdgeInsets.symmetric(horizontal: 33.0, vertical: 10),
+    child: Expanded(
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(15),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.2),
+              spreadRadius: 2,
+              blurRadius: 5,
+              offset: Offset(0, 3),
+            ),
+          ],
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: ScreenUtil().setHeight(33)),
+                    Text(
+                      title,
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black,
+                        fontFamily: 'Montserrat',
+                      ),
                     ),
-                  ),
-                  SizedBox(height: ScreenUtil().setHeight(4)),
-                  Text(
-                    description,
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: Colors.black,
-                      fontWeight: FontWeight.w400,
-                      fontFamily: 'Montserrat',
+                    SizedBox(height: ScreenUtil().setHeight(4)),
+                    Text(
+                      description,
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w400,
+                        fontFamily: 'Montserrat',
+                      ),
                     ),
-                  ),
-                  SizedBox(height: ScreenUtil().setHeight(4)),
-                  Container(
-                    height: ScreenUtil().setHeight(36.02),
-                    width: ScreenUtil().setWidth(151.27),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: buttonColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+                    SizedBox(height: ScreenUtil().setHeight(4)),
+                    Container(
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: buttonColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        onPressed: onPressed, // Pass the callback here
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              'Check now',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            SizedBox(width: 5),
+                            Icon(Icons.arrow_forward,
+                                color: Colors.white, size: 16),
+                          ],
                         ),
                       ),
-                      onPressed: onPressed, // Pass the callback here
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            'Check now',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          SizedBox(width: 5),
-                          Icon(Icons.arrow_forward, color: Colors.white, size: 16),
-                        ],
-                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
+              Flexible(
+                child: Container(
+                  height: ScreenUtil().setHeight(120),
+                  child: Image.asset(
+                    assetImagePath,
+                    fit: BoxFit.contain,
+                  ),
+                ),
+              ),
+            ],
           ),
-          Container(
-            height: ScreenUtil().setHeight(142),
-            width: ScreenUtil().setWidth(151),
-            child: Image.asset(
-              assetImagePath,
-              width: 80,
-              height: 80,
-              fit: BoxFit.contain,
-            ),
-          ),
-        ],
+        ),
       ),
     ),
   );
 }
-
-
