@@ -306,7 +306,9 @@ class _Sign_UpState extends State<Sign_Up> {
                                 ),
                               ),
                               ElevatedButton.icon(
-                                onPressed: () {},
+                                onPressed: () {
+                                  AuthMethods().signInWithGoogle(context);
+                                },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.white,
                                   padding: EdgeInsets.symmetric(

@@ -21,8 +21,8 @@ android {
     ndkVersion = "25.1.8937393"
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
 
     defaultConfig {
@@ -42,6 +42,10 @@ android {
 
 flutter {
     source = "../.."
+}
+
+dependencies{
+    implementation 'com.facebook.android:facebook-login:latest.release'
 }
 
 apply plugin: 'com.google.gms.google-services'
