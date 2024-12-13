@@ -2,17 +2,17 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:phy_men_app/Home/Physical/Physical/WeightLogging/AddWeight.dart';
+import 'package:phy_men_app/Home/Physical/HeartRate/AddHeartRate.dart';
 
 
-class Weight extends StatefulWidget {
-  const Weight({super.key});
+class HeartRate extends StatefulWidget {
+  const HeartRate({super.key});
 
   @override
-  State<Weight> createState() => _WeightState();
+  State<HeartRate> createState() => _HeartRateState();
 }
 
-class _WeightState extends State<Weight> {
+class _HeartRateState extends State<HeartRate> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +36,7 @@ class _WeightState extends State<Weight> {
         backgroundColor: Color.fromRGBO(171, 222, 232, 1),
         foregroundColor: Colors.white,
         title: Text(
-          "Weight Logging",
+          "Heart Rate",
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
         ),
         centerTitle: true,
@@ -55,7 +55,7 @@ class _WeightState extends State<Weight> {
                       height: ScreenUtil().setHeight(321),
                       width: ScreenUtil().setWidth(353),
                       child: Image.asset(
-                        'assets/Image/Physical_Health/rafiki.png',
+                        'assets/Image/Physical_Health/image 5.png',
                       ),
                     ),
                     SizedBox(height: ScreenUtil().setHeight(60)),
@@ -70,7 +70,7 @@ class _WeightState extends State<Weight> {
                             showModalBottomSheet<void>(
                               isScrollControlled: true,
                               context: context,
-                              builder: (context) => AddWeight(),
+                              builder: (context) => AddHeartRate(),
                             );
                           },
                           style: ElevatedButton.styleFrom(

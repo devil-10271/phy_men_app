@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:phy_men_app/Home/Physical/Physical/BloodPressure/Blood.dart';
-import 'package:phy_men_app/Home/Physical/Physical/WeightLogging/Weight.dart';
+import 'package:phy_men_app/Home/Physical/BloodPressure/Blood.dart';
+import 'package:phy_men_app/Home/Physical/WeightLogging/Weight.dart';
 
 import 'HeartRate/HeartRate.dart';
 
@@ -86,7 +86,8 @@ class _PhysicalmainState extends State<Physicalmain> {
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => HeartRate()),
+                            MaterialPageRoute(
+                                builder: (context) => HeartRate()),
                           );
                         },
                       ),
@@ -94,7 +95,8 @@ class _PhysicalmainState extends State<Physicalmain> {
                         title: 'Weight Logging',
                         description: 'Check your weight',
                         buttonColor: Color.fromRGBO(118, 207, 226, 1),
-                        assetImagePath: 'assets/Image/Physical_Health/eating.png',
+                        assetImagePath:
+                            'assets/Image/Physical_Health/eating.png',
                         onPressed: () {
                           Navigator.push(
                             context,
@@ -106,7 +108,8 @@ class _PhysicalmainState extends State<Physicalmain> {
                         title: 'Exercise',
                         description: 'Track your exercise',
                         buttonColor: Color.fromRGBO(211, 201, 225, 1),
-                        assetImagePath: 'assets/Image/Physical_Health/exercise.png',
+                        assetImagePath:
+                            'assets/Image/Physical_Health/exercise.png',
                         onPressed: () {},
                       ),
                     ],

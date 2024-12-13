@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:phy_men_app/Home/Physical/Physical/PhysicalMain.dart';
+import 'package:phy_men_app/Home/Physical/PhysicalMain.dart';
 //developed by ayush
 
 class HomePage extends StatefulWidget {

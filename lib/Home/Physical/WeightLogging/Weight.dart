@@ -2,17 +2,17 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:phy_men_app/Home/Physical/Physical/BloodPressure/AddBloodPressure.dart';
+import 'package:phy_men_app/Home/Physical/WeightLogging/AddWeight.dart';
 
 
-class Blood extends StatefulWidget {
-  const Blood({super.key});
+class Weight extends StatefulWidget {
+  const Weight({super.key});
 
   @override
-  State<Blood> createState() => _BloodState();
+  State<Weight> createState() => _WeightState();
 }
 
-class _BloodState extends State<Blood> {
+class _WeightState extends State<Weight> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +36,7 @@ class _BloodState extends State<Blood> {
         backgroundColor: Color.fromRGBO(171, 222, 232, 1),
         foregroundColor: Colors.white,
         title: Text(
-          "Blood Pressure",
+          "Weight Logging",
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
         ),
         centerTitle: true,
@@ -55,7 +55,7 @@ class _BloodState extends State<Blood> {
                       height: ScreenUtil().setHeight(321),
                       width: ScreenUtil().setWidth(353),
                       child: Image.asset(
-                        'assets/Image/Physical_Health/checkup-2--health-wellness-checkup.png',
+                        'assets/Image/Physical_Health/rafiki.png',
                       ),
                     ),
                     SizedBox(height: ScreenUtil().setHeight(60)),
@@ -70,7 +70,7 @@ class _BloodState extends State<Blood> {
                             showModalBottomSheet<void>(
                               isScrollControlled: true,
                               context: context,
-                              builder: (context) => AddBloodPressure(),
+                              builder: (context) => AddWeight(),
                             );
                           },
                           style: ElevatedButton.styleFrom(
@@ -101,5 +101,3 @@ class _BloodState extends State<Blood> {
     );
   }
 }
-
-

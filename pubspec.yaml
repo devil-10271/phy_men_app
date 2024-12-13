@@ -77,6 +77,8 @@ flutter:
     - assets/Image/Home/
     - assets/Image/Physical_Health/
     - assets/Image/Quiz/
+    - assets/Image/Physical_Health/Exercise/Cadio/
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

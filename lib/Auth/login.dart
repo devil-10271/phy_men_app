@@ -14,25 +14,32 @@ class Log_in extends StatefulWidget {
 }
 
 class _Log_inState extends State<Log_in> {
-
-  String email="", password="";
+  String email = "", password = "";
   TextEditingController _email = new TextEditingController();
   TextEditingController _password = new TextEditingController();
   final _formkey = GlobalKey<FormState>();
 
-  userLogin()async{
-    try{
-      await FirebaseAuth.instance.signInWithEmailAndPassword(email: _email.text, password: _password.text);
-      Navigator.push(context,MaterialPageRoute(builder: (context)=>HomePage()));
-    }on FirebaseAuthException catch(e){
-      if(e.code=="user-not-found"){
+  userLogin() async {
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: _email.text, password: _password.text);
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => HomePage()));
+    } on FirebaseAuthException catch (e) {
+      if (e.code == "user-not-found") {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             backgroundColor: Colors.orangeAccent,
-            content: Text("User Not Found", style: TextStyle(fontSize: 20.0),)));
-      }else if(e.code=='wrong-password'){
+            content: Text(
+              "User Not Found",
+              style: TextStyle(fontSize: 20.0),
+            )));
+      } else if (e.code == 'wrong-password') {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             backgroundColor: Colors.orangeAccent,
-            content: Text("Enter Correct password", style: TextStyle(fontSize: 20.0),)));
+            content: Text(
+              "Enter Correct password",
+              style: TextStyle(fontSize: 20.0),
+            )));
       }
     }
   }
@@ -102,9 +109,8 @@ class _Log_inState extends State<Log_in> {
                             child: Column(
                               children: [
                                 TextFormField(
-                                  validator: (value){
-                                    if(value == null|| value.isEmpty)
-                                    {
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
                                       return "Enter email";
                                     }
                                     return null;
@@ -116,7 +122,8 @@ class _Log_inState extends State<Log_in> {
                                     enabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(40),
                                         borderSide: BorderSide(
-                                            color: Color(methods.hex('76CFE2')))),
+                                            color:
+                                                Color(methods.hex('76CFE2')))),
                                     focusedBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                           color: Color(methods.hex('76CFE2')),
@@ -133,11 +140,12 @@ class _Log_inState extends State<Log_in> {
                                     // suffixIcon: Icon(Icons.email),
                                   ),
                                 ),
+
                                 SizedBox(height: 10),
+
                                 TextFormField(
-                                  validator: (value){
-                                    if(value == null|| value.isEmpty)
-                                    {
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
                                       return "Enter password ";
                                     }
                                     return null;
@@ -145,26 +153,32 @@ class _Log_inState extends State<Log_in> {
                                   controller: _password,
                                   style: TextStyle(color: Colors.black),
                                   decoration: InputDecoration(
+                                    fillColor: Color(methods.hex('76CFE2')),
                                     enabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(40),
                                         borderSide: BorderSide(
-                                            color: Color(methods.hex('76CFE2')))),
+                                            color:
+                                            Color(methods.hex('76CFE2')))),
                                     focusedBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                           color: Color(methods.hex('76CFE2')),
                                           width: 2),
                                       borderRadius: BorderRadius.circular(20),
                                     ),
-                                    hintText: 'Enter Password',
+                                    hintText: 'Enter Email',
                                     hintStyle: TextStyle(
                                       color: Colors.grey,
                                     ),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(30),
+                                    ),
+                                    // suffixIcon: Icon(Icons.email),
                                   ),
                                 ),
                                 SizedBox(height: 60),
                                 ElevatedButton(
                                   onPressed: () {
-                                    if(_formkey.currentState!.validate()){
+                                    if (_formkey.currentState!.validate()) {
                                       setState(() {
                                         email = _email.text;
                                         password = _password.text;
@@ -289,7 +303,11 @@ class _Log_inState extends State<Log_in> {
                               ),
                               TextButton(
                                 onPressed: () {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Forgot_Password()));
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              Forgot_Password()));
                                 },
                                 child: Text(
                                   'Forgot Password?',

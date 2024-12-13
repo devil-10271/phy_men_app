@@ -2,17 +2,17 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:phy_men_app/Home/Physical/Physical/HeartRate/AddHeartRate.dart';
+import 'package:phy_men_app/Home/Physical/BloodPressure/AddBloodPressure.dart';
 
 
-class HeartRate extends StatefulWidget {
-  const HeartRate({super.key});
+class Blood extends StatefulWidget {
+  const Blood({super.key});
 
   @override
-  State<HeartRate> createState() => _HeartRateState();
+  State<Blood> createState() => _BloodState();
 }
 
-class _HeartRateState extends State<HeartRate> {
+class _BloodState extends State<Blood> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +36,7 @@ class _HeartRateState extends State<HeartRate> {
         backgroundColor: Color.fromRGBO(171, 222, 232, 1),
         foregroundColor: Colors.white,
         title: Text(
-          "Heart Rate",
+          "Blood Pressure",
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
         ),
         centerTitle: true,
@@ -55,7 +55,7 @@ class _HeartRateState extends State<HeartRate> {
                       height: ScreenUtil().setHeight(321),
                       width: ScreenUtil().setWidth(353),
                       child: Image.asset(
-                        'assets/Image/Physical_Health/image 5.png',
+                        'assets/Image/Physical_Health/checkup-2--health-wellness-checkup.png',
                       ),
                     ),
                     SizedBox(height: ScreenUtil().setHeight(60)),
@@ -70,7 +70,7 @@ class _HeartRateState extends State<HeartRate> {
                             showModalBottomSheet<void>(
                               isScrollControlled: true,
                               context: context,
-                              builder: (context) => AddHeartRate(),
+                              builder: (context) => AddBloodPressure(),
                             );
                           },
                           style: ElevatedButton.styleFrom(
@@ -101,3 +101,5 @@ class _HeartRateState extends State<HeartRate> {
     );
   }
 }
+
+
