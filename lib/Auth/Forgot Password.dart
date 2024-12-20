@@ -1,5 +1,6 @@
 // Develop by SaHil
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:phy_men_app/Auth/Otp_send.dart';
@@ -13,7 +14,32 @@ class Forgot_Password extends StatefulWidget {
 }
 
 class _Forgot_PasswordState extends State<Forgot_Password> {
-  final TextEditingController _password = TextEditingController();
+  final TextEditingController _email = TextEditingController();
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _email.dispose();
+    super.dispose();
+  }
+  Future passwordReset() async{
+    try{
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: _email.text.trim());
+      showDialog(context: context, builder: (context){
+        return AlertDialog(
+          content: Text("Password Reset Link Sent To Email"),
+        );
+      });
+    } on FirebaseAuthException catch (e)
+    {
+      print(e);
+      showDialog(context: context, builder: (context){
+        return AlertDialog(
+          content: Text(e.message.toString()),
+        );
+      });
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -69,11 +95,11 @@ class _Forgot_PasswordState extends State<Forgot_Password> {
                 TextFormField(
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return "Enter password ";
+                      return "Enter Email ";
                     }
                     return null;
                   },
-                  controller: _password,
+                  controller: _email,
                   style: TextStyle(color: Colors.black),
                   decoration: InputDecoration(
                     fillColor: Color(methods.hex('76CFE2')),
@@ -101,8 +127,7 @@ class _Forgot_PasswordState extends State<Forgot_Password> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Otp_send()));
+                    passwordReset();
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color.fromARGB(255, 129, 218, 250),
