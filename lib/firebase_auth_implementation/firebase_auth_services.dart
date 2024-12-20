@@ -5,6 +5,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:phy_men_app/Home/Home_page.dart';
 import 'package:phy_men_app/firebase_auth_implementation/database.dart';
 
+
 class AuthMethods{
   final FirebaseAuth _auth = FirebaseAuth.instance;
 

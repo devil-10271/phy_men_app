@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">phy_men_app</string>
+    <string name="facebook_app_id">938380087715822</string>
+    <string name="fb_login_protocol_scheme">fb938380087715822</string>
+</resources>
