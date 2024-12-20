@@ -3,4 +3,5 @@
     <string name="app_name">phy_men_app</string>
     <string name="facebook_app_id">938380087715822</string>
     <string name="fb_login_protocol_scheme">fb938380087715822</string>
+    <string name="facebook_client_token">9b5ec215f91faeff4492cd48bbce154a</string>
 </resources>

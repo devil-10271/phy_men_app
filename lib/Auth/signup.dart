@@ -281,7 +281,9 @@ class _Sign_UpState extends State<Sign_Up> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               ElevatedButton.icon(
-                                onPressed: () {},
+                                onPressed: () async{
+                                  signInWithFacebook();
+                                },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.white,
                                   padding: EdgeInsets.symmetric(

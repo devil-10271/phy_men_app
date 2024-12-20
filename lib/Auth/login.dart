@@ -225,7 +225,9 @@ class _Log_inState extends State<Log_in> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               ElevatedButton.icon(
-                                onPressed: () {},
+                                onPressed: () async{
+                                  signInWithFacebook();
+                                },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.white,
                                   padding: EdgeInsets.symmetric(
