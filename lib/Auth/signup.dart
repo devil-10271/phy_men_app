@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:phy_men_app/Home/Home_page.dart';
@@ -20,6 +21,16 @@ class _Sign_UpState extends State<Sign_Up> {
   TextEditingController _username = new TextEditingController();
   TextEditingController _email = new TextEditingController();
   TextEditingController _password = new TextEditingController();
+  TextEditingController _confpassword = new TextEditingController();
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _username.dispose();
+    _email.dispose();
+    _password.dispose();
+    super.dispose();
+  }
 
   final _formkey = GlobalKey<FormState>();
 
@@ -44,6 +55,15 @@ class _Sign_UpState extends State<Sign_Up> {
               }
         }
       }
+
+    //add user details
+    addUserdetails(_username.text.trim(), _email.text.trim());
+  }
+  Future addUserdetails(String Username, String Email) async{
+    await FirebaseFirestore.instance.collection('User').add({
+      'Username': Username,
+      'Email': Email
+    });
   }
   @override
   Widget build(BuildContext context) {
@@ -199,6 +219,7 @@ class _Sign_UpState extends State<Sign_Up> {
                                 ),
                                 SizedBox(height: 10),
                                 // TextFormField(
+                                //   controller: _confpassword,
                                 //   style: TextStyle(color: Colors.black),
                                 //   decoration: InputDecoration(
                                 //     enabledBorder: OutlineInputBorder(

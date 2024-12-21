@@ -43,8 +43,8 @@ class AuthMethods{
     if(result!=null)
       {
         Map<String, dynamic> userInfoMap={
-          "email":userDetails!.email,
-          "name": userDetails.displayName,
+          "Email":userDetails!.email,
+          "Username": userDetails.displayName,
           "id":userDetails.uid
         };
         await DatabaseMethod().addUser(userDetails.uid, userInfoMap).then((value){
