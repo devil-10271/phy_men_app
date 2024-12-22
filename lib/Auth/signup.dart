@@ -1,12 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:phy_men_app/Home/Home_page.dart';
 import 'package:phy_men_app/firebase_auth_implementation/firebase_auth_services.dart';
 import 'package:phy_men_app/main.dart';
 import 'package:phy_men_app/Auth/login.dart';
 
-dynamic met=methods();
+dynamic met = methods();
 
 class Sign_Up extends StatefulWidget {
   const Sign_Up({super.key});
@@ -17,7 +18,7 @@ class Sign_Up extends StatefulWidget {
 
 class _Sign_UpState extends State<Sign_Up> {
   bool isChecked = false;
-  String email="", password="", username="";
+  String email = "", password = "", username = "";
   TextEditingController _username = new TextEditingController();
   TextEditingController _email = new TextEditingController();
   TextEditingController _password = new TextEditingController();
@@ -34,37 +35,135 @@ class _Sign_UpState extends State<Sign_Up> {
 
   final _formkey = GlobalKey<FormState>();
 
-  registration()async{
-    if(password!= null && _username.text !=""&&_email.text !="")
-      {
-        try{
-          UserCredential userCredential= await FirebaseAuth.instance.createUserWithEmailAndPassword(email: _email.text, password: _password.text);
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Registration Success", style: TextStyle(fontSize: 20.0),)));
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage()));
-        }on FirebaseAuthException catch(e){
-          if(e.code == 'weak password')
-            {
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  backgroundColor: Colors.orangeAccent,
-                  content: Text("Password Provided is too weak", style: TextStyle(fontSize: 20.0),)));
-            }else if(e.code == "email-already-in-use")
-              {
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    backgroundColor: Colors.orangeAccent,
-                    content: Text("Email in use", style: TextStyle(fontSize: 20.0),)));
-              }
-        }
-      }
+  final DatabaseReference _database = FirebaseDatabase.instanceFor(
+    app: FirebaseDatabase.instance.app,
+    databaseURL:
+    'https://phymenapp-default-rtdb.asia-southeast1.firebasedatabase.app',
+  ).ref();
 
-    //add user details
-    addUserdetails(_username.text.trim(), _email.text.trim());
+  Future<void> registration() async {
+    if (_formkey.currentState!.validate() &&
+        _password.text.isNotEmpty &&
+        _username.text.isNotEmpty &&
+        _email.text.isNotEmpty) {
+      try {
+        // Create user with Firebase Authentication
+        UserCredential userCredential = await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(
+          email: _email.text.trim(),
+          password: _password.text.trim(),
+        );
+
+        // Add user details to the database
+        await _addUserToDatabase(
+          uid: userCredential.user!.uid,
+          uname: _username.text.trim(),
+        );
+
+        // Display success message
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(
+              "Registration Successful",
+              style: TextStyle(fontSize: 20.0),
+            ),
+          ),
+        );
+
+        // Navigate to the home page
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const HomePage(),
+          ),
+        );
+      } on FirebaseAuthException catch (e) {
+        // Handle specific Firebase Auth exceptions
+        if (e.code == 'weak-password') {
+          _showError("The password provided is too weak.");
+        } else if (e.code == "email-already-in-use") {
+          _showError("The email is already in use.");
+        } else {
+          _showError("An error occurred. Please try again.");
+        }
+      } catch (e) {
+        // Handle general exceptions
+        _showError("An unexpected error occurred. Please try again.");
+      }
+    } else {
+      // Handle form validation failure
+      _showError("Please fill in all the required fields.");
+    }
   }
-  Future addUserdetails(String Username, String Email) async{
-    await FirebaseFirestore.instance.collection('User').add({
-      'Username': Username,
-      'Email': Email
-    });
+
+  Future<void> _addUserToDatabase({
+    required String uid,
+    required String uname,
+  }) async {
+    try {
+      await _database.child('users/$uid').set({
+        "uname": uname,
+        "details": {
+          "address": "",
+          "contact_no": "",
+          "dob": "",
+          "f_name": "",
+          "l_name": "",
+        },
+        "mental_health": {
+          "gk_score": {
+            "date": "",
+            "reading_gkscore": "",
+            "time": "",
+          },
+          "iq_score": {
+            "date": "",
+            "reading_iqscore": "",
+            "time": "",
+          },
+        },
+        "physical_health": {
+          "blood_pressure": {
+            "date": "",
+            "reading_diastole": "",
+            "reading_systole": "",
+            "time": "",
+          },
+          "height": {
+            "date": "",
+            "reading_height": "",
+            "time": "",
+          },
+          "pulse": {
+            "date": "",
+            "reading_pulse": "",
+            "time": "",
+          },
+          "weight": {
+            "date": "",
+            "reading_weight": "",
+            "time": "",
+          },
+        },
+      });
+    } catch (e) {
+      _showError("Failed to add user to the database.");
+    }
   }
+
+  void _showError(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: Colors.red,
+        content: Text(
+          message,
+          style: const TextStyle(fontSize: 16.0),
+        ),
+      ),
+    );
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -132,31 +231,36 @@ class _Sign_UpState extends State<Sign_Up> {
                                 Column(
                                   children: [
                                     TextFormField(
-                                      validator: (value){
-                                        if(value == null|| value.isEmpty)
-                                          {
-                                            return "Enter username";
-                                          }
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return "Enter username";
+                                        }
                                         return null;
                                       },
                                       controller: _username,
                                       style: TextStyle(color: Colors.black),
                                       decoration: InputDecoration(
                                         enabledBorder: OutlineInputBorder(
-                                            borderRadius: BorderRadius.circular(40),
+                                            borderRadius:
+                                                BorderRadius.circular(40),
                                             borderSide: BorderSide(
-                                                color: Color(methods.hex('76CFE2')))),
+                                                color: Color(
+                                                    methods.hex('76CFE2')))),
                                         focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
-                                              color: Color(methods.hex('76CFE2')), width: 2),
-                                          borderRadius: BorderRadius.circular(20),
+                                              color:
+                                                  Color(methods.hex('76CFE2')),
+                                              width: 2),
+                                          borderRadius:
+                                              BorderRadius.circular(20),
                                         ),
                                         hintText: 'Enter User Name',
                                         hintStyle: TextStyle(
                                           color: Colors.grey,
                                         ),
                                         border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(30),
+                                          borderRadius:
+                                              BorderRadius.circular(30),
                                         ),
                                         // suffixIcon: Icon(Icons.email),
                                       ),
@@ -165,9 +269,8 @@ class _Sign_UpState extends State<Sign_Up> {
                                 ),
                                 SizedBox(height: 10),
                                 TextFormField(
-                                  validator: (value){
-                                    if(value == null|| value.isEmpty)
-                                    {
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
                                       return "Enter email";
                                     }
                                     return null;
@@ -178,10 +281,12 @@ class _Sign_UpState extends State<Sign_Up> {
                                     enabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(40),
                                         borderSide: BorderSide(
-                                            color: Color(methods.hex('76CFE2')))),
+                                            color:
+                                                Color(methods.hex('76CFE2')))),
                                     focusedBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
-                                          color: Color(methods.hex('76CFE2')), width: 2),
+                                          color: Color(methods.hex('76CFE2')),
+                                          width: 2),
                                       borderRadius: BorderRadius.circular(20),
                                     ),
                                     hintText: 'Enter Email',
@@ -192,9 +297,8 @@ class _Sign_UpState extends State<Sign_Up> {
                                 ),
                                 SizedBox(height: 10),
                                 TextFormField(
-                                  validator: (value){
-                                    if(value == null|| value.isEmpty)
-                                    {
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
                                       return "Enter password ";
                                     }
                                     return null;
@@ -205,10 +309,12 @@ class _Sign_UpState extends State<Sign_Up> {
                                     enabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(40),
                                         borderSide: BorderSide(
-                                            color: Color(methods.hex('76CFE2')))),
+                                            color:
+                                                Color(methods.hex('76CFE2')))),
                                     focusedBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
-                                          color: Color(methods.hex('76CFE2')), width: 2),
+                                          color: Color(methods.hex('76CFE2')),
+                                          width: 2),
                                       borderRadius: BorderRadius.circular(20),
                                     ),
                                     hintText: 'Enter Password',
@@ -254,9 +360,9 @@ class _Sign_UpState extends State<Sign_Up> {
                                 SizedBox(height: 40),
                                 ElevatedButton(
                                   onPressed: () {
-                                    if(_formkey.currentState!.validate()){
+                                    if (_formkey.currentState!.validate()) {
                                       setState(() {
-                                        email =_email.text;
+                                        email = _email.text;
                                         username = _username.text;
                                         password = _password.text;
                                       });
@@ -302,7 +408,7 @@ class _Sign_UpState extends State<Sign_Up> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               ElevatedButton.icon(
-                                onPressed: () async{
+                                onPressed: () async {
                                   signInWithFacebook();
                                 },
                                 style: ElevatedButton.styleFrom(
@@ -395,6 +501,3 @@ class _Sign_UpState extends State<Sign_Up> {
     );
   }
 }
-
-
-
