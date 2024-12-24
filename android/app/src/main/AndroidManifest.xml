@@ -4,7 +4,7 @@
         <provider android:authorities="com.facebook.katana.provider.PlatformProvider" />
     </queries>
     <application
-        android:label="phy_men_app"
+        android:label="Balance 365"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

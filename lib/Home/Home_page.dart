@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:phy_men_app/Home/Physical/PhysicalMain.dart';
+
+import 'ChatBot/Chatbot.dart';
 //developed by ayush
 
 class HomePage extends StatefulWidget {
@@ -8,6 +10,12 @@ class HomePage extends StatefulWidget {
   @override
   State<HomePage> createState() => _HomePageState();
 }
+
+
+
+
+
+
 
 class _HomePageState extends State<HomePage> {
   final ScrollController _scrollController = ScrollController();
@@ -193,7 +201,9 @@ class _HomePageState extends State<HomePage> {
                                 ),
                                 const SizedBox(width: 17),
                                 InkWell(
-                                  onTap: () {},
+                                  onTap: () {
+                                    Navigator.push(context, MaterialPageRoute(builder: (context)=>ChatBot()));
+                                  },
                                   child: Container(
                                     width: 157,
                                     height: 239,

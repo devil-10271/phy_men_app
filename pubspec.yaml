@@ -81,6 +81,7 @@ flutter:
     - assets/Image/Physical_Health/
     - assets/Image/Quiz/
     - assets/Image/Physical_Health/Exercise/Cadio/
+    - assets/Image/Chat_Bot/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

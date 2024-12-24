@@ -111,7 +111,7 @@ class _Log_inState extends State<Log_in> {
                                 TextFormField(
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
-                                      return "Enter email";
+                                      return "Enter Email";
                                     }
                                     return null;
                                   },
@@ -165,7 +165,7 @@ class _Log_inState extends State<Log_in> {
                                           width: 2),
                                       borderRadius: BorderRadius.circular(20),
                                     ),
-                                    hintText: 'Enter Email',
+                                    hintText: 'Enter Password',
                                     hintStyle: TextStyle(
                                       color: Colors.grey,
                                     ),

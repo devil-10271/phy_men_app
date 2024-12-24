@@ -254,7 +254,7 @@ class _Sign_UpState extends State<Sign_Up> {
                                           borderRadius:
                                               BorderRadius.circular(20),
                                         ),
-                                        hintText: 'Enter User Name',
+                                        hintText: 'Enter Username',
                                         hintStyle: TextStyle(
                                           color: Colors.grey,
                                         ),
@@ -271,7 +271,7 @@ class _Sign_UpState extends State<Sign_Up> {
                                 TextFormField(
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
-                                      return "Enter email";
+                                      return "Enter Email";
                                     }
                                     return null;
                                   },
@@ -279,27 +279,35 @@ class _Sign_UpState extends State<Sign_Up> {
                                   style: TextStyle(color: Colors.black),
                                   decoration: InputDecoration(
                                     enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(40),
+                                        borderRadius:
+                                        BorderRadius.circular(40),
                                         borderSide: BorderSide(
-                                            color:
-                                                Color(methods.hex('76CFE2')))),
+                                            color: Color(
+                                                methods.hex('76CFE2')))),
                                     focusedBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
-                                          color: Color(methods.hex('76CFE2')),
+                                          color:
+                                          Color(methods.hex('76CFE2')),
                                           width: 2),
-                                      borderRadius: BorderRadius.circular(20),
+                                      borderRadius:
+                                      BorderRadius.circular(20),
                                     ),
                                     hintText: 'Enter Email',
                                     hintStyle: TextStyle(
                                       color: Colors.grey,
                                     ),
+                                    border: OutlineInputBorder(
+                                      borderRadius:
+                                      BorderRadius.circular(30),
+                                    ),
+                                    // suffixIcon: Icon(Icons.email),
                                   ),
                                 ),
                                 SizedBox(height: 10),
                                 TextFormField(
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
-                                      return "Enter password ";
+                                      return "Enter password";
                                     }
                                     return null;
                                   },
@@ -307,20 +315,28 @@ class _Sign_UpState extends State<Sign_Up> {
                                   style: TextStyle(color: Colors.black),
                                   decoration: InputDecoration(
                                     enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(40),
+                                        borderRadius:
+                                        BorderRadius.circular(40),
                                         borderSide: BorderSide(
-                                            color:
-                                                Color(methods.hex('76CFE2')))),
+                                            color: Color(
+                                                methods.hex('76CFE2')))),
                                     focusedBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
-                                          color: Color(methods.hex('76CFE2')),
+                                          color:
+                                          Color(methods.hex('76CFE2')),
                                           width: 2),
-                                      borderRadius: BorderRadius.circular(20),
+                                      borderRadius:
+                                      BorderRadius.circular(20),
                                     ),
                                     hintText: 'Enter Password',
                                     hintStyle: TextStyle(
                                       color: Colors.grey,
                                     ),
+                                    border: OutlineInputBorder(
+                                      borderRadius:
+                                      BorderRadius.circular(30),
+                                    ),
+                                    // suffixIcon: Icon(Icons.email),
                                   ),
                                 ),
                                 SizedBox(height: 10),
