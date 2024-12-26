@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:phy_men_app/Home/Physical/HeartRate/AddHeartRate.dart';
-
+import 'package:phy_men_app/Home/Physical/HeartRate/PulseGraph.dart';
 
 class HeartRate extends StatefulWidget {
   const HeartRate({super.key});
@@ -33,7 +33,7 @@ class _HeartRateState extends State<HeartRate> {
             size: 20,
           ),
         ),
-        backgroundColor: Color.fromRGBO(171, 222, 232, 1),
+        backgroundColor: Color.fromRGBO(248, 132, 146, 1),
         foregroundColor: Colors.white,
         title: Text(
           "Heart Rate",
@@ -75,7 +75,7 @@ class _HeartRateState extends State<HeartRate> {
                           },
                           style: ElevatedButton.styleFrom(
                             foregroundColor: Colors.white,
-                            backgroundColor: Color.fromRGBO(171, 222, 232, 1),
+                            backgroundColor: Color.fromRGBO(248, 132, 146, 1),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(
                                   100), // Adjust the radius as needed
@@ -83,6 +83,38 @@ class _HeartRateState extends State<HeartRate> {
                           ),
                           child: Text(
                             'ADD NEW',
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
+                                fontFamily: 'Montserrat'),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: ScreenUtil().setHeight(50),),
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: ScreenUtil().setWidth(20)),
+                      child: Container(
+                        height: ScreenUtil().setHeight(54),
+                        width: ScreenUtil().setWidth(388),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => PulseGraph()),
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                            foregroundColor: Color.fromRGBO(248, 132, 146, 1),
+                            backgroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                  100), // Adjust the radius as needed
+                            ),
+                          ),
+                          child: Text(
+                            'View Pulse Graph',
                             style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w700,

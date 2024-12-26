@@ -102,49 +102,205 @@ class _Sign_UpState extends State<Sign_Up> {
   }) async {
     try {
       await _database.child('users/$uid').set({
-        "uname": uname,
         "details": {
           "address": "",
           "contact_no": "",
           "dob": "",
           "f_name": "",
-          "l_name": "",
+          "l_name": ""
         },
         "mental_health": {
           "gk_score": {
-            "date": "",
-            "reading_gkscore": "",
-            "time": "",
+            "18-12-2024": {
+              "reading_gkscore": "1",
+              "time": "08:00"
+            },
+            "19-12-2024": {
+              "reading_gkscore": "2",
+              "time": "08:00"
+            },
+            "20-12-2024": {
+              "reading_gkscore": "3",
+              "time": "08:00"
+            },
+            "21-12-2024": {
+              "reading_gkscore": "5",
+              "time": "08:00"
+            },
+            "22-12-2024": {
+              "reading_gkscore": "4",
+              "time": "08:00"
+            },
+            "23-12-2024": {
+              "reading_gkscore": "2",
+              "time": "08:00"
+            },
+            "24-12-2024": {
+              "reading_gkscore": "3",
+              "time": "08:00"
+            }
           },
           "iq_score": {
-            "date": "",
-            "reading_iqscore": "",
-            "time": "",
-          },
+            "18-12-2024": {
+              "reading_iqscore": "1",
+              "time": "08:00"
+            },
+            "19-12-2024": {
+              "reading_iqscore": "2",
+              "time": "08:00"
+            },
+            "20-12-2024": {
+              "reading_iqscore": "3",
+              "time": "08:00"
+            },
+            "21-12-2024": {
+              "reading_iqscore": "5",
+              "time": "08:00"
+            },
+            "22-12-2024": {
+              "reading_iqscore": "4",
+              "time": "08:00"
+            },
+            "23-12-2024": {
+              "reading_iqscore": "2",
+              "time": "08:00"
+            },
+            "24-12-2024": {
+              "reading_iqscore": "3",
+              "time": "08:00"
+            }
+          }
         },
         "physical_health": {
           "blood_pressure": {
-            "date": "",
-            "reading_diastole": "",
-            "reading_systole": "",
-            "time": "",
+            "18-12-2024": {
+              "reading_diastole": "100",
+              "reading_systole": "70",
+              "time": "08:00"
+            },
+            "19-12-2024": {
+              "reading_diastole": "130",
+              "reading_systole": "100",
+              "time": "08:00"
+            },
+            "20-12-2024": {
+              "reading_diastole": "125",
+              "reading_systole": "90",
+              "time": "08:00"
+            },
+            "21-12-2024": {
+              "reading_diastole": "100",
+              "reading_systole": "80",
+              "time": "08:00"
+            },
+            "22-12-2024": {
+              "reading_diastole": "110",
+              "reading_systole": "80",
+              "time": "08:00"
+            },
+            "23-12-2024": {
+              "reading_diastole": "120",
+              "reading_systole": "80",
+              "time": "08:00"
+            },
+            "24-12-2024": {
+              "reading_diastole": "100",
+              "reading_systole": "100",
+              "time": "08:00"
+            }
           },
           "height": {
-            "date": "",
-            "reading_height": "",
-            "time": "",
+            "18-12-2024": {
+              "reading_height": "5.1",
+              "time": "08:00"
+            },
+            "19-12-2024": {
+              "reading_height": "5.1",
+              "time": "08:00"
+            },
+            "20-12-2024": {
+              "reading_height": "5.1",
+              "time": "08:00"
+            },
+            "21-12-2024": {
+              "reading_height": "5.1",
+              "time": "08:00"
+            },
+            "22-12-2024": {
+              "reading_height": "5.1",
+              "time": "08:00"
+            },
+            "23-12-2024": {
+              "reading_height": "5.1",
+              "time": "08:00"
+            },
+            "24-12-2024": {
+              "reading_height": "5.1",
+              "time": "08:00"
+            }
           },
           "pulse": {
-            "date": "",
-            "reading_pulse": "",
-            "time": "",
+            "18-12-2024": {
+              "reading_pulse": "75",
+              "time": "08:00"
+            },
+            "19-12-2024": {
+              "reading_pulse": "78",
+              "time": "08:00"
+            },
+            "20-12-2024": {
+              "reading_pulse": "80",
+              "time": "08:00"
+            },
+            "21-12-2024": {
+              "reading_pulse": "76",
+              "time": "08:00"
+            },
+            "22-12-2024": {
+              "reading_pulse": "77",
+              "time": "08:00"
+            },
+            "23-12-2024": {
+              "reading_pulse": "75",
+              "time": "08:00"
+            },
+            "24-12-2024": {
+              "reading_pulse": "79",
+              "time": "08:00"
+            }
           },
           "weight": {
-            "date": "",
-            "reading_weight": "",
-            "time": "",
-          },
+            "18-12-2024": {
+              "reading_weight": "70",
+              "time": "8:00"
+            },
+            "19-12-2024": {
+              "reading_weight": "70",
+              "time": "8:00"
+            },
+            "20-12-2024": {
+              "reading_weight": "70",
+              "time": "8:00"
+            },
+            "21-12-2024": {
+              "reading_weight": "70",
+              "time": "8:00"
+            },
+            "22-12-2024": {
+              "reading_weight": "70",
+              "time": "8:00"
+            },
+            "23-12-2024": {
+              "reading_weight": "70",
+              "time": "8:00"
+            },
+            "24-12-2024": {
+              "reading_weight": "70",
+              "time": "8:00"
+            }
+          }
         },
+        "uname": ""
       });
     } catch (e) {
       _showError("Failed to add user to the database.");

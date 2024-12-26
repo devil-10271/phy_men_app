@@ -1,7 +1,8 @@
-//developed by ayush
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:intl/intl.dart';
 
 class AddBloodPressure extends StatefulWidget {
   const AddBloodPressure({super.key});
@@ -11,9 +12,97 @@ class AddBloodPressure extends StatefulWidget {
 }
 
 class _AddBloodPressureState extends State<AddBloodPressure> {
+  late TextEditingController _dateController;
+  late TextEditingController _timeController;
+  late TextEditingController _systolicController;
+  late TextEditingController _diastolicController;
+
+  final String? uid = FirebaseAuth.instance.currentUser?.uid;
+
+  final DatabaseReference _database = FirebaseDatabase.instanceFor(
+    app: FirebaseDatabase.instance.app,
+    databaseURL:
+    'https://phymenapp-default-rtdb.asia-southeast1.firebasedatabase.app',
+  ).ref();
+
+  @override
+  void initState() {
+    super.initState();
+    _dateController = TextEditingController(
+      text: DateFormat('dd-M-yyyy').format(DateTime.now()),
+    );
+    _timeController = TextEditingController(
+      text: DateFormat('hh:mm a').format(DateTime.now()),
+    );
+    _systolicController = TextEditingController();
+    _diastolicController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _dateController.dispose();
+    _timeController.dispose();
+    _systolicController.dispose();
+    _diastolicController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _saveDataToFirebase() async {
+    final String date = _dateController.text;
+    final String time = _timeController.text;
+    final String systolic = _systolicController.text;
+    final String diastolic = _diastolicController.text;
+
+    if (systolic.isEmpty || diastolic.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Please fill in all fields")),
+      );
+      return;
+    }
+
+    try {
+      // Reference to the blood pressure data for the current user
+      final DatabaseReference bpRef =
+      _database.child('users/$uid/physical_health/blood_pressure');
+
+      // Fetch existing blood pressure data
+      final DataSnapshot snapshot = await bpRef.get();
+      final Map<String, dynamic>? existingData = snapshot.value != null
+          ? Map<String, dynamic>.from(snapshot.value as Map)
+          : null;
+
+      // Add the new data
+      await bpRef.child(date).set({
+        "time": time,
+        "reading_systole": systolic,
+        "reading_diastole": diastolic,
+      });
+
+      // Check if there are more than 7 entries and remove the oldest
+      if (existingData != null && existingData.keys.length >= 7) {
+        final List<String> sortedDates = existingData.keys.toList()
+          ..sort((a, b) => DateFormat('dd-M-yyyy').parse(a).compareTo(
+              DateFormat('dd-M-yyyy').parse(b)));
+
+        // Remove the oldest date
+        final String oldestDate = sortedDates.first;
+        await bpRef.child(oldestDate).remove();
+      }
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Blood pressure data saved successfully")),
+      );
+
+      Navigator.pop(context);
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Error saving data: $e")),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.only(
@@ -32,17 +121,17 @@ class _AddBloodPressureState extends State<AddBloodPressure> {
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
                   ),
                 ),
-                SizedBox(height: ScreenUtil().setHeight(30)),
-
-                // Reusable blood pressure input rows
-                _buildInputRow('Systolic (mmHg)'),
+                SizedBox(height: ScreenUtil().setHeight(10)),
+                _buildInputRow("Date", _dateController, TextInputType.datetime),
                 _buildDivider(),
-                _buildInputRow('Diastolic (mmHg)'),
+                _buildInputRow("Time", _timeController, TextInputType.datetime),
                 _buildDivider(),
-                _buildInputRow('Pulse Rate (mmHg)'),
+                _buildInputRow("Systolic (mmHg)", _systolicController,
+                    TextInputType.number),
                 _buildDivider(),
-
-                // Buttons Row
+                _buildInputRow("Diastolic (mmHg)", _diastolicController,
+                    TextInputType.number),
+                _buildDivider(),
                 Padding(
                   padding: EdgeInsets.only(
                     top: ScreenUtil().setHeight(30),
@@ -54,17 +143,15 @@ class _AddBloodPressureState extends State<AddBloodPressure> {
                       _buildButton(
                         label: 'Cancel',
                         color: Colors.white,
-                        textColor: Color.fromRGBO(118, 207, 226, 1),
+                        textColor: const Color.fromRGBO(118, 207, 226, 1),
                         onPressed: () => Navigator.pop(context),
                       ),
                       SizedBox(width: ScreenUtil().setWidth(10)),
                       _buildButton(
                         label: 'Save',
-                        color: Color.fromRGBO(171, 222, 232, 1),
+                        color: const Color.fromRGBO(171, 222, 232, 1),
                         textColor: Colors.white,
-                        onPressed: () {
-                          // Navigate or save logic here
-                        },
+                        onPressed: _saveDataToFirebase,
                       ),
                     ],
                   ),
@@ -77,9 +164,9 @@ class _AddBloodPressureState extends State<AddBloodPressure> {
     );
   }
 
-  Widget _buildInputRow(String label) {
+  Widget _buildInputRow(
+      String label, TextEditingController controller, TextInputType type) {
     return Container(
-      //color: Colors.green,
       height: ScreenUtil().setHeight(54),
       width: ScreenUtil().setWidth(388),
       margin: EdgeInsets.only(top: ScreenUtil().setHeight(10)),
@@ -88,22 +175,21 @@ class _AddBloodPressureState extends State<AddBloodPressure> {
         children: [
           Text(
             label,
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
           ),
           Container(
             height: ScreenUtil().setHeight(54),
-            width: ScreenUtil().setWidth(100),
-            //margin: EdgeInsets.only(top: ScreenUtil().setHeight(5)),
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey),
-              borderRadius: BorderRadius.circular(5),
-              //color: Colors.yellow
-            ),
+            width: ScreenUtil().setWidth(150),
             child: TextField(
-              decoration: InputDecoration(border: InputBorder.none),
-              keyboardType: TextInputType.number,
+              controller: controller,
+              decoration: const InputDecoration(border: InputBorder.none),
+              keyboardType: type,
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w700,
+                fontFamily: 'Montserrat',
+              ),
             ),
           ),
         ],
@@ -111,24 +197,22 @@ class _AddBloodPressureState extends State<AddBloodPressure> {
     );
   }
 
-  // Divider between input rows
   Widget _buildDivider() {
     return Container(
       height: ScreenUtil().setHeight(1),
       width: ScreenUtil().setWidth(388),
-      color: Color.fromRGBO(234, 234, 234, 1),
+      color: const Color.fromRGBO(234, 234, 234, 1),
       margin: EdgeInsets.only(top: ScreenUtil().setHeight(10)),
     );
   }
 
-  // Reusable button
   Widget _buildButton({
     required String label,
     required Color color,
     required Color textColor,
     required VoidCallback onPressed,
   }) {
-    return Container(
+    return SizedBox(
       height: ScreenUtil().setHeight(54),
       width: ScreenUtil().setWidth(189),
       child: ElevatedButton(

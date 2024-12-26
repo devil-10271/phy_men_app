@@ -1,5 +1,7 @@
 // developed by ayush
 
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
@@ -14,6 +16,15 @@ class AddWeight extends StatefulWidget {
 class _AddWeightState extends State<AddWeight> {
   late TextEditingController _dateController;
   late TextEditingController _timeController;
+  late TextEditingController _weightController;
+
+  final String? uid = FirebaseAuth.instance.currentUser?.uid;
+
+  final DatabaseReference _database = FirebaseDatabase.instanceFor(
+    app: FirebaseDatabase.instance.app,
+    databaseURL:
+    'https://phymenapp-default-rtdb.asia-southeast1.firebasedatabase.app',
+  ).ref();
 
   @override
   void initState() {
@@ -24,13 +35,64 @@ class _AddWeightState extends State<AddWeight> {
     _timeController = TextEditingController(
       text: DateFormat('hh:mm a').format(DateTime.now()),
     );
+    _weightController = TextEditingController();
   }
 
   @override
   void dispose() {
     _dateController.dispose();
     _timeController.dispose();
+    _weightController.dispose();
     super.dispose();
+  }
+
+  Future<void> _saveDataToFirebase() async {
+    final String date = _dateController.text;
+    final String time = _timeController.text;
+    final String weight = _weightController.text;
+
+    if (weight.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Please enter a valid pulse rate")),
+      );
+      return;
+    }
+
+    try {
+      // Reference to the pulse data for the current user
+      final DatabaseReference pulseRef = _database.child('users/$uid/physical_health/weight');
+
+      // Fetch existing pulse data
+      final DataSnapshot snapshot = await pulseRef.get();
+      final Map<String, dynamic>? existingData =
+      snapshot.value != null ? Map<String, dynamic>.from(snapshot.value as Map) : null;
+
+      // Add the new data
+      await pulseRef.child(date).set({
+        "reading_weight": weight,
+        "time": time,
+      });
+
+      // Check if there are more than 7 entries and remove the oldest
+      if (existingData != null && existingData.keys.length >= 7) {
+        final List<String> sortedDates = existingData.keys.toList()
+          ..sort((a, b) => DateFormat('yyyy-MM-dd').parse(a).compareTo(DateFormat('yyyy-MM-dd').parse(b)));
+
+        // Remove the oldest date
+        final String oldestDate = sortedDates.first;
+        await pulseRef.child(oldestDate).remove();
+      }
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Pulse data updated successfully")),
+      );
+
+      Navigator.pop(context);
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Error updating data: $e")),
+      );
+    }
   }
 
   @override
@@ -118,7 +180,42 @@ class _AddWeightState extends State<AddWeight> {
                   ),
                 ),
                 _buildDivider(),
-                _buildInputRow('Weight (kg)'),
+            Container(
+              height: ScreenUtil().setHeight(54),
+              width: ScreenUtil().setWidth(388),
+              margin: EdgeInsets.only(top: ScreenUtil().setHeight(10)),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Weight (kg)',
+                    style: const TextStyle(
+                        fontSize: 18, fontWeight: FontWeight.w400),
+                  ),
+                  Container(
+                    height: ScreenUtil().setHeight(54),
+                    width: ScreenUtil().setWidth(100),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(5),
+                      //color: Colors.yellow
+                    ),
+                    child: TextField(
+                      controller: _weightController,
+                      decoration:
+                      const InputDecoration(border: InputBorder.none),
+                      keyboardType: TextInputType.number,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
+                        fontFamily: 'Montserrat',
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
 
                 // Buttons Row
                 Padding(
@@ -140,9 +237,7 @@ class _AddWeightState extends State<AddWeight> {
                         label: 'Save',
                         color: Color.fromRGBO(171, 222, 232, 1),
                         textColor: Colors.white,
-                        onPressed: () {
-                          // Navigate or save logic here
-                        },
+                        onPressed: _saveDataToFirebase,
                       ),
                     ],
                   ),
