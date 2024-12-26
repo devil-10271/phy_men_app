@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:phy_men_app/Home/Physical/WeightLogging/AddWeight.dart';
+import 'package:phy_men_app/Home/Physical/WeightLogging/WeightGraph.dart';
 
 
 class Weight extends StatefulWidget {
@@ -59,6 +60,7 @@ class _WeightState extends State<Weight> {
                       ),
                     ),
                     SizedBox(height: ScreenUtil().setHeight(60)),
+
                     Padding(
                       padding: EdgeInsets.symmetric(
                           horizontal: ScreenUtil().setWidth(20)),
@@ -83,6 +85,35 @@ class _WeightState extends State<Weight> {
                           ),
                           child: Text(
                             'ADD NEW',
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
+                                fontFamily: 'Montserrat'),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: ScreenUtil().setHeight(60)),
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: ScreenUtil().setWidth(20)),
+                      child: Container(
+                        height: ScreenUtil().setHeight(54),
+                        width: ScreenUtil().setWidth(388),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (content) => WeightGraph()));
+                          },
+                          style: ElevatedButton.styleFrom(
+                            foregroundColor: Color.fromRGBO(171, 222, 232, 1),
+                            backgroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                  100), // Adjust the radius as needed
+                            ),
+                          ),
+                          child: Text(
+                            'View Weight Graph',
                             style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w700,
