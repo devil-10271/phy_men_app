@@ -9,6 +9,7 @@ import 'package:phy_men_app/Home/Physical/BloodPressure/Blood.dart';
 import 'package:phy_men_app/Home/Physical/Exercise/Cadio/Cardiopage.dart';
 import 'package:phy_men_app/Home/Physical/HeartRate/HeartRate.dart';
 import 'package:phy_men_app/Home/Physical/WeightLogging/Weight.dart';
+import 'package:phy_men_app/Profile/Profile.dart';
 import 'Home/Physical/PhysicalMain.dart';
 import 'Splash_Screen/splash_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
                 useMaterial3: true,
               ),
 
-              home: Physicalmain());
+              home: HomePage());
 
         });
   }
