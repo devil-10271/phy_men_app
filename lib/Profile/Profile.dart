@@ -149,7 +149,7 @@ class _ProfileState extends State<Profile> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Expanded(child: SizedBox()),
+
                   ElevatedButton(
                     onPressed: () {
                        Navigator.push(context, MaterialPageRoute(builder: (context)=>Edit_Profile()));

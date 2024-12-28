@@ -89,42 +89,27 @@ class _HomePageState extends State<HomePage> {
                 height: 932,
                 color: const Color.fromARGB(255, 129, 218, 250),
               ),
+              Expanded(child: Image.asset("assets/Image/Home/main_photo.png")),
               Positioned(
-                top: 149,
-                child: Image.asset(
-                  'assets/Image/Home/Plants.png',
-                  width: 217,
-                  height: 118,
-                ),
-              ),
-              Positioned(
-                top: 25,
-                left: 172,
-                child: Image.asset(
-                  'assets/Image/Home/bro.png',
-                  width: 240,
-                  height: 250,
-                ),
-              ),
-              Positioned(
-                top: 266,
+                top: ScreenUtil().setHeight(266),
                 child: Container(
-                  width: 411,
-                  height: 666,
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(73.0),
-                      topRight: Radius.circular(73.0),
+                      topLeft: Radius.circular(50.0),
+                      topRight: Radius.circular(50.0),
                     ),
                     color: Colors.white,
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.only(top: 39),
+                    padding: EdgeInsets.symmetric(vertical: 20),
                     child: StreamBuilder<Object>(
                         stream: null,
                         builder: (context, snapshot) {
                           return Padding(
-                            padding: const EdgeInsets.all(20.0),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20.0, vertical: 20),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -161,18 +146,21 @@ class _HomePageState extends State<HomePage> {
                                         width: 40,
                                       )),
                                       InkWell(
-                                        onTap: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      Profile()));
-                                        },
-                                        child: const Placeholder(
-                                          fallbackHeight: 75,
-                                          fallbackWidth: 75,
-                                        ),
-                                      ),
+                                          onTap: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        Profile()));
+                                          },
+                                          child: ClipOval(
+                                            child: Image.asset(
+                                              'assets/Image/Edit_Profile/unknown.png',
+                                              height:
+                                                  ScreenUtil().setHeight(60),
+                                              width: ScreenUtil().setWidth(60),
+                                            ),
+                                          )),
                                     ],
                                   ),
                                 ),
@@ -189,93 +177,91 @@ class _HomePageState extends State<HomePage> {
                                   ],
                                 ),
                                 const SizedBox(height: 30),
-                                Expanded(
-                                  child: SingleChildScrollView(
-                                    controller: _scrollController,
-                                    scrollDirection: Axis.horizontal,
-                                    child: Row(
-                                      children: [
-                                        InkWell(
-                                          onTap: () {},
-                                          child: Container(
-                                            width: 157,
-                                            height: 239,
-                                            decoration: BoxDecoration(
-                                              color: const Color.fromRGBO(
-                                                  118, 207, 226, 0.3),
-                                              borderRadius:
-                                                  BorderRadius.circular(15.0),
+                                SingleChildScrollView(
+                                  controller: _scrollController,
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
+                                    children: [
+                                      InkWell(
+                                        onTap: () {},
+                                        child: Container(
+                                          width: 157,
+                                          height: 239,
+                                          decoration: BoxDecoration(
+                                            color: const Color.fromRGBO(
+                                                118, 207, 226, 0.3),
+                                            borderRadius:
+                                                BorderRadius.circular(15.0),
+                                          ),
+                                          child: Expanded(
+                                            child: Image.asset(
+                                              'assets/Image/Home/mental_health.png',
                                             ),
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(width: 17),
+                                      InkWell(
+                                        onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      Physicalmain()));
+                                        },
+                                        child: Container(
+                                          width: 157,
+                                          height: 239,
+                                          decoration: BoxDecoration(
+                                            color: const Color.fromRGBO(
+                                                242, 143, 143, 0.3),
+                                            borderRadius:
+                                                BorderRadius.circular(15.0),
+                                          ),
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsets.only(top: 80),
                                             child: Expanded(
                                               child: Image.asset(
-                                                'assets/Image/Home/mental_health.png',
+                                                'assets/Image/Home/physical_health.png',
                                               ),
                                             ),
                                           ),
                                         ),
-                                        const SizedBox(width: 17),
-                                        InkWell(
-                                          onTap: () {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        Physicalmain()));
-                                          },
-                                          child: Container(
-                                            width: 157,
-                                            height: 239,
-                                            decoration: BoxDecoration(
-                                              color: const Color.fromRGBO(
-                                                  242, 143, 143, 0.3),
-                                              borderRadius:
-                                                  BorderRadius.circular(15.0),
-                                            ),
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 80),
-                                              child: Expanded(
-                                                child: Image.asset(
-                                                  'assets/Image/Home/physical_health.png',
-                                                ),
+                                      ),
+                                      const SizedBox(width: 17),
+                                      InkWell(
+                                        onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      ChatBot()));
+                                        },
+                                        child: Container(
+                                          width: 157,
+                                          height: 239,
+                                          decoration: BoxDecoration(
+                                            color: const Color.fromRGBO(
+                                                146, 227, 169, 0.4),
+                                            borderRadius:
+                                                BorderRadius.circular(15.0),
+                                          ),
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsets.only(top: 70),
+                                            child: Expanded(
+                                              child: Image.asset(
+                                                'assets/Image/Home/ai.png',
                                               ),
                                             ),
                                           ),
                                         ),
-                                        const SizedBox(width: 17),
-                                        InkWell(
-                                          onTap: () {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        ChatBot()));
-                                          },
-                                          child: Container(
-                                            width: 157,
-                                            height: 239,
-                                            decoration: BoxDecoration(
-                                              color: const Color.fromRGBO(
-                                                  146, 227, 169, 0.4),
-                                              borderRadius:
-                                                  BorderRadius.circular(15.0),
-                                            ),
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 70),
-                                              child: Expanded(
-                                                child: Image.asset(
-                                                  'assets/Image/Home/ai.png',
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 17,
-                                        ),
-                                      ],
-                                    ),
+                                      ),
+                                      SizedBox(
+                                        width: 17,
+                                      ),
+                                    ],
                                   ),
                                 ),
                                 const SizedBox(height: 35),
