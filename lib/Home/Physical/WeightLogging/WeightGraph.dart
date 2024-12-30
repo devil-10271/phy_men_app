@@ -42,10 +42,21 @@ class _WeightGraphState extends State<WeightGraph> {
 
       if (snapshot.exists) {
         print('Weight Data: ${snapshot.value}');
-        final weightDataMap = snapshot.value as Map<dynamic, dynamic>;
 
-        // Process and generate weightData, lastFiveDates and weightValues
-        _processWeightData(weightDataMap);
+        // Check if the data is a map
+        if (snapshot.value is Map<dynamic, dynamic>) {
+          final weightDataMap = snapshot.value as Map<dynamic, dynamic>;
+
+          // Process and generate weightData, lastFiveDates and weightValues
+          _processWeightData(weightDataMap);
+        } else {
+          print('Unexpected data format: ${snapshot.value}');
+          setState(() {
+            weightData = [];
+            lastFiveDates = [];
+            weightValues = [];
+          });
+        }
       } else {
         print('No weight data found.');
         setState(() {
@@ -60,22 +71,37 @@ class _WeightGraphState extends State<WeightGraph> {
   }
 
   void _processWeightData(Map<dynamic, dynamic> weightDataMap) {
-    final Map<DateTime, double> consolidatedWeightData = {};
+    final Map<DateTime, double> averageWeightData = {};
 
     // Date format for parsing
     final DateFormat dateFormat = DateFormat('dd-MM-yyyy');
 
-    // Consolidate data by unique dates
-    weightDataMap.forEach((key, value) {
-      final date = dateFormat.parse(key); // Parse date from format "24-12-2024"
-      final readingWeight =
-          double.tryParse(value['reading_weight'].toString()) ?? 0.0;
+    // Process nested time data
+    weightDataMap.forEach((dateKey, dateValue) {
+      if (dateValue is Map<dynamic, dynamic> && dateValue.containsKey('time')) {
+        final date = dateFormat.parse(dateKey); // Parse date from format "24-12-2024"
+        final timeData = dateValue['time'] as Map<dynamic, dynamic>;
 
-      consolidatedWeightData[date] = readingWeight;
+        // Calculate the sum and count of weights for the date
+        double totalWeight = 0.0;
+        int count = 0;
+
+        timeData.forEach((timeKey, timeValue) {
+          final readingWeight =
+              double.tryParse(timeValue['reading_weight'].toString()) ?? 0.0;
+          totalWeight += readingWeight;
+          count++;
+        });
+
+        // Calculate the average weight for the date
+        if (count > 0) {
+          averageWeightData[date] = totalWeight / count;
+        }
+      }
     });
 
     // Sort entries by date and extract the last 5
-    final sortedEntries = consolidatedWeightData.entries.toList()
+    final sortedEntries = averageWeightData.entries.toList()
       ..sort((a, b) => a.key.compareTo(b.key));
     final lastFiveEntries = sortedEntries.length > 5
         ? sortedEntries.sublist(sortedEntries.length - 5)
@@ -137,10 +163,8 @@ class _WeightGraphState extends State<WeightGraph> {
             child: Text('No weight data available.'),
           )
               : Padding(
-            padding: EdgeInsets.only(
-                left: ScreenUtil().setWidth(16),
-                right: ScreenUtil().setWidth(16)),
-            child: Column(
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
+              child: Column(
               children: [
                 SizedBox(height: ScreenUtil().setHeight(20)),
                 Row(
@@ -270,7 +294,7 @@ class _WeightGraphState extends State<WeightGraph> {
                             showTitles: true,
                             interval: 20,
                             getTitlesWidget: (value, meta) {
-                              if (value >= 40 && value <= 160) {
+                              if (value >= 0 && value <= 160) {
                                 return Text(
                                   value.toInt().toString(),
                                   style: TextStyle(fontSize: 10),
@@ -281,7 +305,7 @@ class _WeightGraphState extends State<WeightGraph> {
                           ),
                         ),
                       ),
-                      minY: 40,
+                      minY: 0,
                       maxY: 160,
                       gridData: FlGridData(
                         show: true,
@@ -289,7 +313,7 @@ class _WeightGraphState extends State<WeightGraph> {
                         drawHorizontalLine: true,
                         horizontalInterval: 20,
                         getDrawingHorizontalLine: (value) {
-                          if (value >= 40 && value <= 160) {
+                          if (value >= 0 && value <= 160) {
                             return FlLine(
                               color: Colors.grey.withOpacity(0.5),
                               strokeWidth: 1,

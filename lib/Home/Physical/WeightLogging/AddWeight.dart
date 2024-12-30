@@ -47,44 +47,73 @@ class _AddWeightState extends State<AddWeight> {
   }
 
   Future<void> _saveDataToFirebase() async {
-    final String date = _dateController.text;
-    final String time = _timeController.text;
-    final String weight = _weightController.text;
+    final String date = _dateController.text; // Date in "dd-MM-yyyy" format
+    final String time = _timeController.text; // Time in "HH:mm" format
+    final String weight = _weightController.text; // Weight as a string
 
     if (weight.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Please enter a valid pulse rate")),
+        const SnackBar(content: Text("Please enter a valid weight")),
       );
       return;
     }
 
     try {
-      // Reference to the pulse data for the current user
-      final DatabaseReference pulseRef = _database.child('users/$uid/physical_health/weight');
+      // Reference to the user's weight data
+      final DatabaseReference weightRef = _database.child('users/$uid/physical_health/weight');
 
-      // Fetch existing pulse data
-      final DataSnapshot snapshot = await pulseRef.get();
-      final Map<String, dynamic>? existingData =
-      snapshot.value != null ? Map<String, dynamic>.from(snapshot.value as Map) : null;
+      // Check if data for the given date exists
+      final DataSnapshot snapshot = await weightRef.child(date).get();
+      Map<String, dynamic>? existingData = snapshot.value != null
+          ? Map<String, dynamic>.from(snapshot.value as Map)
+          : null;
 
-      // Add the new data
-      await pulseRef.child(date).set({
-        "reading_weight": weight,
-        "time": time,
-      });
+      // Prepare the new time entry
+      final Map<String, dynamic> newTimeEntry = {
+        time: {
+          'reading_weight': double.tryParse(weight) ?? 0.0,
+        }
+      };
 
-      // Check if there are more than 7 entries and remove the oldest
-      if (existingData != null && existingData.keys.length >= 7) {
-        final List<String> sortedDates = existingData.keys.toList()
-          ..sort((a, b) => DateFormat('yyyy-MM-dd').parse(a).compareTo(DateFormat('yyyy-MM-dd').parse(b)));
+      // Update the time field for the date
+      if (existingData != null) {
+        final Map<String, dynamic> timeData = existingData['time'] != null
+            ? Map<String, dynamic>.from(existingData['time'] as Map)
+            : {};
+        timeData.addAll(newTimeEntry); // Add or update the time entry
+        existingData['time'] = timeData;
+      } else {
+        // Create a new entry for the date
+        existingData = {'time': newTimeEntry};
+      }
 
-        // Remove the oldest date
-        final String oldestDate = sortedDates.first;
-        await pulseRef.child(oldestDate).remove();
+      // Save the updated data back to Firebase
+      await weightRef.child(date).set(existingData);
+
+      // Limit the number of dates to the last 7
+      final DataSnapshot allDatesSnapshot = await weightRef.get();
+      final Map<dynamic, dynamic>? allDatesData = allDatesSnapshot.value != null
+          ? Map<dynamic, dynamic>.from(allDatesSnapshot.value as Map)
+          : null;
+
+      if (allDatesData != null && allDatesData.keys.length > 30) {
+        // Sort dates to find the oldest ones
+        final List<String> sortedDates = allDatesData.keys
+            .map((key) => key.toString())
+            .toList()
+          ..sort((a, b) => DateFormat('dd-MM-yyyy')
+              .parse(a)
+              .compareTo(DateFormat('dd-MM-yyyy').parse(b)));
+
+        // Remove the oldest dates to keep only the last 7
+        while (sortedDates.length > 30) {
+          final String oldestDate = sortedDates.removeAt(0);
+          await weightRef.child(oldestDate).remove();
+        }
       }
 
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Pulse data updated successfully")),
+        const SnackBar(content: Text("Weight data updated successfully")),
       );
 
       Navigator.pop(context);

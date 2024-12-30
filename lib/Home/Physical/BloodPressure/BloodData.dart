@@ -22,7 +22,7 @@ class _BloodDataState extends State<BloodData> {
   ).ref();
   final String? uid = FirebaseAuth.instance.currentUser?.uid;
 
-  List<Map<String, String>> _bloodData = [];
+  List<Map<String, dynamic>> _bloodData = [];
 
   @override
   void initState() {
@@ -32,21 +32,21 @@ class _BloodDataState extends State<BloodData> {
 
   Future<void> _fetchBloodData() async {
     try {
-      // Access the blood data path in the database
       final snapshot = await _database
           .child('users/$uid/physical_health/blood_pressure')
           .get();
 
       if (snapshot.exists) {
         final bloodMap = Map<String, dynamic>.from(snapshot.value as Map);
-        List<Map<String, String>> bloodList = [];
+
+        List<Map<String, dynamic>> bloodList = [];
 
         bloodMap.forEach((date, details) {
+          final times = Map<String, dynamic>.from(details['time'] ?? {});
+
           bloodList.add({
             'date': date,
-            'reading_systole': details['reading_systole'] ?? 'N/A',
-            'reading_diastole': details['reading_diastole'] ?? 'N/A',
-            'time': details['time'] ?? 'N/A',
+            'times': times,
           });
         });
 
@@ -88,50 +88,45 @@ class _BloodDataState extends State<BloodData> {
         backgroundColor: Color.fromRGBO(248, 132, 146, 1),
         foregroundColor: Colors.white,
         title: Text(
-          "Pulse Data",
+          "Blood Pressure Data",
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
         ),
         centerTitle: true,
       ),
       body: _bloodData.isEmpty
-          ? Center(child: Text('no data found'))
+          ? Center(child: Text('No data found'))
           : ListView.builder(
         itemCount: _bloodData.length,
         itemBuilder: (context, index) {
-          final pulseItem = _bloodData[index];
-          return ListTile(
-            title: Text(
-              '${pulseItem['date']}',
-              style: TextStyle(
-                  fontFamily: 'Montserrat',
-                  fontWeight: FontWeight.w700,
-                  fontSize: 20),
-            ),
-            subtitle: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                        'Systolic : ${pulseItem['reading_systole']} mmHg'
-                    ),
-                    Text(
-                        '${pulseItem['time']}'
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                        'Diastolic : ${pulseItem['reading_diastole']} mmHg'
-                    ),
-                    Text(
-                        '${pulseItem['time']}'
-                    ),
-                  ],
-                ),
-              ],
+          final bloodItem = _bloodData[index];
+          final times = bloodItem['times'] as Map<String, dynamic>;
+
+          return Card(
+            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: ExpansionTile(
+              title: Text(
+                '${bloodItem['date']}',
+                style: const TextStyle(
+                    fontFamily: 'Montserrat',
+                    fontWeight: FontWeight.w700,
+                    fontSize: 20),
+              ),
+              children: times.entries.map((entry) {
+                final time = entry.key;
+                final readingSys = entry.value['reading_systole'];
+                final readingDia = entry.value['reading_diastole'];
+
+                return ListTile(
+                  title: Text(
+                    'Time: $time',
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                  subtitle: Text(
+                    'Systolic: ${readingSys ?? "N/A"} mmHg\nDiastolic: ${readingDia ?? "N/A"} mmHg',
+                    style: const TextStyle(fontSize: 14),
+                  ),
+                );
+              }).toList(),
             ),
           );
         },

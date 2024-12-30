@@ -38,7 +38,7 @@ class _Sign_UpState extends State<Sign_Up> {
   final DatabaseReference _database = FirebaseDatabase.instanceFor(
     app: FirebaseDatabase.instance.app,
     databaseURL:
-    'https://phymenapp-default-rtdb.asia-southeast1.firebasedatabase.app',
+        'https://phymenapp-default-rtdb.asia-southeast1.firebasedatabase.app',
   ).ref();
 
   Future<void> registration() async {
@@ -48,8 +48,8 @@ class _Sign_UpState extends State<Sign_Up> {
         _email.text.isNotEmpty) {
       try {
         // Create user with Firebase Authentication
-        UserCredential userCredential = await FirebaseAuth.instance
-            .createUserWithEmailAndPassword(
+        UserCredential userCredential =
+            await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: _email.text.trim(),
           password: _password.text.trim(),
         );
@@ -111,192 +111,112 @@ class _Sign_UpState extends State<Sign_Up> {
         },
         "mental_health": {
           "gk_score": {
-            "18-12-2024": {
-              "reading_gkscore": "1",
-              "time": "08:00"
-            },
-            "19-12-2024": {
-              "reading_gkscore": "2",
-              "time": "08:00"
-            },
-            "20-12-2024": {
-              "reading_gkscore": "3",
-              "time": "08:00"
-            },
-            "21-12-2024": {
-              "reading_gkscore": "5",
-              "time": "08:00"
-            },
-            "22-12-2024": {
-              "reading_gkscore": "4",
-              "time": "08:00"
-            },
-            "23-12-2024": {
-              "reading_gkscore": "2",
-              "time": "08:00"
-            },
-            "24-12-2024": {
-              "reading_gkscore": "3",
-              "time": "08:00"
-            }
+            "18-12-2024": {"reading_gkscore": "1", "time": "08:00"},
+            "19-12-2024": {"reading_gkscore": "2", "time": "08:00"},
+            "20-12-2024": {"reading_gkscore": "3", "time": "08:00"},
+            "21-12-2024": {"reading_gkscore": "5", "time": "08:00"},
+            "22-12-2024": {"reading_gkscore": "4", "time": "08:00"},
+            "23-12-2024": {"reading_gkscore": "2", "time": "08:00"},
+            "24-12-2024": {"reading_gkscore": "3", "time": "08:00"}
           },
           "iq_score": {
-            "18-12-2024": {
-              "reading_iqscore": "1",
-              "time": "08:00"
-            },
-            "19-12-2024": {
-              "reading_iqscore": "2",
-              "time": "08:00"
-            },
-            "20-12-2024": {
-              "reading_iqscore": "3",
-              "time": "08:00"
-            },
-            "21-12-2024": {
-              "reading_iqscore": "5",
-              "time": "08:00"
-            },
-            "22-12-2024": {
-              "reading_iqscore": "4",
-              "time": "08:00"
-            },
-            "23-12-2024": {
-              "reading_iqscore": "2",
-              "time": "08:00"
-            },
-            "24-12-2024": {
-              "reading_iqscore": "3",
-              "time": "08:00"
-            }
+            "18-12-2024": {"reading_iqscore": "1", "time": "08:00"},
+            "19-12-2024": {"reading_iqscore": "2", "time": "08:00"},
+            "20-12-2024": {"reading_iqscore": "3", "time": "08:00"},
+            "21-12-2024": {"reading_iqscore": "5", "time": "08:00"},
+            "22-12-2024": {"reading_iqscore": "4", "time": "08:00"},
+            "23-12-2024": {"reading_iqscore": "2", "time": "08:00"},
+            "24-12-2024": {"reading_iqscore": "3", "time": "08:00"}
           }
         },
         "physical_health": {
           "blood_pressure": {
-            "18-12-2024": {
-              "reading_diastole": "100",
-              "reading_systole": "70",
-              "time": "08:00"
-            },
-            "19-12-2024": {
-              "reading_diastole": "130",
-              "reading_systole": "100",
-              "time": "08:00"
-            },
-            "20-12-2024": {
-              "reading_diastole": "125",
-              "reading_systole": "90",
-              "time": "08:00"
-            },
-            "21-12-2024": {
-              "reading_diastole": "100",
-              "reading_systole": "80",
-              "time": "08:00"
-            },
-            "22-12-2024": {
-              "reading_diastole": "110",
-              "reading_systole": "80",
-              "time": "08:00"
-            },
-            "23-12-2024": {
-              "reading_diastole": "120",
-              "reading_systole": "80",
-              "time": "08:00"
-            },
             "24-12-2024": {
-              "reading_diastole": "100",
-              "reading_systole": "100",
-              "time": "08:00"
+              "time": {
+                "08:00": {"reading_systole": 0, "reading_diastole": 0},
+                "12:00": {"reading_systole": 0, "reading_diastole": 0},
+                "18:00": {"reading_systole": 0, "reading_diastole": 0}
+              }
+            },
+            "25-12-2024": {
+              "time": {
+                "08:00": {"reading_systole": 0, "reading_diastole": 0},
+                "12:00": {"reading_systole": 0, "reading_diastole": 0},
+                "18:00": {"reading_systole": 0, "reading_diastole": 0}
+              }
+            },
+            "26-12-2024": {
+              "time": {
+                "08:00": {"reading_systole": 0, "reading_diastole": 0},
+                "12:00": {"reading_systole": 0, "reading_diastole": 0},
+                "18:00": {"reading_systole": 0, "reading_diastole": 0}
+              }
             }
           },
           "height": {
-            "18-12-2024": {
-              "reading_height": "5.1",
-              "time": "08:00"
-            },
-            "19-12-2024": {
-              "reading_height": "5.1",
-              "time": "08:00"
-            },
-            "20-12-2024": {
-              "reading_height": "5.1",
-              "time": "08:00"
-            },
-            "21-12-2024": {
-              "reading_height": "5.1",
-              "time": "08:00"
-            },
-            "22-12-2024": {
-              "reading_height": "5.1",
-              "time": "08:00"
-            },
-            "23-12-2024": {
-              "reading_height": "5.1",
-              "time": "08:00"
-            },
-            "24-12-2024": {
-              "reading_height": "5.1",
-              "time": "08:00"
-            }
+            "18-12-2024": {"reading_height": "5.1", "time": "08:00"},
+            "19-12-2024": {"reading_height": "5.1", "time": "08:00"},
+            "20-12-2024": {"reading_height": "5.1", "time": "08:00"},
+            "21-12-2024": {"reading_height": "5.1", "time": "08:00"},
+            "22-12-2024": {"reading_height": "5.1", "time": "08:00"},
+            "23-12-2024": {"reading_height": "5.1", "time": "08:00"},
+            "24-12-2024": {"reading_height": "5.1", "time": "08:00"}
           },
           "pulse": {
-            "18-12-2024": {
-              "reading_pulse": "75",
-              "time": "08:00"
-            },
-            "19-12-2024": {
-              "reading_pulse": "78",
-              "time": "08:00"
-            },
-            "20-12-2024": {
-              "reading_pulse": "80",
-              "time": "08:00"
-            },
-            "21-12-2024": {
-              "reading_pulse": "76",
-              "time": "08:00"
-            },
-            "22-12-2024": {
-              "reading_pulse": "77",
-              "time": "08:00"
-            },
-            "23-12-2024": {
-              "reading_pulse": "75",
-              "time": "08:00"
-            },
             "24-12-2024": {
-              "reading_pulse": "79",
-              "time": "08:00"
+              "time": {
+                "08:00": {"reading_pulse": 0},
+                "12:00": {"reading_pulse": 0},
+                "18:00": {"reading_pulse": 0}
+              }
+            },
+            "25-12-2024": {
+              "time": {
+                "08:00": {"reading_pulse": 0},
+                "12:00": {"reading_pulse": 0},
+                "18:00": {"reading_pulse": 0}
+              }
+            },
+            "26-12-2024": {
+              "time": {
+                "08:00": {"reading_pulse": 0},
+                "12:00": {"reading_pulse": 0},
+                "18:00": {"reading_pulse": 0}
+              }
             }
           },
           "weight": {
-            "18-12-2024": {
-              "reading_weight": "70",
-              "time": "8:00"
-            },
-            "19-12-2024": {
-              "reading_weight": "70",
-              "time": "8:00"
-            },
-            "20-12-2024": {
-              "reading_weight": "70",
-              "time": "8:00"
-            },
-            "21-12-2024": {
-              "reading_weight": "70",
-              "time": "8:00"
-            },
-            "22-12-2024": {
-              "reading_weight": "70",
-              "time": "8:00"
-            },
-            "23-12-2024": {
-              "reading_weight": "70",
-              "time": "8:00"
-            },
             "24-12-2024": {
-              "reading_weight": "70",
-              "time": "8:00"
+              "time": {
+                "08:00": {"reading_weight": 0},
+                "12:00": {"reading_weight": 0},
+                "18:00": {"reading_weight": 0}
+              }
+            },
+            "25-12-2024": {
+              "time": {
+                "09:00": {"reading_weight": 73.2},
+                "15:00": {"reading_weight": 73.5},
+                "21:00": {"reading_weight": 73.0}
+              }
+            },
+            "26-12-2024": {
+              "time": {
+                "07:30": {"reading_weight": 72.9},
+                "14:00": {"reading_weight": 73.3}
+              }
+            },
+            "27-12-2024": {
+              "time": {
+                "10:00": {"reading_weight": 73.1},
+                "16:00": {"reading_weight": 72.7}
+              }
+            },
+            "28-12-2024": {
+              "time": {
+                "11:00": {"reading_weight": 73.4},
+                "19:00": {"reading_weight": 73.0}
+              }
             }
           }
         },
@@ -318,7 +238,6 @@ class _Sign_UpState extends State<Sign_Up> {
       ),
     );
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -435,26 +354,22 @@ class _Sign_UpState extends State<Sign_Up> {
                                   style: TextStyle(color: Colors.black),
                                   decoration: InputDecoration(
                                     enabledBorder: OutlineInputBorder(
-                                        borderRadius:
-                                        BorderRadius.circular(40),
+                                        borderRadius: BorderRadius.circular(40),
                                         borderSide: BorderSide(
-                                            color: Color(
-                                                methods.hex('76CFE2')))),
+                                            color:
+                                                Color(methods.hex('76CFE2')))),
                                     focusedBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
-                                          color:
-                                          Color(methods.hex('76CFE2')),
+                                          color: Color(methods.hex('76CFE2')),
                                           width: 2),
-                                      borderRadius:
-                                      BorderRadius.circular(20),
+                                      borderRadius: BorderRadius.circular(20),
                                     ),
                                     hintText: 'Enter Email',
                                     hintStyle: TextStyle(
                                       color: Colors.grey,
                                     ),
                                     border: OutlineInputBorder(
-                                      borderRadius:
-                                      BorderRadius.circular(30),
+                                      borderRadius: BorderRadius.circular(30),
                                     ),
                                     // suffixIcon: Icon(Icons.email),
                                   ),
@@ -471,26 +386,22 @@ class _Sign_UpState extends State<Sign_Up> {
                                   style: TextStyle(color: Colors.black),
                                   decoration: InputDecoration(
                                     enabledBorder: OutlineInputBorder(
-                                        borderRadius:
-                                        BorderRadius.circular(40),
+                                        borderRadius: BorderRadius.circular(40),
                                         borderSide: BorderSide(
-                                            color: Color(
-                                                methods.hex('76CFE2')))),
+                                            color:
+                                                Color(methods.hex('76CFE2')))),
                                     focusedBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
-                                          color:
-                                          Color(methods.hex('76CFE2')),
+                                          color: Color(methods.hex('76CFE2')),
                                           width: 2),
-                                      borderRadius:
-                                      BorderRadius.circular(20),
+                                      borderRadius: BorderRadius.circular(20),
                                     ),
                                     hintText: 'Enter Password',
                                     hintStyle: TextStyle(
                                       color: Colors.grey,
                                     ),
                                     border: OutlineInputBorder(
-                                      borderRadius:
-                                      BorderRadius.circular(30),
+                                      borderRadius: BorderRadius.circular(30),
                                     ),
                                     // suffixIcon: Icon(Icons.email),
                                   ),

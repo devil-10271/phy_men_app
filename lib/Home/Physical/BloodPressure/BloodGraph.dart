@@ -6,6 +6,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:phy_men_app/Home/Physical/BloodPressure/AddBloodPressure.dart';
 import 'package:phy_men_app/Home/Physical/BloodPressure/BloodData.dart';
 
 class BloodGraph extends StatefulWidget {
@@ -36,8 +37,7 @@ class _BloodGraphState extends State<BloodGraph> {
   Future<void> _fetchBloodPressureData() async {
     try {
       final snapshot = await _database
-          .child(
-              'users/$uid/physical_health/blood_pressure')
+          .child('users/$uid/physical_health/blood_pressure')
           .get();
 
       if (snapshot.exists) {
@@ -65,44 +65,64 @@ class _BloodGraphState extends State<BloodGraph> {
     // Date format for parsing
     final DateFormat dateFormat = DateFormat('dd-MM-yyyy');
 
-    // Consolidate data by unique dates
-    bloodPressureDataMap.forEach((key, value) {
-      final date = dateFormat.parse(key); // Parse date from format "24-12-2024"
-      final systolic =
-          double.tryParse(value['reading_systole'].toString()) ?? 0.0;
-      final diastolic =
-          double.tryParse(value['reading_diastole'].toString()) ?? 0.0;
+    // Process blood pressure data
+    bloodPressureDataMap.forEach((dateKey, dateValue) {
+      final date = dateFormat.parse(dateKey);
 
-      consolidatedData[date] = {
-        'reading_systole': systolic,
-        'reading_diastole': diastolic,
-      };
+      if (dateValue['time'] != null) {
+        final timeEntries = dateValue['time'] as Map<dynamic, dynamic>;
+
+        double totalSystolic = 0;
+        double totalDiastolic = 0;
+        int count = 0;
+
+        // Iterate over time entries
+        timeEntries.forEach((timeKey, timeData) {
+          if (timeData is Map<dynamic, dynamic>) {
+            final systolic = double.tryParse(timeData['reading_systole'].toString()) ?? 0.0;
+            final diastolic = double.tryParse(timeData['reading_diastole'].toString()) ?? 0.0;
+
+            totalSystolic += systolic;
+            totalDiastolic += diastolic;
+            count++;
+          }
+        });
+
+        // Calculate average for systolic and diastolic
+        if (count > 0) {
+          consolidatedData[date] = {
+            'systolic': totalSystolic / count,
+            'diastolic': totalDiastolic / count,
+          };
+        }
+      }
     });
 
-    // Sort entries by date and extract the last 5
+    // Sort the entries by date and extract the last 5
     final sortedEntries = consolidatedData.entries.toList()
       ..sort((a, b) => a.key.compareTo(b.key));
     final lastFiveEntries = sortedEntries.length > 5
         ? sortedEntries.sublist(sortedEntries.length - 5)
         : sortedEntries;
 
-    // Create FlSpot lists and date labels
+    // Create FlSpot lists for systolic and diastolic values
     final systolicSpots = lastFiveEntries.map((entry) {
       return FlSpot(
         entry.key.millisecondsSinceEpoch.toDouble(),
-        entry.value['reading_systole']!,
+        entry.value['systolic']!,
       );
     }).toList();
 
     final diastolicSpots = lastFiveEntries.map((entry) {
       return FlSpot(
         entry.key.millisecondsSinceEpoch.toDouble(),
-        entry.value['reading_diastole']!,
+        entry.value['diastolic']!,
       );
     }).toList();
 
+    // Create date labels
     final dates = lastFiveEntries.map((entry) {
-      return DateFormat('dd-M').format(entry.key); // Format date as "20 Dec"
+      return DateFormat('dd-M').format(entry.key); // Format date as "24-12"
     }).toList();
 
     // Update state
@@ -355,7 +375,7 @@ class _BloodGraphState extends State<BloodGraph> {
                                   showTitles: true,
                                   interval: 20,
                                   getTitlesWidget: (value, meta) {
-                                    if (value >= 60 && value <= 140) {
+                                    if (value >= 0 && value <= 160) {
                                       return Text(
                                         value.toInt().toString(),
                                         style: TextStyle(fontSize: 10),
@@ -366,15 +386,15 @@ class _BloodGraphState extends State<BloodGraph> {
                                 ),
                               ),
                             ),
-                            minY: 60,
-                            maxY: 140,
+                            minY: 0,
+                            maxY: 160,
                             gridData: FlGridData(
                               show: true,
                               drawVerticalLine: false,
                               drawHorizontalLine: true,
                               horizontalInterval: 20,
                               getDrawingHorizontalLine: (value) {
-                                if (value >= 60 && value <= 140) {
+                                if (value >= 0 && value <= 160) {
                                   return FlLine(
                                     color: Colors.grey.withOpacity(0.5),
                                     strokeWidth: 1,
@@ -403,20 +423,19 @@ class _BloodGraphState extends State<BloodGraph> {
                             ),
                           ),
                         ),
-
                       ),
                       Padding(
                         padding:
-                            EdgeInsets.only(left: ScreenUtil().setWidth(25)),
+                        EdgeInsets.only(left: ScreenUtil().setWidth(25)),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: lastFiveDates
                               .map(
                                 (date) => Text(
-                                  date,
-                                  style: TextStyle(fontSize: 10),
-                                ),
-                              )
+                              date,
+                              style: TextStyle(fontSize: 12),
+                            ),
+                          )
                               .toList(),
                         ),
                       ),
@@ -431,11 +450,11 @@ class _BloodGraphState extends State<BloodGraph> {
                           width: ScreenUtil().setWidth(388),
                           child: ElevatedButton(
                             onPressed: () {
-                              // showModalBottomSheet<void>(
-                              //   isScrollControlled: true,
-                              //   context: context,
-                              //   builder: (context) => AddBloodPressure(),
-                              // );
+                              showModalBottomSheet<void>(
+                                isScrollControlled: true,
+                                context: context,
+                                builder: (context) => AddBloodPressure(),
+                              );
                             },
                             style: ElevatedButton.styleFrom(
                               foregroundColor: Colors.white,

@@ -22,7 +22,7 @@ class _AddBloodPressureState extends State<AddBloodPressure> {
   final DatabaseReference _database = FirebaseDatabase.instanceFor(
     app: FirebaseDatabase.instance.app,
     databaseURL:
-    'https://phymenapp-default-rtdb.asia-southeast1.firebasedatabase.app',
+        'https://phymenapp-default-rtdb.asia-southeast1.firebasedatabase.app',
   ).ref();
 
   @override
@@ -63,30 +63,54 @@ class _AddBloodPressureState extends State<AddBloodPressure> {
     try {
       // Reference to the blood pressure data for the current user
       final DatabaseReference bpRef =
-      _database.child('users/$uid/physical_health/blood_pressure');
+          _database.child('users/$uid/physical_health/blood_pressure');
 
       // Fetch existing blood pressure data
-      final DataSnapshot snapshot = await bpRef.get();
-      final Map<String, dynamic>? existingData = snapshot.value != null
+      final DataSnapshot snapshot = await bpRef.child(date).get();
+      Map<String, dynamic>? existingData = snapshot.value != null
           ? Map<String, dynamic>.from(snapshot.value as Map)
           : null;
 
       // Add the new data
-      await bpRef.child(date).set({
-        "time": time,
-        "reading_systole": systolic,
-        "reading_diastole": diastolic,
-      });
+      // await bpRef.child(date).set({
+      //   "time": time,
+      //   "reading_systole": systolic,
+      //   "reading_diastole": diastolic,
+      // });
+
+      //prepare the new entry
+      final Map<String, dynamic> newTimeEntry = {
+        time: {
+          'reading_systole': double.tryParse(systolic) ?? 0.0,
+          'reading_diastole': double.tryParse(diastolic) ?? 0.0,
+        }
+      };
+
+      // Update the time field for the date
+      if (existingData != null) {
+        final Map<String, dynamic> timeData = existingData['time'] != null
+            ? Map<String, dynamic>.from(existingData['time'] as Map)
+            : {};
+        timeData.addAll(newTimeEntry); // Add or update the time entry
+        existingData['time'] = timeData;
+      } else {
+        // Create a new entry for the date
+        existingData = {'time': newTimeEntry};
+      }
+
+      await bpRef.child(date).set(existingData);
 
       // Check if there are more than 7 entries and remove the oldest
-      if (existingData != null && existingData.keys.length >= 7) {
+      if (existingData != null && existingData.keys.length >= 30) {
         final List<String> sortedDates = existingData.keys.toList()
-          ..sort((a, b) => DateFormat('dd-M-yyyy').parse(a).compareTo(
-              DateFormat('dd-M-yyyy').parse(b)));
+          ..sort((a, b) => DateFormat('dd-M-yyyy')
+              .parse(a)
+              .compareTo(DateFormat('dd-M-yyyy').parse(b)));
 
-        // Remove the oldest date
-        final String oldestDate = sortedDates.first;
-        await bpRef.child(oldestDate).remove();
+        while (sortedDates.length > 30) {
+          final String oldestDate = sortedDates.removeAt(0);
+          await bpRef.child(oldestDate).remove();
+        }
       }
 
       ScaffoldMessenger.of(context).showSnackBar(

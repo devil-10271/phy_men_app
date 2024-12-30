@@ -8,7 +8,10 @@ import 'package:phy_men_app/Home/Physical/Exercise/Cadio/Cardiopage.dart';
 import 'package:phy_men_app/Home/Physical/BloodPressure/Blood.dart';
 import 'package:phy_men_app/Home/Physical/Exercise/Cadio/Cardiopage.dart';
 import 'package:phy_men_app/Home/Physical/HeartRate/HeartRate.dart';
+import 'package:phy_men_app/Home/Physical/HeartRate/PulseData.dart';
+import 'package:phy_men_app/Home/Physical/HeartRate/PulseGraph.dart';
 import 'package:phy_men_app/Home/Physical/WeightLogging/Weight.dart';
+import 'package:phy_men_app/Home/Physical/WeightLogging/WeightData.dart';
 import 'package:phy_men_app/Profile/Profile.dart';
 import 'Home/Physical/PhysicalMain.dart';
 import 'Splash_Screen/splash_screen.dart';
@@ -40,7 +43,7 @@ class MyApp extends StatelessWidget {
                 useMaterial3: true,
               ),
 
-              home: HomePage());
+              home: SplashScreen());
 
         });
   }

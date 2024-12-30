@@ -66,12 +66,21 @@ class _PulseGraphState extends State<PulseGraph> {
     final DateFormat dateFormat = DateFormat('dd-MM-yyyy');
 
     // Consolidate data by unique dates
-    pulseDataMap.forEach((key, value) {
-      final date = dateFormat.parse(key); // Parse date from format "24-12-2024"
-      final readingPulse =
-          double.tryParse(value['reading_pulse'].toString()) ?? 0.0;
+    pulseDataMap.forEach((dateKey, dateValue) {
+      final date = dateFormat.parse(dateKey);
 
-      consolidatedPulseData[date] = readingPulse;
+      if (dateValue['time'] != null) {
+        final timeEntries = dateValue['time'] as Map<dynamic, dynamic>;
+        final pulseReadings = timeEntries.values.map((timeData) {
+          return double.tryParse(timeData['reading_pulse'].toString()) ?? 0.0;
+        }).toList();
+
+        if (pulseReadings.isNotEmpty) {
+          final averagePulse =
+              pulseReadings.reduce((a, b) => a + b) / pulseReadings.length;
+          consolidatedPulseData[date] = averagePulse;
+        }
+      }
     });
 
     // Sort entries by date and extract the last 5
@@ -90,7 +99,7 @@ class _PulseGraphState extends State<PulseGraph> {
     }).toList();
 
     final dates = lastFiveEntries.map((entry) {
-      return DateFormat('dd-M').format(entry.key); // Format date as "20 Dec"
+      return DateFormat('dd-M').format(entry.key); // Format date as "24-12"
     }).toList();
 
     final pulses = lastFiveEntries.map((entry) => entry.value).toList();

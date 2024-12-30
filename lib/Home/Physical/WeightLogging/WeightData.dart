@@ -18,11 +18,11 @@ class _WeightDataState extends State<WeightData> {
   final DatabaseReference _database = FirebaseDatabase.instanceFor(
     app: FirebaseDatabase.instance.app,
     databaseURL:
-    'https://phymenapp-default-rtdb.asia-southeast1.firebasedatabase.app',
+        'https://phymenapp-default-rtdb.asia-southeast1.firebasedatabase.app',
   ).ref();
   final String? uid = FirebaseAuth.instance.currentUser?.uid;
 
-  List<Map<String, String>> _weightData = [];
+  List<Map<String, dynamic>> _weightData = []; // Holds the fetched data
 
   @override
   void initState() {
@@ -32,27 +32,25 @@ class _WeightDataState extends State<WeightData> {
 
   Future<void> _fetchWeightData() async {
     try {
-      // Access the weight data path in the database
-      final snapshot = await _database
-          .child('users/$uid/physical_health/weight')
-          .get();
+      final snapshot =
+          await _database.child('users/$uid/physical_health/weight').get();
 
       if (snapshot.exists) {
         final weightMap = Map<String, dynamic>.from(snapshot.value as Map);
-        List<Map<String, String>> weightList = [];
+        List<Map<String, dynamic>> weightList = [];
 
         weightMap.forEach((date, details) {
+          final times = Map<String, dynamic>.from(details['time'] ?? {});
           weightList.add({
             'date': date,
-            'reading_weight': details['reading_weight'] ?? 'N/A',
-            'time': details['time'] ?? 'N/A',
+            'times': times, // Store the nested time data
           });
         });
 
-        // Sort the list by date in descending order
+        // Sort the data by date in descending order
         weightList.sort((a, b) {
-          DateTime dateA = DateFormat('dd-MM-yyyy').parse(a['date']!);
-          DateTime dateB = DateFormat('dd-MM-yyyy').parse(b['date']!);
+          DateTime dateA = DateFormat('dd-MM-yyyy').parse(a['date']);
+          DateTime dateB = DateFormat('dd-MM-yyyy').parse(b['date']);
           return dateB.compareTo(dateA);
         });
 
@@ -69,7 +67,7 @@ class _WeightDataState extends State<WeightData> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             bottom: Radius.circular(30),
           ),
@@ -79,47 +77,56 @@ class _WeightDataState extends State<WeightData> {
           onTap: () {
             Navigator.pop(context);
           },
-          child: Icon(
+          child: const Icon(
             Icons.arrow_back_ios,
             size: 20,
           ),
         ),
-        backgroundColor: Color.fromRGBO(118, 207, 226, 1),
+        backgroundColor: const Color.fromRGBO(118, 207, 226, 1),
         foregroundColor: Colors.white,
-        title: Text(
+        title: const Text(
           "Weight Data",
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
         ),
         centerTitle: true,
       ),
       body: _weightData.isEmpty
-          ? Center(child: Text('no data found'))
+          ? const Center(child: Text('No data found'))
           : ListView.builder(
-        itemCount: _weightData.length,
-        itemBuilder: (context, index) {
-          final weightItem = _weightData[index];
-          return ListTile(
-            title: Text(
-              '${weightItem['date']}',
-              style: TextStyle(
-                  fontFamily: 'Montserrat',
-                  fontWeight: FontWeight.w700,
-                  fontSize: 20),
+              itemCount: _weightData.length,
+              itemBuilder: (context, index) {
+                final weightItem = _weightData[index];
+                final times = weightItem['times'] as Map<String, dynamic>;
+
+                return Card(
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  child: ExpansionTile(
+                    title: Text(
+                      '${weightItem['date']}',
+                      style: const TextStyle(
+                          fontFamily: 'Montserrat',
+                          fontWeight: FontWeight.w700,
+                          fontSize: 20),
+                    ),
+                    children: times.entries.map((entry) {
+                      final time = entry.key;
+                      final reading = entry.value['reading_weight'];
+                      return ListTile(
+                        title: Text(
+                          'Time: $time',
+                          style: const TextStyle(fontSize: 16),
+                        ),
+                        subtitle: Text(
+                          'Weight: ${reading ?? "N/A"} Kg',
+                          style: const TextStyle(fontSize: 14),
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                );
+              },
             ),
-            subtitle: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                    'Weight : ${weightItem['reading_weight']} Kg'
-                ),
-                Text(
-                    '${weightItem['time']}'
-                ),
-              ],
-            ),
-          );
-        },
-      ),
     );
   }
 }

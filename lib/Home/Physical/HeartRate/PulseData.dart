@@ -22,7 +22,7 @@ class _PulsedataState extends State<Pulsedata> {
   ).ref();
   final String? uid = FirebaseAuth.instance.currentUser?.uid;
 
-  List<Map<String, String>> _pulseData = [];
+  List<Map<String, dynamic>> _pulseData = [];
 
   @override
   void initState() {
@@ -39,20 +39,24 @@ class _PulsedataState extends State<Pulsedata> {
 
       if (snapshot.exists) {
         final pulseMap = Map<String, dynamic>.from(snapshot.value as Map);
-        List<Map<String, String>> pulseList = [];
+
+        List<Map<String, dynamic>> pulseList = [];
 
         pulseMap.forEach((date, details) {
+          // Safely cast details['time'] as a Map
+          final times = Map<String, dynamic>.from(details['time'] ?? {});
+
+          // Add each date and its time object to the list
           pulseList.add({
             'date': date,
-            'reading_pulse': details['reading_pulse'] ?? 'N/A',
-            'time': details['time'] ?? 'N/A',
+            'times': times, // Corrected key here
           });
         });
 
         // Sort the list by date in descending order
         pulseList.sort((a, b) {
-          DateTime dateA = DateFormat('dd-MM-yyyy').parse(a['date']!);
-          DateTime dateB = DateFormat('dd-MM-yyyy').parse(b['date']!);
+          DateTime dateA = DateFormat('dd-MM-yyyy').parse(a['date']);
+          DateTime dateB = DateFormat('dd-MM-yyyy').parse(b['date']);
           return dateB.compareTo(dateA);
         });
 
@@ -93,29 +97,37 @@ class _PulsedataState extends State<Pulsedata> {
         centerTitle: true,
       ),
       body: _pulseData.isEmpty
-          ? Center(child: Text('no data found'))
+          ? Center(child: Text('No data found'))
           : ListView.builder(
         itemCount: _pulseData.length,
         itemBuilder: (context, index) {
           final pulseItem = _pulseData[index];
-          return ListTile(
-            title: Text(
-              '${pulseItem['date']}',
-              style: TextStyle(
-                  fontFamily: 'Montserrat',
-                  fontWeight: FontWeight.w700,
-                  fontSize: 20),
-            ),
-            subtitle: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                    'Pulse Rate : ${pulseItem['reading_pulse']} BPM'
-                ),
-                Text(
-                    '${pulseItem['time']}'
-                ),
-              ],
+          final times = pulseItem['times'] as Map<String, dynamic>; // Corrected key here
+
+          return Card(
+            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: ExpansionTile(
+              title: Text(
+                '${pulseItem['date']}',
+                style: const TextStyle(
+                    fontFamily: 'Montserrat',
+                    fontWeight: FontWeight.w700,
+                    fontSize: 20),
+              ),
+              children: times.entries.map((entry) {
+                final time = entry.key;
+                final reading = entry.value['reading_pulse'];
+                return ListTile(
+                  title: Text(
+                    'Time: $time',
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                  subtitle: Text(
+                    'Pulse: ${reading ?? "N/A"} bpm',
+                    style: const TextStyle(fontSize: 14),
+                  ),
+                );
+              }).toList(),
             ),
           );
         },
