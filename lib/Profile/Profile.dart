@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:phy_men_app/Auth/login.dart';
 import 'package:phy_men_app/Profile/edit_profile.dart'; // For CupertinoSwitch
 
 class Profile extends StatefulWidget {
@@ -149,7 +151,7 @@ class _ProfileState extends State<Profile> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Expanded(child: SizedBox()),
+
                   ElevatedButton(
                     onPressed: () {
                        Navigator.push(context, MaterialPageRoute(builder: (context)=>Edit_Profile()));
@@ -179,6 +181,10 @@ class _ProfileState extends State<Profile> {
                   // Padding between buttons
                   ElevatedButton(
                     onPressed: () {
+                      FirebaseAuth.instance.signOut();
+                      Navigator.of(context).pushReplacement(
+
+                          MaterialPageRoute(builder: ((context) => Log_in())));
                       // Navigate to Register
                     },
                     style: ElevatedButton.styleFrom(
