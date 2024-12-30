@@ -1,8 +1,9 @@
 {
   "project_info": {
     "project_number": "3200456624",
+    "firebase_url": "https://phymenapp-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "phymenapp",
-    "storage_bucket": "phymenapp.appspot.com"
+    "storage_bucket": "phymenapp.firebasestorage.app"
   },
   "client": [
     {
@@ -14,11 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "3200456624-nhm6giae9g9fg9mhscl2hjmmoe4l9g42.apps.googleusercontent.com",
+          "client_id": "3200456624-ddastofnpmvvbmt3s8c3calo1m8i8s69.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.android.application",
-            "certificate_hash": "44c3468e33bc477403d13cf1d3b6a2cfa8c08698"
+            "certificate_hash": "db19fb8b2b239fed04dbdc07f26b190a741e2e8c"
           }
         },
         {

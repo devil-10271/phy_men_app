@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:phy_men_app/Auth/login.dart';
 import 'package:phy_men_app/Profile/edit_profile.dart'; // For CupertinoSwitch
 

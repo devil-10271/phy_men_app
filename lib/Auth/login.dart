@@ -226,7 +226,7 @@ class _Log_inState extends State<Log_in> {
                             children: [
                               ElevatedButton.icon(
                                 onPressed: () async{
-                                  signInWithFacebook();
+
                                 },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.white,

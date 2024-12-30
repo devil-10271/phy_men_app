@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +22,7 @@ class _Sign_UpState extends State<Sign_Up> {
   TextEditingController _username = new TextEditingController();
   TextEditingController _email = new TextEditingController();
   TextEditingController _password = new TextEditingController();
-  TextEditingController _confpassword = new TextEditingController();
+
 
   @override
   void dispose() {
@@ -492,7 +492,7 @@ class _Sign_UpState extends State<Sign_Up> {
                             children: [
                               ElevatedButton.icon(
                                 onPressed: () async {
-                                  signInWithFacebook();
+
                                 },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.white,
