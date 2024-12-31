@@ -81,9 +81,11 @@ flutter:
     - assets/Image/Home/
     - assets/Image/Physical_Health/
     - assets/Image/Quiz/
+    - assets/Image/Physical_Health/Exercise/
     - assets/Image/Physical_Health/Exercise/Cadio/
     - assets/Image/Physical_Health/Exercise/Yoga/
     - assets/Image/Chat_Bot/
+    - assets/Image/Mental_Health/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

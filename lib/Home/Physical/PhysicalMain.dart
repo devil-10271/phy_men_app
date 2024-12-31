@@ -8,6 +8,7 @@ import 'package:phy_men_app/Home/Physical/Exercise/Yoga/Yogapage.dart';
 
 import 'package:phy_men_app/Home/Physical/WeightLogging/Weight.dart';
 
+import 'Exercise/Exercise.dart';
 import 'HeartRate/HeartRate.dart';
 
 class Physicalmain extends StatefulWidget {
@@ -114,7 +115,7 @@ class _PhysicalmainState extends State<Physicalmain> {
                         assetImagePath:
                             'assets/Image/Physical_Health/exercise.png',
                         onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>Cardiopage()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>Exe()));
                         },
                       ),
                     ],

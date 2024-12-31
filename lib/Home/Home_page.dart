@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:phy_men_app/Home/Mental/Mentalmain.dart';
 import 'package:phy_men_app/Home/Physical/PhysicalMain.dart';
 import 'package:phy_men_app/Profile/Profile.dart';
 
@@ -183,7 +184,9 @@ class _HomePageState extends State<HomePage> {
                                   child: Row(
                                     children: [
                                       InkWell(
-                                        onTap: () {},
+                                        onTap: () {
+                                          Navigator.push(context, MaterialPageRoute(builder: (context)=>MentalMain()));
+                                        },
                                         child: Container(
                                           width: 157,
                                           height: 239,

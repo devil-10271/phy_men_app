@@ -2,20 +2,24 @@
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:phy_men_app/Home/Physical/Exercise/Exercise.dart';
 import 'package:phy_men_app/Auth/signup.dart';
 import 'package:phy_men_app/Home/Home_page.dart';
 import 'package:phy_men_app/Home/Physical/Exercise/Cadio/Cardiopage.dart';
 import 'package:phy_men_app/Home/Physical/BloodPressure/Blood.dart';
 import 'package:phy_men_app/Home/Physical/Exercise/Cadio/Cardiopage.dart';
+import 'package:phy_men_app/Home/Physical/Exercise/Yoga/Yogapage.dart';
 import 'package:phy_men_app/Home/Physical/HeartRate/HeartRate.dart';
 import 'package:phy_men_app/Home/Physical/HeartRate/PulseData.dart';
 import 'package:phy_men_app/Home/Physical/HeartRate/PulseGraph.dart';
 import 'package:phy_men_app/Home/Physical/WeightLogging/Weight.dart';
 import 'package:phy_men_app/Home/Physical/WeightLogging/WeightData.dart';
 import 'package:phy_men_app/Profile/Profile.dart';
+import 'Home/Mental/Mentalmain.dart';
 import 'Home/Physical/PhysicalMain.dart';
 import 'Splash_Screen/splash_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 
 
 void main() async {
@@ -43,7 +47,8 @@ class MyApp extends StatelessWidget {
                 useMaterial3: true,
               ),
 
-              home: SplashScreen());
+              home: HomePage()
+          );
 
         });
   }

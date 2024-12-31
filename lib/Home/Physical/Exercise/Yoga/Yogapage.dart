@@ -79,22 +79,19 @@ class _YogapageState extends State<Yogapage> {
               ),
             ),
             SizedBox(height: ScreenUtil().setHeight(20)),
-            Flexible(
+            Expanded(
               child: Container(
-                height: MediaQuery.of(context).size.height * 0.95,
                 padding: const EdgeInsets.all(20),
                 margin: const EdgeInsets.only(top: 20, bottom: 30),
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: const BorderRadius.only(
-                      topRight: Radius.circular(50),
-                      topLeft: Radius.circular(50)),
+                  borderRadius: const BorderRadius.all(Radius.circular(30)),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 4,
-                      blurRadius: 6,
-                      offset: const Offset(0, 3),
+                      color: Colors.grey.withOpacity(0.2),
+                      spreadRadius: 2,
+                      blurRadius: 5,
+                      offset: Offset(0, 3),
                     ),
                   ],
                 ),
@@ -138,9 +135,10 @@ class _YogapageState extends State<Yogapage> {
                                 borderRadius: BorderRadius.circular(10),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Colors.grey.withOpacity(0.3),
-                                    blurRadius: 6,
-                                    offset: const Offset(5, 5),
+                                    color: Colors.grey.withOpacity(0.2),
+                                    spreadRadius: 2,
+                                    blurRadius: 5,
+                                    offset: Offset(0, 3),
                                   ),
                                 ],
                               ),
