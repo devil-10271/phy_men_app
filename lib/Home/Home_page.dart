@@ -52,28 +52,31 @@ class _HomePageState extends State<HomePage> {
     final bool isSelected = _selectedCategory == type;
     return GestureDetector(
       onTap: () => scrollToContainer(type),
-      child: Column(
-        children: [
-          Text(
-            text,
-            style: TextStyle(
-              fontFamily: 'Montserrat',
-              fontSize: 15.0,
-              fontWeight: FontWeight.w600,
-              color: isSelected ? Colors.black : Colors.grey,
-            ),
-          ),
-          const SizedBox(height: 5),
-          if (isSelected)
-            Container(
-              width: 8,
-              height: 8,
-              decoration: BoxDecoration(
-                color: _getDotColor(type),
-                shape: BoxShape.circle,
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Column(
+          children: [
+            Text(
+              text,
+              style: TextStyle(
+                fontFamily: 'Montserrat',
+                fontSize: ScreenUtil().setSp(15),
+                fontWeight: FontWeight.w600,
+                color: isSelected ? Colors.black : Colors.grey,
               ),
             ),
-        ],
+            const SizedBox(height: 5),
+            if (isSelected)
+              Container(
+                width: 8,
+                height: 8,
+                decoration: BoxDecoration(
+                  color: _getDotColor(type),
+                  shape: BoxShape.circle,
+                ),
+              ),
+          ],
+        ),
       ),
     );
   }
@@ -84,13 +87,14 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
         body: SingleChildScrollView(
           child: Stack(
+            
             children: [
               Container(
                 width: 430,
                 height: 932,
                 color: const Color.fromARGB(255, 129, 218, 250),
               ),
-              Expanded(child: Image.asset("assets/Image/Home/main_photo.png")),
+              Image.asset("assets/Image/Home/main_photo.png"),
               Positioned(
                 top: ScreenUtil().setHeight(266),
                 child: Container(
@@ -120,7 +124,7 @@ class _HomePageState extends State<HomePage> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      const Column(
+                                      Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
@@ -128,7 +132,7 @@ class _HomePageState extends State<HomePage> {
                                             'Hi, Miss Norman',
                                             style: TextStyle(
                                               fontFamily: 'Montserrat',
-                                              fontSize: 24.0,
+                                              fontSize: ScreenUtil().setSp(20),
                                               fontWeight: FontWeight.w600,
                                             ),
                                           ),
@@ -136,7 +140,7 @@ class _HomePageState extends State<HomePage> {
                                             'what would you like to do today?',
                                             style: TextStyle(
                                               fontFamily: 'Montserrat',
-                                              fontSize: 15.0,
+                                              fontSize: ScreenUtil().setSp(15),
                                               fontWeight: FontWeight.w400,
                                             ),
                                           ),

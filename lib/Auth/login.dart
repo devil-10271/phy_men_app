@@ -161,7 +161,7 @@ class _Log_inState extends State<Log_in> {
                                             Color(methods.hex('76CFE2')))),
                                     focusedBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
-                                          color: Color(methods.hex('76CFE2')),
+                                          color: Color(0xFF76CFE2),
                                           width: 2),
                                       borderRadius: BorderRadius.circular(20),
                                     ),

@@ -29,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
           height: screen.size.height,
           width: screen.size.width,
           decoration: BoxDecoration(
-            color: Color(hex('76CFE2')),
+            color: Color(0xff76CFE2),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,

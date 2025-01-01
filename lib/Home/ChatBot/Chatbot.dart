@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:phy_men_app/Splash_Screen/splash_screen.dart';
+
+import 'chatfile.dart';
 
 class ChatBot extends StatefulWidget {
   const ChatBot({super.key});
@@ -54,12 +57,26 @@ class _ChatBotState extends State<ChatBot> {
                     height: ScreenUtil().setHeight(10),
                   ),
                   ElevatedButton(
-                      onPressed: () {},
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 20),
-                        child: Center(child: Text("Start a New Chat")),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFF92E3A9),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                      style: ButtonStyle()),
+                    ),
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Chat()));
+                    },
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                          vertical: ScreenUtil().setHeight(10),
+                          horizontal: ScreenUtil().setWidth(10)),
+                      child: Text(
+                        'Start a New Chat',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
                   SizedBox(
                     height: ScreenUtil().setHeight(10),
                   ),

@@ -50,6 +50,8 @@ dependencies:
   firebase_database: ^11.2.0
   http: ^1.2.2
   fl_chart: ^0.69.2
+  flutter_chat_bubble: ^2.0.2
+
 
 dev_dependencies:
   flutter_test:
