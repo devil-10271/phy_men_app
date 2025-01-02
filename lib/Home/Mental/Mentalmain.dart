@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:phy_men_app/GkTest/StrartGk.dart';
+import 'package:phy_men_app/Quiz/Startquiz.dart';
 
 class MentalMain extends StatefulWidget {
   const MentalMain({super.key});
@@ -154,7 +156,12 @@ class _MentalMainState extends State<MentalMain> {
                       buttonColor: Color.fromRGBO(198, 224, 215, 1),
                       assetImagePath: 'assets/Image/Mental_Health/s3.png',
                       onPressed: () {
-                        print('Navigate to IQ Page');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Startquiz(),
+                          ),
+                        );
                       },
                     ),
                     buildHealthCard(
@@ -172,7 +179,12 @@ class _MentalMainState extends State<MentalMain> {
                       buttonColor: Color.fromRGBO(184, 218, 226, 1),
                       assetImagePath: 'assets/Image/Mental_Health/s5.png',
                       onPressed: () {
-                        print('Navigate to GK Page');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => StartGk(),
+                          ),
+                        );
                       },
                     ),
                   ],

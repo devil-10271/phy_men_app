@@ -5,14 +5,16 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:phy_men_app/Quiz/Startquiz.dart';
+import 'package:phy_men_app/GkTest/StrartGk.dart';
 
-class QuizScreen extends StatefulWidget {
+class GKScreen extends StatefulWidget {
+  const GKScreen({super.key});
+
   @override
-  _QuizScreenState createState() => _QuizScreenState();
+  State<GKScreen> createState() => _GKScreenState();
 }
 
-class _QuizScreenState extends State<QuizScreen> {
+class _GKScreenState extends State<GKScreen> {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   int _currentQuestionIndex = 0;
   List _questions = [];
@@ -70,7 +72,7 @@ class _QuizScreenState extends State<QuizScreen> {
               builder: (context) => ResultScreen(
                 score: _score,
                 totalQuestions:
-                    _questions.length, // Pass total number of questions
+                _questions.length, // Pass total number of questions
               ),
             ),
           );
@@ -109,7 +111,7 @@ class _QuizScreenState extends State<QuizScreen> {
                       width: ScreenUtil().setWidth(354),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(25),
-                        color: Color.fromRGBO(198, 224, 215, 1),
+                        color: Color.fromRGBO(184, 218, 226, 1),
                         border: Border.all(
                           color: Color.fromRGBO(255, 231, 102, 1),
                           width: ScreenUtil().setWidth(1.5),
@@ -162,7 +164,7 @@ class _QuizScreenState extends State<QuizScreen> {
                             backgroundColor: _selectedAnswer == option
                                 ? _feedbackColor
                                 : Colors
-                                    .white, // Change color based on feedback
+                                .white, // Change color based on feedback
                           ),
                           onPressed: () => _onAnswerSelected(option),
                           child: Text(option),
@@ -238,11 +240,11 @@ class ResultScreen extends StatelessWidget {
     String time = "${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}";
 
     // Database path
-    String path = "users/$uid/mental_health/iq_score/$date/time/$time";
+    String path = "users/$uid/mental_health/gk_score/$date/time/$time";
 
     // Update database
     await _database.child(path).set({
-      "reading_iqscore": score,
+      "reading_gkscore": score,
     });
   }
 
@@ -286,7 +288,7 @@ class ResultScreen extends StatelessWidget {
                     fontSize: 32,
                     fontWeight: FontWeight.w500,
                     fontFamily: 'Montserrat',
-                    color: Color.fromRGBO(198, 224, 215, 1),
+                    color: Color.fromRGBO(184, 218, 226, 1),
                   ),
                 ),
                 SizedBox(height: ScreenUtil().setHeight(35)),
@@ -304,7 +306,7 @@ class ResultScreen extends StatelessWidget {
                     onPressed: () {
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => Startquiz()),
+                        MaterialPageRoute(builder: (context) => StartGk()),
                       );
                     },
                     child: Text(
@@ -327,7 +329,7 @@ class ResultScreen extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
-                      backgroundColor: Color.fromRGBO(198, 224, 215, 1),
+                      backgroundColor: Color.fromRGBO(184, 218, 226, 1),
                     ),
                     onPressed: () async {
                       // Update the score in Realtime Database
@@ -356,4 +358,3 @@ class ResultScreen extends StatelessWidget {
     );
   }
 }
-

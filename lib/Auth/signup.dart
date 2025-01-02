@@ -111,111 +111,213 @@ class _Sign_UpState extends State<Sign_Up> {
         },
         "mental_health": {
           "gk_score": {
-            "18-12-2024": {"reading_gkscore": "1", "time": "08:00"},
-            "19-12-2024": {"reading_gkscore": "2", "time": "08:00"},
-            "20-12-2024": {"reading_gkscore": "3", "time": "08:00"},
-            "21-12-2024": {"reading_gkscore": "5", "time": "08:00"},
-            "22-12-2024": {"reading_gkscore": "4", "time": "08:00"},
-            "23-12-2024": {"reading_gkscore": "2", "time": "08:00"},
-            "24-12-2024": {"reading_gkscore": "3", "time": "08:00"}
+            "02-01-2024": {
+              "time": {
+                "08:00": {
+                  "reading_gkscore": 0
+                },
+                "12:00": {
+                  "reading_gkscore": 0
+                },
+                "18:00": {
+                  "reading_gkscore": 0
+                }
+              }
+            }
           },
           "iq_score": {
-            "18-12-2024": {"reading_iqscore": "1", "time": "08:00"},
-            "19-12-2024": {"reading_iqscore": "2", "time": "08:00"},
-            "20-12-2024": {"reading_iqscore": "3", "time": "08:00"},
-            "21-12-2024": {"reading_iqscore": "5", "time": "08:00"},
-            "22-12-2024": {"reading_iqscore": "4", "time": "08:00"},
-            "23-12-2024": {"reading_iqscore": "2", "time": "08:00"},
-            "24-12-2024": {"reading_iqscore": "3", "time": "08:00"}
+            "02-01-2024": {
+              "time": {
+                "08:00": {
+                  "reading_iqscore": 0
+                },
+                "12:00": {
+                  "reading_iqscore": 0
+                },
+                "18:00": {
+                  "reading_iqscore": 0
+                }
+              }
+            }
           }
         },
         "physical_health": {
           "blood_pressure": {
             "24-12-2024": {
               "time": {
-                "08:00": {"reading_systole": 0, "reading_diastole": 0},
-                "12:00": {"reading_systole": 0, "reading_diastole": 0},
-                "18:00": {"reading_systole": 0, "reading_diastole": 0}
+                "08:00": {
+                  "reading_systole": 0,
+                  "reading_diastole": 0
+                },
+                "12:00": {
+                  "reading_systole": 0,
+                  "reading_diastole": 0
+                },
+                "18:00": {
+                  "reading_systole": 0,
+                  "reading_diastole": 0
+                }
               }
             },
             "25-12-2024": {
               "time": {
-                "08:00": {"reading_systole": 0, "reading_diastole": 0},
-                "12:00": {"reading_systole": 0, "reading_diastole": 0},
-                "18:00": {"reading_systole": 0, "reading_diastole": 0}
+                "08:00": {
+                  "reading_systole": 0,
+                  "reading_diastole": 0
+                },
+                "12:00": {
+                  "reading_systole": 0,
+                  "reading_diastole": 0
+                },
+                "18:00": {
+                  "reading_systole": 0,
+                  "reading_diastole": 0
+                }
               }
             },
             "26-12-2024": {
               "time": {
-                "08:00": {"reading_systole": 0, "reading_diastole": 0},
-                "12:00": {"reading_systole": 0, "reading_diastole": 0},
-                "18:00": {"reading_systole": 0, "reading_diastole": 0}
+                "08:00": {
+                  "reading_systole": 0,
+                  "reading_diastole": 0
+                },
+                "12:00": {
+                  "reading_systole": 0,
+                  "reading_diastole": 0
+                },
+                "18:00": {
+                  "reading_systole": 0,
+                  "reading_diastole": 0
+                }
               }
             }
           },
           "height": {
-            "18-12-2024": {"reading_height": "5.1", "time": "08:00"},
-            "19-12-2024": {"reading_height": "5.1", "time": "08:00"},
-            "20-12-2024": {"reading_height": "5.1", "time": "08:00"},
-            "21-12-2024": {"reading_height": "5.1", "time": "08:00"},
-            "22-12-2024": {"reading_height": "5.1", "time": "08:00"},
-            "23-12-2024": {"reading_height": "5.1", "time": "08:00"},
-            "24-12-2024": {"reading_height": "5.1", "time": "08:00"}
+            "18-12-2024": {
+              "reading_height": "5.1",
+              "time": "08:00"
+            },
+            "19-12-2024": {
+              "reading_height": "5.1",
+              "time": "08:00"
+            },
+            "20-12-2024": {
+              "reading_height": "5.1",
+              "time": "08:00"
+            },
+            "21-12-2024": {
+              "reading_height": "5.1",
+              "time": "08:00"
+            },
+            "22-12-2024": {
+              "reading_height": "5.1",
+              "time": "08:00"
+            },
+            "23-12-2024": {
+              "reading_height": "5.1",
+              "time": "08:00"
+            },
+            "24-12-2024": {
+              "reading_height": "5.1",
+              "time": "08:00"
+            }
           },
           "pulse": {
             "24-12-2024": {
               "time": {
-                "08:00": {"reading_pulse": 0},
-                "12:00": {"reading_pulse": 0},
-                "18:00": {"reading_pulse": 0}
+                "08:00": {
+                  "reading_pulse": 0
+                },
+                "12:00": {
+                  "reading_pulse": 0
+                },
+                "18:00": {
+                  "reading_pulse": 0
+                }
               }
             },
             "25-12-2024": {
               "time": {
-                "08:00": {"reading_pulse": 0},
-                "12:00": {"reading_pulse": 0},
-                "18:00": {"reading_pulse": 0}
+                "08:00": {
+                  "reading_pulse": 0
+                },
+                "12:00": {
+                  "reading_pulse": 0
+                },
+                "18:00": {
+                  "reading_pulse": 0
+                }
               }
             },
             "26-12-2024": {
               "time": {
-                "08:00": {"reading_pulse": 0},
-                "12:00": {"reading_pulse": 0},
-                "18:00": {"reading_pulse": 0}
+                "08:00": {
+                  "reading_pulse": 0
+                },
+                "12:00": {
+                  "reading_pulse": 0
+                },
+                "18:00": {
+                  "reading_pulse": 0
+                }
               }
             }
           },
           "weight": {
             "24-12-2024": {
               "time": {
-                "08:00": {"reading_weight": 0},
-                "12:00": {"reading_weight": 0},
-                "18:00": {"reading_weight": 0}
+                "08:00": {
+                  "reading_weight": 0
+                },
+                "12:00": {
+                  "reading_weight": 0
+                },
+                "18:00": {
+                  "reading_weight": 0
+                }
               }
             },
             "25-12-2024": {
               "time": {
-                "09:00": {"reading_weight": 73.2},
-                "15:00": {"reading_weight": 73.5},
-                "21:00": {"reading_weight": 73.0}
+                "09:00": {
+                  "reading_weight": 73.2
+                },
+                "15:00": {
+                  "reading_weight": 73.5
+                },
+                "21:00": {
+                  "reading_weight": 73.0
+                }
               }
             },
             "26-12-2024": {
               "time": {
-                "07:30": {"reading_weight": 72.9},
-                "14:00": {"reading_weight": 73.3}
+                "07:30": {
+                  "reading_weight": 72.9
+                },
+                "14:00": {
+                  "reading_weight": 73.3
+                }
               }
             },
             "27-12-2024": {
               "time": {
-                "10:00": {"reading_weight": 73.1},
-                "16:00": {"reading_weight": 72.7}
+                "10:00": {
+                  "reading_weight": 73.1
+                },
+                "16:00": {
+                  "reading_weight": 72.7
+                }
               }
             },
             "28-12-2024": {
               "time": {
-                "11:00": {"reading_weight": 73.4},
-                "19:00": {"reading_weight": 73.0}
+                "11:00": {
+                  "reading_weight": 73.4
+                },
+                "19:00": {
+                  "reading_weight": 73.0
+                }
               }
             }
           }

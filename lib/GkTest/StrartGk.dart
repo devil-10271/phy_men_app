@@ -2,17 +2,17 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:phy_men_app/Quiz/QuizData.dart';
-import 'package:phy_men_app/Quiz/QuizScreen.dart';
+import 'package:phy_men_app/GkTest/GKData.dart';
+import 'package:phy_men_app/GkTest/GkScreen.dart';
 
-class Startquiz extends StatefulWidget {
-  const Startquiz({super.key});
+class StartGk extends StatefulWidget {
+  const StartGk({super.key});
 
   @override
-  State<Startquiz> createState() => _StartquizState();
+  State<StartGk> createState() => _StartGkState();
 }
 
-class _StartquizState extends State<Startquiz> {
+class _StartGkState extends State<StartGk> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -25,7 +25,7 @@ class _StartquizState extends State<Startquiz> {
               Container(
                 //color: Colors.red,
                 child: Text(
-                  'Test Your IQ~',
+                  'Test Your GK~',
                   style: TextStyle(
                     fontSize: 40,
                     fontWeight: FontWeight.w700,
@@ -39,7 +39,7 @@ class _StartquizState extends State<Startquiz> {
                 width: ScreenUtil().setWidth(218),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color.fromRGBO(198, 224, 215, 1),
+                    backgroundColor: Color.fromRGBO(184, 218, 226, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
@@ -48,7 +48,7 @@ class _StartquizState extends State<Startquiz> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => QuizScreen(),
+                        builder: (context) => GKScreen(),
                       ),
                     );
                   },
@@ -82,7 +82,7 @@ class _StartquizState extends State<Startquiz> {
                 width: ScreenUtil().setWidth(218),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color.fromRGBO(198, 224, 215, 1),
+                    backgroundColor: Color.fromRGBO(184, 218, 226, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
@@ -91,7 +91,7 @@ class _StartquizState extends State<Startquiz> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => QuizData(),
+                        builder: (context) => GKData(),
                       ),
                     );
                   },
@@ -99,7 +99,7 @@ class _StartquizState extends State<Startquiz> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        'View IQ Quiz Score',
+                        'View GK Score',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 14,
@@ -125,7 +125,7 @@ class _StartquizState extends State<Startquiz> {
                 width: ScreenUtil().setWidth(440.31),
                 //color: Colors.yellow,
                 child: Image.asset(
-                  'assets/Image/Quiz/bro.png',
+                  'assets/Image/GK/bro.png',
                   fit: BoxFit.cover,
                 ),
               ),

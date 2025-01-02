@@ -2,6 +2,7 @@
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:phy_men_app/GkTest/StrartGk.dart';
 import 'package:phy_men_app/Home/Physical/Exercise/Exercise.dart';
 import 'package:phy_men_app/Auth/signup.dart';
 import 'package:phy_men_app/Home/Home_page.dart';
@@ -15,6 +16,7 @@ import 'package:phy_men_app/Home/Physical/HeartRate/PulseGraph.dart';
 import 'package:phy_men_app/Home/Physical/WeightLogging/Weight.dart';
 import 'package:phy_men_app/Home/Physical/WeightLogging/WeightData.dart';
 import 'package:phy_men_app/Profile/Profile.dart';
+import 'package:phy_men_app/Quiz/Startquiz.dart';
 import 'Home/Mental/Mentalmain.dart';
 import 'Home/Physical/PhysicalMain.dart';
 import 'Splash_Screen/splash_screen.dart';
