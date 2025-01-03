@@ -51,6 +51,8 @@ dependencies:
   http: ^1.2.2
   fl_chart: ^0.69.2
   flutter_chat_bubble: ^2.0.2
+  numberpicker: ^2.1.2
+  audioplayers: ^6.1.0
 
 
 dev_dependencies:
@@ -88,7 +90,11 @@ flutter:
     - assets/Image/Physical_Health/Exercise/Yoga/
     - assets/Image/Chat_Bot/
     - assets/Image/Mental_Health/
-    - assets/Image/GK/
+    - assets/Image/Mental_Health/Blog/
+    - assets/Image/Mental_Health/Calm/
+    - assets/Image/Mental_Health/Medi/
+    - assets/Image/Mental_Health/GK/
+    - assets/Image/Mental_Health/Quiz/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

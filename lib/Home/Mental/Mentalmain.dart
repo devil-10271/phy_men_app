@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:phy_men_app/GkTest/StrartGk.dart';
+import 'package:phy_men_app/Home/Mental/GkTest/StrartGk.dart';
 import 'package:phy_men_app/Quiz/Startquiz.dart';
 
 class MentalMain extends StatefulWidget {
