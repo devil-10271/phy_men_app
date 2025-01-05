@@ -30,15 +30,17 @@ class _Blog3State extends State<Blog3> {
               clipBehavior: Clip.none,
               children: [
                 Container(
-                  width: 360.w,
-                  height: 320.h,
+                  width: ScreenUtil().setWidth(360),
+                  height: ScreenUtil().setHeight(320),
                   decoration: BoxDecoration(
                     color: const Color.fromRGBO(171, 147, 175, 1),
-                    borderRadius: BorderRadius.all(Radius.circular(35)),
+                    borderRadius: BorderRadius.all(Radius.circular(ScreenUtil().setWidth(35))),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 80),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: ScreenUtil().setWidth(20),
+                      vertical: ScreenUtil().setHeight(80),
+                    ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -46,7 +48,7 @@ class _Blog3State extends State<Blog3> {
                         Text(
                           'Daily Self-Care Routines to Boost Mental Health',
                           style: TextStyle(
-                            fontSize: 31.sp,
+                            fontSize: ScreenUtil().setSp(31),
                             fontWeight: FontWeight.bold,
                             color: const Color.fromRGBO(203, 208, 222, 1),
                           ),
@@ -57,13 +59,13 @@ class _Blog3State extends State<Blog3> {
                   ),
                 ),
                 Positioned(
-                  top: 20.h,
-                  left: 10.w,
+                  top: ScreenUtil().setHeight(20),
+                  left: ScreenUtil().setWidth(10),
                   child: IconButton(
                     icon: Image.asset(
                       'assets/Frame.png',
-                      width: 30.w,
-                      height: 30.h,
+                      width: ScreenUtil().setWidth(30),
+                      height: ScreenUtil().setHeight(30),
                     ),
                     onPressed: () {
                       Navigator.pop(context);
@@ -71,28 +73,28 @@ class _Blog3State extends State<Blog3> {
                   ),
                 ),
                 Positioned(
-                  top: 160.h,
+                  top: ScreenUtil().setHeight(160),
                   child: Image.asset(
                     'assets/blog_image3.png',
-                    width: 260.w,
-                    height: 230.h,
+                    width: ScreenUtil().setWidth(260),
+                    height: ScreenUtil().setHeight(230),
                     fit: BoxFit.cover,
                   ),
                 ),
               ],
             ),
-            SizedBox(height: 60.h),
+            SizedBox(height: ScreenUtil().setHeight(60)),
             ListView.builder(
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
               itemCount: textContent.length,
               itemBuilder: (context, index) {
                 return Padding(
-                  padding: const EdgeInsets.all(20),
+                  padding: EdgeInsets.all(ScreenUtil().setWidth(20)),
                   child: Text(
                     textContent[index],
                     style: TextStyle(
-                      fontSize: 16.sp,
+                      fontSize: ScreenUtil().setSp(16),
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
                     ),

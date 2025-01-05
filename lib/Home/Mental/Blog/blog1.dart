@@ -13,96 +13,162 @@ class _Blog1State extends State<Blog1> {
     'Mental health issues are becoming increasingly common, yet stigma remains a major obstacle to seeking help. Misconceptions, societal judgment, and cultural norms often cause individuals to feel ashamed or fearful of admitting they are struggling.',
     'This prevents many from accessing the support they need, leading to prolonged suffering. Breaking these stigmas begins with education and awareness. Mental health challenges are not a sign of weakness, they are a part of the human experience.',
     'Just as physical health requires care, mental health needs equal attention. By encouraging open and honest conversations, we can normalize seeking help and make mental well-being a shared priority',
-    'Sharing personal experiences is a powerful way to challenge stereotypes. When people talk about their struggles and triumphs, it inspires others to seek support without fear of judgment. Listening with empathy, offering support, and fostering inclusive environments  in schools, workplaces, and communities can create safe spaces where mental health is taken seriously.',
-    'Moreover, media, education systems, and leaders play critical role in addressing stigma. Campaigns, workshops, and mental health resources should be widely promoted to raise awareness and debunk myths. By providing education from a young age, we can cultivate a generation that prioritizes mental well-being and treats it with the same respect as physical health. ',
+    'Sharing personal experiences is a powerful way to challenge stereotypes. When people talk about their struggles and triumphs, it inspires others to seek support without fear of judgment. Listening with empathy, offering support, and fostering inclusive environments in schools, workplaces, and communities can create safe spaces where mental health is taken seriously.',
+    'Moreover, media, education systems, and leaders play critical role in addressing stigma. Campaigns, workshops, and mental health resources should be widely promoted to raise awareness and debunk myths. By providing education from a young age, we can cultivate a generation that prioritizes mental well-being and treats it with the same respect as physical health.',
     'Remember, asking for help is not a weakness but a courageous step toward healing. Together, through understanding and compassion, we can create a society where everyone feels safe to talk about their mental well-being and seek the support they deserve.',
   ];
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Stack(
-              clipBehavior: Clip.none,
-              children: [
-                Container(
-                  width: 360.w,
-                  height: 300.h,
-                  decoration: BoxDecoration(
-                    color: const Color.fromRGBO(171, 147, 175, 1),
-                    borderRadius: BorderRadius.all(Radius.circular(35)),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 80),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: ScreenUtil().setHeight(300),
+                decoration: BoxDecoration(
+                  color: const Color.fromRGBO(171, 147, 175, 1),
+                  borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(ScreenUtil().setWidth(35)),
+                      bottomLeft: Radius.circular(ScreenUtil().setWidth(35))),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          '  Breaking Mental Health Stigmas',
-                          style: TextStyle(
-                            fontSize: 31.sp,
-                            fontWeight: FontWeight.bold,
-                            color: const Color.fromRGBO(203, 208, 222, 1),
+                        Padding(
+                          padding: EdgeInsets.only(
+                              top: ScreenUtil().setHeight(20),
+                              left: ScreenUtil().setWidth(20)),
+                          child: Icon(
+                            Icons.arrow_back_ios,
+                            color: Colors.white,
                           ),
-                          textAlign: TextAlign.center,
+                        ),
+                        Center(
+                          child: Container(
+                            width: ScreenUtil().setWidth(350),
+                            child: Text(
+                              'Breaking Mental Health Stigmas',
+                              style: TextStyle(
+                                  fontSize: ScreenUtil().setSp(31),
+                                  fontWeight: FontWeight.bold,
+                                  color: const Color.fromRGBO(203, 208, 222, 1),
+                                  overflow: TextOverflow.clip),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
                         ),
                       ],
                     ),
-                  ),
-                ),
-                Positioned(
-                  top: 20.h,
-                  left: 10.w,
-                  child: IconButton(
-                    icon: Image.asset(
-                      'assets/Frame.png',
-                      width: 30.w,
-                      height: 30.h,
+                    Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: Image.asset(
+                        'assets/Image/Mental_Health/Blog/blog_image1.png',
+                        height: ScreenUtil().setHeight(150),
+                        width: ScreenUtil().setWidth(150),
+                        
+                      ),
                     ),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
+                  ],
                 ),
-                Positioned(
-                  top: 160.h,
-                  left: 20.w,
-                  child: Image.asset(
-                    'assets/blog_image1.png',
-                    width: 250.w,
-                    height: 210.h,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 60.h),
-            ListView.builder(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: textContent.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: Text(
-                    textContent[index],
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
+              ),
+              ListView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: textContent.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: EdgeInsets.all(ScreenUtil().setWidth(20)),
+                    child: Text(
+                      textContent[index],
+                      style: TextStyle(
+                        fontSize: ScreenUtil().setSp(16),
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
                     ),
-                  ),
-                );
-              },
-            ),
-          ],
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 }
+
+//Stack(
+//               clipBehavior: Clip.none,
+//               children: [
+//                 Container(
+//                   width: MediaQuery.of(context).size.width,
+//                   height: ScreenUtil().setHeight(300),
+//                   decoration: BoxDecoration(
+//                     color: const Color.fromRGBO(171, 147, 175, 1),
+//                     borderRadius: BorderRadius.all(
+//                         Radius.circular(ScreenUtil().setWidth(35))),
+//                   ),
+//                   child: Padding(
+//                     padding: EdgeInsets.symmetric(
+//                       horizontal: ScreenUtil().setWidth(20),
+//                       vertical: ScreenUtil().setHeight(80),
+//                     ),
+//                     child: Column(
+//                       mainAxisAlignment: MainAxisAlignment.start,
+//                       crossAxisAlignment: CrossAxisAlignment.center,
+//                       children: [
+//                         Text(
+//                           'Breaking Mental Health Stigmas',
+//                           style: TextStyle(
+//                             fontSize: ScreenUtil().setSp(31),
+//                             fontWeight: FontWeight.bold,
+//                             color: const Color.fromRGBO(203, 208, 222, 1),
+//                           ),
+//                           textAlign: TextAlign.center,
+//                         ),
+//                       ],
+//                     ),
+//                   ),
+//                 ),
+//                 IconButton(
+//                   icon: Icon(Icons.arrow_back_ios),
+//                   onPressed: () {
+//                     Navigator.pop(context);
+//                   },
+//                 ),
+//                 Flexible(
+//                   child: Image.asset(
+//                     'assets/Image/Mental_Health/Blog/blog_image1.png',
+//                     width: ScreenUtil().setWidth(150),
+//                     height: ScreenUtil().setHeight(150),
+//                     fit: BoxFit.cover,
+//                   ),
+//                 ),
+//               ],
+//             ),
+
+// ListView.builder(
+//               shrinkWrap: true,
+//               physics: NeverScrollableScrollPhysics(),
+//               itemCount: textContent.length,
+//               itemBuilder: (context, index) {
+//                 return Padding(
+//                   padding: EdgeInsets.all(ScreenUtil().setWidth(20)),
+//                   child: Text(
+//                     textContent[index],
+//                     style: TextStyle(
+//                       fontSize: ScreenUtil().setSp(16),
+//                       fontWeight: FontWeight.bold,
+//                       color: Colors.black,
+//                     ),
+//                   ),
+//                 );
+//               },
+//             ),

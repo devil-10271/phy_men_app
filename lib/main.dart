@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
                 useMaterial3: true,
               ),
 
-              home: StartGk()
+              home: Main_blog()
           );
 
         });

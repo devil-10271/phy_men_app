@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'blog1.dart';
-import 'blog2.dart';
-import 'blog3.dart';
+import 'package:phy_men_app/Home/Mental/Blog/blog1.dart';
+import 'package:phy_men_app/Home/Mental/Blog/blog2.dart';
+import 'package:phy_men_app/Home/Mental/Blog/blog3.dart';
 
 class Main_blog extends StatefulWidget {
   const Main_blog({super.key});
@@ -12,335 +12,295 @@ class Main_blog extends StatefulWidget {
 }
 
 class _Main_blogState extends State<Main_blog> {
+  final List<Map<String, dynamic>> blogs = [
+    {
+      'title': 'Breaking Mental health Stigmas',
+      'date': '2 days ago',
+      'image': 'assets/Image/Mental_Health/Blog/blog_image1.png',
+      'page': Blog1(),
+    },
+    {
+      'title': 'How Nutrition Impacts Mental Health',
+      'date': '2 days ago',
+      'image': 'assets/Image/Mental_Health/Blog/blog_image2.png',
+      'page': Blog2(),
+    },
+    {
+      'title': 'Daily self-care Routines to boost Mental health',
+      'date': '10 days ago',
+      'image': 'assets/Image/Mental_Health/Blog/blog_image3.png',
+      'page': Blog3(),
+    },
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Stack(
-        children: [
-          SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(top: ScreenUtil().setWidth(30)),
-                  child: IconButton(
-                    icon: Icon(Icons.arrow_back_ios),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                ),
-                // Title Section
-                Padding(
-                  padding: const EdgeInsets.only(left: 30.0),
-                  child: RichText(
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
-                          text: 'Blogs \n',
-                          style: TextStyle(
-                            fontSize: 60,
-                            fontWeight: FontWeight.bold,
-                            color: Color.fromRGBO(171, 147, 175, 1),
-                          ),
-                        ),
-                        TextSpan(
-                          text: '3 Blogs',
-                          style: TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                            color: Color.fromRGBO(203, 208, 222, 1),
-                          ),
-                        ),
-                      ],
+      body: SafeArea(
+        child: Stack(
+          children: [
+            SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(top: ScreenUtil().setHeight(10)),
+                    child: IconButton(
+                      icon: Icon(Icons.arrow_back_ios),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
                     ),
                   ),
-                ),
-                SizedBox(height: 20.h),
-                // Buttons
-                Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.black,
-                        ),
-                        child: Center(
-                          child: Text(
-                            'Published',
+                  // Title Section
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: ScreenUtil().setWidth(30)),
+                    child: RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: 'Blogs \n',
                             style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20.sp,
+                              fontSize: ScreenUtil().setSp(60),
                               fontWeight: FontWeight.bold,
+                              color: Color.fromRGBO(171, 147, 175, 1),
                             ),
                           ),
-                        ),
+                          TextSpan(
+                            text: '3 Blogs',
+                            style: TextStyle(
+                              fontSize: ScreenUtil().setSp(30),
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromRGBO(203, 208, 222, 1),
+                            ),
+                          ),
+                        ],
                       ),
-                      SizedBox(width: 20.w),
-                      ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Color.fromRGBO(171, 147, 175, 1),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Drafts',
+                    ),
+                  ),
+                  SizedBox(height: ScreenUtil().setHeight(20)),
+                  // Buttons
+                  Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.black,
+                          ),
+                          child: Center(
+                            child: Text(
+                              'Published',
                               style: TextStyle(
-                                fontSize: 20.sp,
+                                color: Colors.white,
+                                fontSize: ScreenUtil().setSp(20),
                                 fontWeight: FontWeight.bold,
-                                color: Color.fromRGBO(203, 208, 222, 1),
                               ),
                             ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: ScreenUtil().setHeight(30)),
-                // Blog 1
-                Center(
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Blog1()),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromRGBO(225, 225, 225, 2),
-                      padding: EdgeInsets.all(0),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                    ),
-                    child: Stack(
-                      clipBehavior: Clip.none,
-                      children: [
-                        Container(
-                          width: 310.w,
-                          height: 250.h,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                            border: Border.all(
-                              color: Color.fromRGBO(203, 208, 222, 1),
-                              width: 5,
-                            ),
                           ),
                         ),
-                        Positioned(
-                          top: 8.h,
-                          left: 8.w,
-                          child: Text(
-                            'Breaking Mental\nhealth\nStigmas',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 25.sp,
-                              fontWeight: FontWeight.bold,
-                            ),
+                        SizedBox(width: ScreenUtil().setWidth(20)),
+                        ElevatedButton(
+                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Color.fromRGBO(171, 147, 175, 1),
                           ),
-                        ),
-                        Positioned(
-                          top: 100.h,
-                          left: 40.w,
-                          child: Text(
-                            '2 days ago',
-                            style: TextStyle(color: Colors.black),
-                          ),
-                        ),
-                        Positioned(
-                          top: 8.h,
-                          right: 8.w,
-                          child: IconButton(
-                            iconSize: 30,
-                            icon: Icon(Icons.more_horiz, color: Colors.black),
-                            onPressed: () {},
-                          ),
-                        ),
-                        Positioned(
-                          bottom: -35.h,
-                          right: -30.w,
-                          child: Image.asset(
-                            'assets/Image/Mental_Health/Blog/blog_image1.png',
-                            width: 230.w,
-                            height: 230.h,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Drafts',
+                                style: TextStyle(
+                                  fontSize: ScreenUtil().setSp(20),
+                                  fontWeight: FontWeight.bold,
+                                  color: Color.fromRGBO(203, 208, 222, 1),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
                     ),
                   ),
-                ),
-                SizedBox(height: 40.h),
-                // Blog 2
-                Center(
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => blog2()),
+                  SizedBox(height: ScreenUtil().setHeight(30)),
+                  // Blog List
+                  ListView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: blogs.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: ScreenUtil().setWidth(20),
+                            vertical: ScreenUtil().setHeight(10)),
+                        child: InkWell(
+                          onTap: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>blogs[index]['page']));
+                          },
+                          child: Container(
+                            width: ScreenUtil().setWidth(360),
+                            height: ScreenUtil().setHeight(250),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              border: Border.all(
+                                color: Color.fromRGBO(203, 208, 222, 1),
+                                width: 5,
+                              ),
+                              color: index % 2 == 0
+                                  ? Color.fromRGBO(225, 225, 225, 2)
+                                  : Color.fromRGBO(171, 147, 175, 1),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                children: [
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        blogs[index]['title'],
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: ScreenUtil().setSp(18),
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                      Text(
+                                        blogs[index]['date'],
+                                        style: TextStyle(color: Colors.black),
+                                      ),
+                                    ],
+                                  ),
+                                  Expanded(
+                                    child: Image.asset(
+                                      blogs[index]['image'],
+                                      width: ScreenUtil().setWidth(150),
+                                      height: ScreenUtil().setHeight(150),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
                       );
                     },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromRGBO(171, 147, 175, 1),
-                      padding: EdgeInsets.all(0),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                    ),
-                    child: Stack(
-                      clipBehavior: Clip.none,
-                      children: [
-                        Container(
-                          width: 310.w,
-                          height: 250.h,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                            border: Border.all(
-                              color: Color.fromRGBO(203, 208, 222, 1),
-                              width: 5,
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          top: 35.h,
-                          left: 25.w,
-                          child: Text(
-                            'How Nutrition Impacts\n Mental Health',
-                            style: TextStyle(
-                              color: Color.fromRGBO(74, 74, 74, 1),
-                              fontSize: 25.sp,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          top: 100.h,
-                          left: 150.w,
-                          child: Text(
-                            '2 days ago',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                        Positioned(
-                          top: 8.h,
-                          left: 8.w,
-                          child: IconButton(
-                            iconSize: 30,
-                            icon: Icon(Icons.more_horiz, color: Colors.black),
-                            onPressed: () {},
-                          ),
-                        ),
-                        Positioned(
-                          bottom: -55.h,
-                          right: -20.w,
-                          child: Image.asset(
-                            'assets/Image/Mental_Health/Blog/blog_image2.png',
-                            width: 240.w,
-                            height: 240.h,
-                          ),
-                        ),
-                      ],
-                    ),
                   ),
-                ),
-                // Blog 3
-                SizedBox(height: 40.h),
-                Center(
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Blog3()),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromRGBO(225, 225, 225, 2),
-                      padding: EdgeInsets.all(0),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                    ),
-                    child: Stack(
-                      clipBehavior: Clip.none,
-                      children: [
-                        Container(
-                          width: 310.w,
-                          height: 250.h,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                            border: Border.all(
-                              color: Color.fromRGBO(203, 208, 222, 1),
-                              width: 5,
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          top: 8.h,
-                          right: 8.w,
-                          child: Text(
-                            'Daily self-care\nRoutines\nto boost\nMental health',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 23.sp,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          top: 120.h,
-                          right: 25.w,
-                          child: Text(
-                            '10 days ago',
-                            style: TextStyle(color: Colors.black),
-                          ),
-                        ),
-                        Positioned(
-                          top: 8.h,
-                          left: 8.w,
-                          child: IconButton(
-                            iconSize: 30,
-                            icon: Icon(Icons.more_horiz, color: Colors.black),
-                            onPressed: () {},
-                          ),
-                        ),
-                        Positioned(
-                          bottom: -80.h,
-                          left: -20.w,
-                          child: Image.asset(
-                            'assets/Image/Mental_Health/Blog/blog_image3.png',
-                            width: 230.w,
-                            height: 200.h,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(height: 80.h),
-              ],
-            ),
-          ),
-          Positioned(
-            right: 20.w,
-            top: 20.h,
-            child: IconButton(
-              icon: Image.asset(
-                'assets/Image/Mental_Health/Blog/add.png',
-                width: 70.w,
-                height: 70.h,
+                  SizedBox(height: ScreenUtil().setHeight(80)),
+                ],
               ),
-              onPressed: () {
-                Navigator.pop(context);
-              },
             ),
-          ),
-        ],
+            Positioned(
+              right: ScreenUtil().setWidth(20),
+              child: IconButton(
+                icon: Image.asset(
+                  'assets/Image/Mental_Health/Blog/add.png',
+                  width: ScreenUtil().setWidth(70),
+                  height: ScreenUtil().setHeight(70),
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
 }
+
+//ListView.builder(
+//                     shrinkWrap: true,
+//                     physics: NeverScrollableScrollPhysics(),
+//                     itemCount: blogs.length,
+//                     itemBuilder: (context, index) {
+//                       return Column(
+//                         children: [
+//                           Center(
+//                             child: ElevatedButton(
+//                               onPressed: () {
+//                                 Navigator.push(
+//                                   context,
+//                                   MaterialPageRoute(
+//                                       builder: (context) =>
+//                                           blogs[index]['page']),
+//                                 );
+//                               },
+//                               style: ElevatedButton.styleFrom(
+//                                 backgroundColor: index % 2 == 0
+//                                     ? Color.fromRGBO(225, 225, 225, 2)
+//                                     : Color.fromRGBO(171, 147, 175, 1),
+//                                 padding: EdgeInsets.all(0),
+//                                 shape: RoundedRectangleBorder(
+//                                   borderRadius: BorderRadius.circular(15),
+//                                 ),
+//                               ),
+//                               child: Stack(
+//                                 children: [
+//                                   Container(
+//                                     width: ScreenUtil().setWidth(360),
+//                                     height: ScreenUtil().setHeight(250),
+//                                     decoration: BoxDecoration(
+//                                       borderRadius: BorderRadius.circular(15),
+//                                       border: Border.all(
+//                                         color: Color.fromRGBO(203, 208, 222, 1),
+//                                         width: 5,
+//                                       ),
+//                                     ),
+//                                   ),
+//                                   Positioned(
+//                                     top: ScreenUtil().setHeight(8),
+//                                     left: ScreenUtil().setWidth(8),
+//                                     child: Wrap(
+//                                       children: [
+//                                         Text(
+//                                           blogs[index]['title'],
+//                                           style: TextStyle(
+//                                             color: Colors.black,
+//                                             fontSize: ScreenUtil().setSp(18),
+//                                             fontWeight: FontWeight.bold,
+//                                           ),
+//                                         ),
+//                                       ],
+//
+//                                     ),
+//                                   ),
+//                                   Text(
+//                                     blogs[index]['date'],
+//                                     style: TextStyle(color: Colors.black),
+//                                   ),
+//                                   Positioned(
+//                                     top: ScreenUtil().setHeight(8),
+//                                     right: ScreenUtil().setWidth(8),
+//                                     child: IconButton(
+//                                       iconSize: ScreenUtil().setSp(30),
+//                                       icon: Icon(Icons.more_horiz,
+//                                           color: Colors.black),
+//                                       onPressed: () {},
+//                                     ),
+//                                   ),
+//                                   Positioned(
+//                                     bottom: ScreenUtil().setHeight(-35),
+//                                     right: ScreenUtil().setWidth(-30),
+//                                     child: Image.asset(
+//                                       blogs[index]['image'],
+//                                       width: ScreenUtil().setWidth(200),
+//                                       height: ScreenUtil().setHeight(200),
+//                                     ),
+//                                   ),
+//                                 ],
+//                               ),
+//                             ),
+//                           ),
+//                           SizedBox(
+//                               height: ScreenUtil().setHeight(
+//                                   40)), // Add spacing between buttons
+//                         ],
+//                       );
+//                     },
+//                   ),
