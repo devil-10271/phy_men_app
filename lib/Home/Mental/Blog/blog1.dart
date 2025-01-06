@@ -45,9 +45,14 @@ class _Blog1State extends State<Blog1> {
                           padding: EdgeInsets.only(
                               top: ScreenUtil().setHeight(20),
                               left: ScreenUtil().setWidth(20)),
-                          child: Icon(
-                            Icons.arrow_back_ios,
-                            color: Colors.white,
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                            child: Icon(
+                              Icons.arrow_back_ios,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                         Center(
@@ -56,7 +61,7 @@ class _Blog1State extends State<Blog1> {
                             child: Text(
                               'Breaking Mental Health Stigmas',
                               style: TextStyle(
-                                  fontSize: ScreenUtil().setSp(31),
+                                  fontSize: ScreenUtil().setSp(28),
                                   fontWeight: FontWeight.bold,
                                   color: const Color.fromRGBO(203, 208, 222, 1),
                                   overflow: TextOverflow.clip),
@@ -72,7 +77,6 @@ class _Blog1State extends State<Blog1> {
                         'assets/Image/Mental_Health/Blog/blog_image1.png',
                         height: ScreenUtil().setHeight(150),
                         width: ScreenUtil().setWidth(150),
-                        
                       ),
                     ),
                   ],

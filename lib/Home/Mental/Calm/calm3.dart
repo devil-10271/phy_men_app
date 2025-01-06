@@ -88,12 +88,12 @@ class _Calm3State extends State<Calm3> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(top: 20.h, left: 10.w),
+                  padding: EdgeInsets.only(top: ScreenUtil().setHeight(20), left: ScreenUtil().setWidth(10)),
                   child: IconButton(
                     icon: Image.asset(
                       'assets/Frame.png',
-                      width: 30.w,
-                      height: 30.h,
+                      width: ScreenUtil().setWidth(30),
+                      height: ScreenUtil().setHeight(30),
                       color: const Color(0xFF76CFE2),
                     ),
                     onPressed: () {
@@ -102,14 +102,14 @@ class _Calm3State extends State<Calm3> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10.h),
+                  padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(10)),
                   child: Center(
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(ScreenUtil().setWidth(20)),
                       child: Image.asset(
                         'assets/calm3.png',
-                        width: 300.w,
-                        height: 400.h,
+                        width: ScreenUtil().setWidth(300),
+                        height: ScreenUtil().setHeight(400),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -123,14 +123,14 @@ class _Calm3State extends State<Calm3> {
                         TextSpan(
                           text: 'Oceanwaves\n',
                           style: TextStyle(
-                            fontSize: 40,
+                            fontSize: ScreenUtil().setSp(40),
                             color: Colors.black,
                           ),
                         ),
                         TextSpan(
                           text: 'SLEEP MUSIC',
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: ScreenUtil().setSp(20),
                             color: Color.fromRGBO(152, 161, 189, 1),
                           ),
                         ),
@@ -138,24 +138,24 @@ class _Calm3State extends State<Calm3> {
                     ),
                   ),
                 ),
-                SizedBox(height: 10.h),
+                SizedBox(height: ScreenUtil().setHeight(10)),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     _buildIconButton(Icons.replay_30, skipBackward),
-                    SizedBox(width: 30.w),
+                    SizedBox(width: ScreenUtil().setWidth(30)),
                     _buildPlayPauseButton(),
-                    SizedBox(width: 30.w),
+                    SizedBox(width: ScreenUtil().setWidth(30)),
                     _buildIconButton(Icons.forward_30, skipForward),
                   ],
                 ),
-                SizedBox(height: 10.h),
+                SizedBox(height: ScreenUtil().setHeight(10)),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       "${(value / 60).floor()}:${(value % 60).floor().toString().padLeft(2, '0')}",
-                      style: TextStyle(color: Colors.grey, fontSize: 20.sp),
+                      style: TextStyle(color: Colors.grey, fontSize: ScreenUtil().setSp(20)),
                     ),
                     if (duration != null)
                       Slider(
@@ -164,13 +164,11 @@ class _Calm3State extends State<Calm3> {
                         max: duration!.inSeconds.toDouble(),
                         onChanged: (v) {
                           setState(() {
-                            value =
-                                v.clamp(0.0, duration!.inSeconds.toDouble());
+                            value = v.clamp(0.0, duration!.inSeconds.toDouble());
                           });
                         },
                         onChangeEnd: (newValue) async {
-                          await player
-                              .seek(Duration(seconds: newValue.toInt()));
+                          await player.seek(Duration(seconds: newValue.toInt()));
                           if (isPlaying) {
                             await player.resume();
                           }
@@ -180,7 +178,7 @@ class _Calm3State extends State<Calm3> {
                     if (duration != null)
                       Text(
                         "${duration!.inMinutes}:${(duration!.inSeconds % 60).toString().padLeft(2, '0')}",
-                        style: TextStyle(color: Colors.grey, fontSize: 20.sp),
+                        style: TextStyle(color: Colors.grey, fontSize: ScreenUtil().setSp(20)),
                       ),
                   ],
                 ),
@@ -188,8 +186,8 @@ class _Calm3State extends State<Calm3> {
             ),
           ),
           Positioned(
-            top: 30.h,
-            right: 15.w,
+            top: ScreenUtil().setHeight(30),
+            right: ScreenUtil().setWidth(15),
             child: Row(
               children: [
                 GestureDetector(
@@ -198,19 +196,19 @@ class _Calm3State extends State<Calm3> {
                   },
                   child: Image.asset(
                     'assets/like.png',
-                    width: 40.w,
-                    height: 40.h,
+                    width: ScreenUtil().setWidth(40),
+                    height: ScreenUtil().setHeight(40),
                   ),
                 ),
-                SizedBox(width: 10.w),
+                SizedBox(width: ScreenUtil().setWidth(10)),
                 GestureDetector(
                   onTap: () {
                     print("Saved!");
                   },
                   child: Image.asset(
                     'assets/save.png',
-                    width: 40.w,
-                    height: 40.h,
+                    width: ScreenUtil().setWidth(40),
+                    height: ScreenUtil().setHeight(40),
                   ),
                 ),
               ],
@@ -223,10 +221,10 @@ class _Calm3State extends State<Calm3> {
 
   Widget _buildIconButton(IconData icon, VoidCallback onPressed) {
     return Container(
-      width: 70.w,
-      height: 70.h,
+      width: ScreenUtil().setWidth(70),
+      height: ScreenUtil().setHeight(70),
       child: IconButton(
-        icon: Icon(icon, size: 30.sp, color: Colors.blueGrey),
+        icon: Icon(icon, size: ScreenUtil().setSp(30), color: Colors.blueGrey),
         onPressed: onPressed,
       ),
     );
@@ -234,10 +232,10 @@ class _Calm3State extends State<Calm3> {
 
   Widget _buildPlayPauseButton() {
     return Container(
-      width: 60.w,
-      height: 50.h,
+      width: ScreenUtil().setWidth(60),
+      height: ScreenUtil().setHeight(50),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(60),
+        borderRadius: BorderRadius.circular(ScreenUtil().setWidth(60)),
         color: Colors.blueGrey,
         border: Border.all(color: Colors.grey),
       ),
@@ -254,7 +252,7 @@ class _Calm3State extends State<Calm3> {
         },
         child: Icon(
           isPlaying ? Icons.pause : Icons.play_arrow,
-          size: 30.sp,
+          size: ScreenUtil().setSp(30),
           color: Colors.white,
         ),
       ),

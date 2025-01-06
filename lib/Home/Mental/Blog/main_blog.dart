@@ -137,8 +137,12 @@ class _Main_blogState extends State<Main_blog> {
                             horizontal: ScreenUtil().setWidth(20),
                             vertical: ScreenUtil().setHeight(10)),
                         child: InkWell(
-                          onTap: (){
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=>blogs[index]['page']));
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        blogs[index]['page']));
                           },
                           child: Container(
                             width: ScreenUtil().setWidth(360),
@@ -153,34 +157,37 @@ class _Main_blogState extends State<Main_blog> {
                                   ? Color.fromRGBO(225, 225, 225, 2)
                                   : Color.fromRGBO(171, 147, 175, 1),
                             ),
+
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Row(
                                 children: [
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        blogs[index]['title'],
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: ScreenUtil().setSp(18),
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                      Text(
-                                        blogs[index]['date'],
-                                        style: TextStyle(color: Colors.black),
-                                      ),
-                                    ],
-                                  ),
                                   Expanded(
-                                    child: Image.asset(
-                                      blogs[index]['image'],
-                                      width: ScreenUtil().setWidth(150),
-                                      height: ScreenUtil().setHeight(150),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(blogs[index]['title'],
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: ScreenUtil().setSp(18),
+                                              fontWeight: FontWeight.bold,
+                                    
+                                            ),
+                                          overflow: TextOverflow.clip,
+                                            ),
+                                        Text(
+                                          blogs[index]['date'],
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: ScreenUtil().setSp(12)),
+                                        ),
+                                      ],
                                     ),
+                                  ),
+                                  Image.asset(
+                                    blogs[index]['image'],
+                                    width: ScreenUtil().setWidth(150),
+                                    height: ScreenUtil().setHeight(150),
                                   ),
                                 ],
                               ),
