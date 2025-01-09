@@ -58,6 +58,7 @@ class _Sign_UpState extends State<Sign_Up> {
         await _addUserToDatabase(
           uid: userCredential.user!.uid,
           uname: _username.text.trim(),
+          email: _email.text.trim()
         );
 
         // Display success message
@@ -99,6 +100,7 @@ class _Sign_UpState extends State<Sign_Up> {
   Future<void> _addUserToDatabase({
     required String uid,
     required String uname,
+    required String email,
   }) async {
     try {
       await _database.child('users/$uid').set({
@@ -322,7 +324,8 @@ class _Sign_UpState extends State<Sign_Up> {
             }
           }
         },
-        "uname": ""
+        "uname": "",
+        "email": ""
       });
     } catch (e) {
       _showError("Failed to add user to the database.");

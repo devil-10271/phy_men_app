@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
                 useMaterial3: true,
               ),
 
-              home: Main_calm()
+              home: HomePage()
           );
 
         });

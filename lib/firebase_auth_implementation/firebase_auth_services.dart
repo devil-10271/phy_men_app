@@ -26,6 +26,7 @@ class AuthMethods{
   Future<void> _addUserToDatabase({
     required String uid,
     required String uname,
+    required String email
   }) async {
     try {
       await _database.child('users/$uid').set({
@@ -147,7 +148,8 @@ class AuthMethods{
             }
           }
         },
-        "uname": ""
+        "uname": "",
+        "email": ""
       });
     } catch (e) {
       print("Error");
@@ -184,7 +186,9 @@ class AuthMethods{
       }try{
       await _addUserToDatabase(
           uid: userDetails!.uid,
-          uname: userDetails.displayName.toString()
+          uname: userDetails.displayName.toString(),
+          email: userDetails.email.toString()
+
       );
     }catch(e){
       print("Error occurred");

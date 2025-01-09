@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:phy_men_app/Auth/login.dart';
@@ -16,7 +17,8 @@ class _ProfileState extends State<Profile> {
   bool _laa = true;
   bool _lbn = true;
   bool _ls = false;
-
+  String currentUserId = FirebaseAuth.instance.currentUser?.uid ?? "";
+  final ref = FirebaseDatabase.instance.ref('user');
   @override
   Widget build(BuildContext context) {
     var screen = MediaQuery.of(context);
@@ -95,28 +97,39 @@ class _ProfileState extends State<Profile> {
                       padding: EdgeInsets.only(
                           top: screen.size.height * ht(context, 145),
                           left: 145),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Elena Norman',
-                            style: TextStyle(
-                              color: Color.fromRGBO(245, 245, 245, 1),
-                              fontSize: screen.size.width * wt(context, 16),
-                              fontWeight: FontWeight.w700,
-                              fontFamily: 'Montserrat',
-                            ),
-                          ),
-                          Text(
-                            'Elenanorman22@gamil.com',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: screen.size.width * wt(context, 16),
-                              fontWeight: FontWeight.w300,
-                              fontFamily: 'Montserrat',
-                            ),
-                          ),
-                        ],
+                      child: StreamBuilder(
+                        stream: ref.child(currentUserId).onValue,
+                        builder: (context,AsyncSnapshot snapshot) {
+                          if(snapshot.hasData)
+                            {
+                              return Center(child: CircularProgressIndicator());
+                            }else{
+
+                          }
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Elena Norman',
+                                style: TextStyle(
+                                  color: Color.fromRGBO(245, 245, 245, 1),
+                                  fontSize: screen.size.width * wt(context, 16),
+                                  fontWeight: FontWeight.w700,
+                                  fontFamily: 'Montserrat',
+                                ),
+                              ),
+                              Text(
+                                '',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: screen.size.width * wt(context, 16),
+                                  fontWeight: FontWeight.w300,
+                                  fontFamily: 'Montserrat',
+                                ),
+                              ),
+                            ],
+                          );
+                        }
                       ),
                     ),
                   ],
