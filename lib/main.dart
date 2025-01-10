@@ -2,6 +2,7 @@
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:phy_men_app/Auth/login.dart';
 import 'package:phy_men_app/Home/Mental/Blog/main_blog.dart';
 import 'package:phy_men_app/Home/Mental/Calm/main_calm.dart';
 import 'package:phy_men_app/Home/Mental/GkTest/StrartGk.dart';
@@ -50,7 +51,7 @@ class MyApp extends StatelessWidget {
                 useMaterial3: true,
               ),
 
-              home: HomePage()
+              home: Log_in()
           );
 
         });

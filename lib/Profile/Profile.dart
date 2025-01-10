@@ -17,6 +17,7 @@ class _ProfileState extends State<Profile> {
   bool _laa = true;
   bool _lbn = true;
   bool _ls = false;
+  final user = FirebaseAuth.instance.currentUser;
   String currentUserId = FirebaseAuth.instance.currentUser?.uid ?? "";
   final ref = FirebaseDatabase.instance.ref('user');
   @override
@@ -100,17 +101,11 @@ class _ProfileState extends State<Profile> {
                       child: StreamBuilder(
                         stream: ref.child(currentUserId).onValue,
                         builder: (context,AsyncSnapshot snapshot) {
-                          if(snapshot.hasData)
-                            {
-                              return Center(child: CircularProgressIndicator());
-                            }else{
-
-                          }
                           return Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Elena Norman',
+                                  user!.displayName.toString(),
                                 style: TextStyle(
                                   color: Color.fromRGBO(245, 245, 245, 1),
                                   fontSize: screen.size.width * wt(context, 16),
@@ -119,7 +114,7 @@ class _ProfileState extends State<Profile> {
                                 ),
                               ),
                               Text(
-                                '',
+                                user!.email.toString(),
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: screen.size.width * wt(context, 16),

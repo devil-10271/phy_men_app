@@ -1,4 +1,5 @@
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,14 @@ class Sign_Up extends StatefulWidget {
   State<Sign_Up> createState() => _Sign_UpState();
 }
 
+class FirestoreServices{
+  static saveUser(String name, email,uid) async{
+    await FirebaseFirestore.instance
+        .collection("User")
+        .doc(uid)
+        .set({'Email':email, 'Username':name, 'id':uid});
+  }
+}
 class _Sign_UpState extends State<Sign_Up> {
   bool isChecked = false;
   String email = "", password = "", username = "";
@@ -34,13 +43,13 @@ class _Sign_UpState extends State<Sign_Up> {
   }
 
   final _formkey = GlobalKey<FormState>();
-
+  final user = FirebaseAuth.instance.currentUser;
   final DatabaseReference _database = FirebaseDatabase.instanceFor(
     app: FirebaseDatabase.instance.app,
     databaseURL:
         'https://phymenapp-default-rtdb.asia-southeast1.firebasedatabase.app',
   ).ref();
-
+  
   Future<void> registration() async {
     if (_formkey.currentState!.validate() &&
         _password.text.isNotEmpty &&
@@ -51,9 +60,9 @@ class _Sign_UpState extends State<Sign_Up> {
         UserCredential userCredential =
             await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: _email.text.trim(),
-          password: _password.text.trim(),
+          password: _password.text.trim()
         );
-
+        await FirestoreServices.saveUser(username, email, userCredential.user!.uid);
         // Add user details to the database
         await _addUserToDatabase(
           uid: userCredential.user!.uid,
@@ -324,8 +333,7 @@ class _Sign_UpState extends State<Sign_Up> {
             }
           }
         },
-        "uname": "",
-        "email": ""
+        "uname": _username.text
       });
     } catch (e) {
       _showError("Failed to add user to the database.");
