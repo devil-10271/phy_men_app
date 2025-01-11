@@ -98,13 +98,14 @@ class _Sign_UpState extends State<Sign_Up> {
         }
       } catch (e) {
         // Handle general exceptions
-        _showError("An unexpected error occurred. Please try again.");
+       _showError("An unexpected error occurred. Please try again.");
       }
     } else {
       // Handle form validation failure
       _showError("Please fill in all the required fields.");
     }
   }
+  RegExp emailRegExp = RegExp(r'^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$');
 
   Future<void> _addUserToDatabase({
     required String uid,
@@ -333,7 +334,8 @@ class _Sign_UpState extends State<Sign_Up> {
             }
           }
         },
-        "uname": _username.text
+        "uname": _username.text,
+        "email": _email.text
       });
     } catch (e) {
       _showError("Failed to add user to the database.");
@@ -458,10 +460,14 @@ class _Sign_UpState extends State<Sign_Up> {
                                 SizedBox(height: 10),
                                 TextFormField(
                                   validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return "Enter Email";
+                                    if (value!.isEmpty) {
+                                      return 'Please Enter a Email Id';
                                     }
-                                    return null;
+                                    if (emailRegExp.hasMatch(value)) {
+                                      return 'Please Enter valid Email Address';
+                                    } else {
+                                      return null;
+                                    }
                                   },
                                   controller: _email,
                                   style: TextStyle(color: Colors.black),
@@ -603,33 +609,6 @@ class _Sign_UpState extends State<Sign_Up> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              ElevatedButton.icon(
-                                onPressed: () async {
-
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.white,
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 15, horizontal: 20),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(40),
-                                  ),
-                                  shadowColor: Colors.grey.withOpacity(0.9),
-                                  elevation: 5,
-                                ),
-                                icon: Image.asset(
-                                  'assets/Company_icon/facebook.png',
-                                  height: 30,
-                                  width: 30,
-                                ),
-                                label: Text(
-                                  'Facebook',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                              ),
                               ElevatedButton.icon(
                                 onPressed: () {
                                   AuthMethods().signInWithGoogle(context);

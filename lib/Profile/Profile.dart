@@ -187,8 +187,8 @@ class _ProfileState extends State<Profile> {
                   ),
                   // Padding between buttons
                   ElevatedButton(
-                    onPressed: () {
-                      FirebaseAuth.instance.signOut();
+                    onPressed: () async{
+                      await FirebaseAuth.instance.signOut();
                       Navigator.of(context).pushReplacement(
 
                           MaterialPageRoute(builder: ((context) => Log_in())));

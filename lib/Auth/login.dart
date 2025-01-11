@@ -226,33 +226,6 @@ class _Log_inState extends State<Log_in> {
                             children: [
                               ElevatedButton.icon(
                                 onPressed: () {
-
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.white,
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 15, horizontal: 20),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(40),
-                                  ),
-                                  shadowColor: Colors.grey.withOpacity(0.9),
-                                  elevation: 5,
-                                ),
-                                icon: Image.asset(
-                                  'assets/Company_icon/facebook.png',
-                                  height: 30,
-                                  width: 30,
-                                ),
-                                label: Text(
-                                  'Facebook',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                              ),
-                              ElevatedButton.icon(
-                                onPressed: () {
                                   AuthMethods().signInWithGoogle(context);
                                 },
                                 style: ElevatedButton.styleFrom(
