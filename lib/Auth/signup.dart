@@ -463,7 +463,7 @@ class _Sign_UpState extends State<Sign_Up> {
                                     if (value!.isEmpty) {
                                       return 'Please Enter a Email Id';
                                     }
-                                    if (emailRegExp.hasMatch(value)) {
+                                    if (!emailRegExp.hasMatch(value)) {
                                       return 'Please Enter valid Email Address';
                                     } else {
                                       return null;

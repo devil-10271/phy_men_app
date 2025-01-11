@@ -23,26 +23,39 @@ class _Log_inState extends State<Log_in> {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: _email.text, password: _password.text);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+            content: Text(
+              "Login Successful",
+              style: TextStyle(fontSize: 20.0),
+            )
+        )
+      );
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => HomePage()));
     } on FirebaseAuthException catch (e) {
       if (e.code == "user-not-found") {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            backgroundColor: Colors.orangeAccent,
-            content: Text(
-              "User Not Found",
-              style: TextStyle(fontSize: 20.0),
-            )));
+        _showError("User Not Found");
       } else if (e.code == 'wrong-password') {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            backgroundColor: Colors.orangeAccent,
-            content: Text(
-              "Enter Correct password",
-              style: TextStyle(fontSize: 20.0),
-            )));
-      }
+        _showError("Wrong Password");
+      } else{
+        _showError("Error Occurred");
+
+    }
     }
   }
+  void _showError(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: Colors.red,
+        content: Text(
+          message,
+          style: const TextStyle(fontSize: 16.0),
+        ),
+      ),
+    );
+  }
+
 
   @override
   Widget build(BuildContext context) {
