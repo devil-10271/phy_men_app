@@ -1,277 +1,199 @@
-  import 'package:flutter/material.dart';
-  import 'package:flutter/cupertino.dart';
-  import 'package:flutter_screenutil/flutter_screenutil.dart';
-  import 'package:flutter_chat_bubble/chat_bubble.dart';
-  class Chat extends StatefulWidget {
+import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_chat_bubble/chat_bubble.dart';
+import 'package:google_generative_ai/google_generative_ai.dart';
+import 'package:intl/intl.dart';
+
+class Chat extends StatefulWidget {
   const Chat({super.key});
 
   @override
   State<Chat> createState() => _ChatState();
+}
+
+class _ChatState extends State<Chat> {
+  TextEditingController _userInput = TextEditingController();
+
+  static const apiKey = "AIzaSyC0g4yr4P9T9poz2xWNn6rPWXQK5tQc2_A";
+
+  final model = GenerativeModel(model: 'gemini-pro', apiKey: apiKey);
+
+  final List<Message> _messages = [];
+
+  Future<void> sendMessage() async {
+    final message = _userInput.text;
+
+    setState(() {
+      _messages
+          .add(Message(isUser: true, message: message, date: DateTime.now()));
+    });
+
+    final content = [Content.text(message)];
+    final response = await model.generateContent(content);
+
+    setState(() {
+      _messages.add(Message(
+          isUser: false, message: response.text ?? "", date: DateTime.now()));
+    });
   }
 
-  class _ChatState extends State<Chat> {
   @override
   Widget build(BuildContext context) {
-  return Scaffold(
-    backgroundColor: Colors.white,
-    body: Column(
-      children: [
-        // Header Section
-        Container(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8),
-            child: Row(
-
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                InkWell(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: Icon(CupertinoIcons.back),
-                ),
-                Center(child: Text('Motivational Quotes')),
-              ],
-            ),
-          ),
-          height: ScreenUtil().setHeight(142),
-          width: ScreenUtil().setWidth(438),
-          decoration: BoxDecoration(
-            color: Color.fromRGBO(148, 227, 169, 1),
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(30),
-              bottomRight: Radius.circular(30),
-            ),
+    return Scaffold(
+      appBar: AppBar(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(30),
           ),
         ),
-        // Chat Bubble Section
-        Expanded(
-          child: ListView(
-            padding: EdgeInsets.all(8),
-            children: [
-              // Sender Bubble
-              ChatBubble(
-                clipper: ChatBubbleClipper5(type: BubbleType.sendBubble),
-                alignment: Alignment.topRight,
-                margin: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-                backGroundColor: Color.fromRGBO(146, 227, 169, 1),
-                child: Container(
-                  constraints: BoxConstraints(
-                    maxWidth: MediaQuery.of(context).size.width * 0.6,
-                  ),
-                  child: Text(
-                    "Hey, send me motivational quotes",
-                    style: TextStyle(color: Colors.black, fontSize: 16),
-                  ),
-                ),
-              ),
-              // Time Label
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Container(
-                  alignment: Alignment.topRight,
-                  child: Text(
-                    "03:30 PM",
-                    style: TextStyle(
-                      color: Color.fromRGBO(74, 74, 74, 1),
-                      fontSize: 12,
-                    ),
-                  ),
-                ),
-              ),
-              // Receiver Bubble
-              ChatBubble(
-                clipper: ChatBubbleClipper5(type: BubbleType.receiverBubble),
-                backGroundColor: Color.fromRGBO(245, 245, 245, 1),
-                margin: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-                child: Container(
-                  constraints: BoxConstraints(
-                    maxWidth: MediaQuery.of(context).size.width * 0.7,
-                  ),
-                  child: Text(
-                    "If your dreams don’t scare you, they are too small.",
-                    style: TextStyle(color: Colors.black, fontSize: 16),
-                  ),
-                ),
-              ),
-              ChatBubble(
-                clipper: ChatBubbleClipper5(type: BubbleType.receiverBubble),
-                backGroundColor: Color.fromRGBO(245, 245, 245, 1),
-                margin: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-                child: Container(
-                  constraints: BoxConstraints(
-                    maxWidth: MediaQuery.of(context).size.width * 0.7,
-                  ),
-                  child: Text(
-                    "Change is painful, but nothing is as painful as staying stuck somewhere you don’t belong.",
-                    style: TextStyle(color: Colors.black,fontSize: 16),
-                  ),
-                ),
-              ),
-              Padding(
-                padding:
-                const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                child: Container(
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    "03:31 PM",
-                    style: TextStyle(
-                      color: Color.fromRGBO(74, 74, 74, 1),
-                      fontSize: 12,
-                    ),
-                  ),
-                ),
-              ),
-              ChatBubble(
-                clipper: ChatBubbleClipper5(type: BubbleType.sendBubble),
-                alignment: Alignment.topRight,
-                margin: EdgeInsets.symmetric(vertical: 8, horizontal: 5),
-                backGroundColor: Color.fromRGBO(146, 227, 169, 1),
-                child: Container(
-                  constraints: BoxConstraints(
-                    maxWidth: MediaQuery.of(context).size.width * 0.7,
-                  ),
-                  child: Text(
-                    "Thanks",
-                    style: TextStyle(color: Colors.black,fontSize: 16),
-                  ),
-                ),
-              ),
-              ChatBubble(
-                clipper: ChatBubbleClipper5(type: BubbleType.sendBubble),
-                alignment: Alignment.topRight,
-                margin: EdgeInsets.symmetric(vertical: 0, horizontal: 5),
-                backGroundColor: Color.fromRGBO(146, 227, 169, 1),
-                child: Container(
-                  constraints: BoxConstraints(
-                    maxWidth: MediaQuery.of(context).size.width * 0.7,
-                  ),
-                  child: Text(
-                    "Send me few more",
-                    style: TextStyle(color: Colors.black,fontSize: 16),
-                  ),
-                ),
-              ),
-
-              Padding(
-                padding:
-                const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                child: Container(
-                  alignment: Alignment.topRight,
-                  child: Text(
-                    "03:34 PM",
-                    style: TextStyle(
-                      color: Color.fromRGBO(74, 74, 74, 1),
-                      fontSize: 12,
-                    ),
-                  ),
-                ),
-              ),
-
-              SizedBox(height: 19),
-              ChatBubble(
-                clipper: ChatBubbleClipper5(type: BubbleType.receiverBubble),
-                backGroundColor: Color.fromRGBO(245, 245, 245, 1),
-                margin: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-                child: Container(
-                  constraints: BoxConstraints(
-                    maxWidth: MediaQuery.of(context).size.width * 0.7,
-                  ),
-                  child: Text(
-                    "Yeah Sure",
-                    style: TextStyle(color: Colors.black,fontSize: 16),
-                  ),
-                ),
-              ),
-
-              ChatBubble(
-                clipper: ChatBubbleClipper5(type: BubbleType.receiverBubble),
-                backGroundColor: Color.fromRGBO(245, 245, 245, 1),
-                margin: EdgeInsets.symmetric(vertical: 0, horizontal: 5),
-                child: Container(
-                  constraints: BoxConstraints(
-                    maxWidth: MediaQuery.of(context).size.width * 0.7,
-                  ),
-                  child: Text(
-                    "If your dreams don’t scare you, they are too small.",
-                    style: TextStyle(color: Colors.black,fontSize: 16),
-                  ),
-                ),
-              ),
-
-              ChatBubble(
-                clipper: ChatBubbleClipper5(type: BubbleType.receiverBubble),
-                backGroundColor: Color.fromRGBO(245, 245, 245, 1),
-                margin: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-                child: Container(
-                  constraints: BoxConstraints(
-                    maxWidth: MediaQuery.of(context).size.width * 0.7,
-                  ),
-                  child: Text(
-                    "Nothing is impossible. The word itself says I’m possible! #DailyAffirmations",
-                    style: TextStyle(color: Colors.black,fontSize: 16),
-                  ),
-                ),
-              ),
-
-              Padding(
-                padding:
-                const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                child: Container(
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    "03:40 PM",
-                    style: TextStyle(
-                      color: Color.fromRGBO(74, 74, 74, 1),
-                      fontSize: 12,
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 20),
-              Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: TextField(
-                  decoration: InputDecoration(
-                    labelText: 'Type a message...',
-                    labelStyle: TextStyle(color: Colors.black,fontSize: 16),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                    ),
-                    suffixIcon: Stack(
-                      children: [
-                        SizedBox(height: 10),
-                        Padding(
-                          padding: const EdgeInsets.only(top:1.5),
-                          child: Image.asset('assets/Image/Chat_Bot/Ellipse 98.png', width: 44.5),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(top:11,left:10),
-                          child: Image.asset(
-                            'assets/Image/Chat_Bot/Vector.png',
-                            width: 24,
-                            height: 24,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-
-               // Add more ChatBubbles as required...
-            ],
+        leading: InkWell(
+          borderRadius: BorderRadius.circular(90),
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Icon(
+            Icons.arrow_back_ios,
+            size: 20,
           ),
         ),
-        // Message Input Field
-
-      ],
-    ),
-  );
+        backgroundColor: Color.fromRGBO(146, 227, 169, 1),
+        foregroundColor: Colors.black,
+        title: Text(
+          "ChatBot",
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+        ),
+        centerTitle: true,
+      ),
+      backgroundColor: Colors.white,
+      body: Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Expanded(
+                child: ListView.builder(
+                    itemCount: _messages.length,
+                    itemBuilder: (context, index) {
+                      final message = _messages[index];
+                      return Messages(
+                          isUser: message.isUser,
+                          message: message.message,
+                          date: DateFormat('HH:mm').format(message.date));
+                    })),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 15,
+                    child: TextFormField(
+                      style: TextStyle(color: Colors.black),
+                      controller: _userInput,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(90),
+                          borderSide: BorderSide(
+                              color: Color.fromRGBO(
+                                  146, 227, 169, 1)), // Default border color
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(90),
+                          borderSide: BorderSide(
+                              color: Color.fromRGBO(146, 227, 169,
+                                  1)), // Green border when not focused
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(90),
+                          borderSide: BorderSide(
+                              color: Color.fromRGBO(146, 227, 169, 1),
+                              width: 2.0), // Green border when focused
+                        ),
+                        label: Text(
+                          'Type a Message',
+                          style: TextStyle(color: Colors.black),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: ScreenUtil().setWidth(10),),
+                  IconButton(
+                    padding: EdgeInsets.all(12),
+                    iconSize: 30,
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(
+                            Color.fromRGBO(146, 227, 169, 1)),
+                        foregroundColor:
+                            MaterialStateProperty.all(Colors.black),
+                        shape: MaterialStateProperty.all(CircleBorder())),
+                    onPressed: () {
+                      sendMessage();
+                      _userInput.clear();
+                      FocusScope.of(context).unfocus();
+                    },
+                    icon: Icon(Icons.send),
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
+}
+
+class Message {
+  final bool isUser;
+  final String message;
+  final DateTime date;
+
+  Message({required this.isUser, required this.message, required this.date});
+}
+
+class Messages extends StatelessWidget {
+  final bool isUser;
+  final String message;
+  final String date;
+
+  const Messages(
+      {super.key,
+      required this.isUser,
+      required this.message,
+      required this.date});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.all(15),
+      margin: EdgeInsets.symmetric(vertical: 15)
+          .copyWith(left: isUser ? 100 : 10, right: isUser ? 10 : 100),
+      decoration: BoxDecoration(
+          color: isUser
+              ? Color.fromRGBO(146, 227, 169, 1)
+              : Color.fromRGBO(245, 245, 245, 1),
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(10),
+              bottomLeft: isUser ? Radius.circular(10) : Radius.zero,
+              topRight: Radius.circular(10),
+              bottomRight: isUser ? Radius.zero : Radius.circular(10))),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            message,
+            style: TextStyle(
+                fontSize: 16, color: isUser ? Colors.white : Colors.black),
+          ),
+          Text(
+            date,
+            style: TextStyle(
+              fontSize: 10,
+              color: isUser ? Colors.white : Colors.black,
+            ),
+          )
+        ],
+      ),
+    );
   }
-
-  void showTooltip(BuildContext context, String message) {}
-
-  void hideTooltip() {}
-
+}

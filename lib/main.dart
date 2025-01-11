@@ -3,6 +3,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:phy_men_app/Auth/login.dart';
+import 'package:phy_men_app/Home/ChatBot/chatfile.dart';
 import 'package:phy_men_app/Home/Mental/Blog/main_blog.dart';
 import 'package:phy_men_app/Home/Mental/Calm/main_calm.dart';
 import 'package:phy_men_app/Home/Mental/GkTest/StrartGk.dart';
@@ -23,8 +24,6 @@ import 'package:phy_men_app/Home/Mental/Mentalmain.dart';
 import 'package:phy_men_app/Home/Physical/PhysicalMain.dart';
 import 'package:phy_men_app/Splash_Screen/splash_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -51,7 +50,7 @@ class MyApp extends StatelessWidget {
                 useMaterial3: true,
               ),
 
-              home: Log_in()
+              home: SplashScreen()
           );
 
         });
