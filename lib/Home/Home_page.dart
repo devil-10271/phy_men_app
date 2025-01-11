@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:phy_men_app/Home/Mental/Mentalmain.dart';
@@ -17,6 +18,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final ScrollController _scrollController = ScrollController();
   String _selectedCategory = 'mental'; // Track the selected category
+  final user = FirebaseAuth.instance.currentUser;
 
   final Map<String, double> _containerOffsets = {
     'mental': 0.0,
@@ -129,7 +131,7 @@ class _HomePageState extends State<HomePage> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            'Hi, Miss Norman',
+                                            user!.displayName.toString(),
                                             style: TextStyle(
                                               fontFamily: 'Montserrat',
                                               fontSize: ScreenUtil().setSp(20),

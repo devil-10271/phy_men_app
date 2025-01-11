@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:phy_men_app/Home/Home_page.dart';
 import 'package:phy_men_app/firebase_auth_implementation/database.dart';
@@ -251,7 +250,8 @@ class AuthMethods{
             }
           }
         },
-        "uname": user!.displayName.toString()
+        "uname": user!.displayName.toString(),
+        "email": user!.email.toString()
 
       });
     } catch (e) {

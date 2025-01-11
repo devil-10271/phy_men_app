@@ -23,26 +23,39 @@ class _Log_inState extends State<Log_in> {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: _email.text, password: _password.text);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+            content: Text(
+              "Login Successful",
+              style: TextStyle(fontSize: 20.0),
+            )
+        )
+      );
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => HomePage()));
     } on FirebaseAuthException catch (e) {
       if (e.code == "user-not-found") {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            backgroundColor: Colors.orangeAccent,
-            content: Text(
-              "User Not Found",
-              style: TextStyle(fontSize: 20.0),
-            )));
+        _showError("User Not Found");
       } else if (e.code == 'wrong-password') {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            backgroundColor: Colors.orangeAccent,
-            content: Text(
-              "Enter Correct password",
-              style: TextStyle(fontSize: 20.0),
-            )));
-      }
+        _showError("Wrong Password");
+      } else{
+        _showError("Error Occurred");
+
+    }
     }
   }
+  void _showError(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: Colors.red,
+        content: Text(
+          message,
+          style: const TextStyle(fontSize: 16.0),
+        ),
+      ),
+    );
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -224,33 +237,6 @@ class _Log_inState extends State<Log_in> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              ElevatedButton.icon(
-                                onPressed: () {
-
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.white,
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 15, horizontal: 20),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(40),
-                                  ),
-                                  shadowColor: Colors.grey.withOpacity(0.9),
-                                  elevation: 5,
-                                ),
-                                icon: Image.asset(
-                                  'assets/Company_icon/facebook.png',
-                                  height: 30,
-                                  width: 30,
-                                ),
-                                label: Text(
-                                  'Facebook',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                              ),
                               ElevatedButton.icon(
                                 onPressed: () {
                                   AuthMethods().signInWithGoogle(context);
