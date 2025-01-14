@@ -17,41 +17,40 @@ class _ChatBotState extends State<ChatBot> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(30),
+          ),
+        ),
+        leading: InkWell(
+          borderRadius: BorderRadius.circular(90),
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Icon(
+            Icons.arrow_back_ios,
+            size: 20,
+          ),
+        ),
+        backgroundColor: Color.fromRGBO(146, 227, 169, 1),
+        foregroundColor: Colors.black,
+        title: Text(
+          "ChatBot",
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+        ),
+        centerTitle: true,
+      ),
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          Container(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  InkWell(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: Icon(CupertinoIcons.back)),
-                  SizedBox(width: ScreenUtil().setWidth(140)),
-                  Text('Chat Bot')
-                ],
-              ),
-            ),
-            height: ScreenUtil().setHeight(142),
-            width: ScreenUtil().setWidth(438),
-            decoration: BoxDecoration(
-                color: Color(hex('92E3A9')),
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(30),
-                    bottomRight: Radius.circular(30))),
-          ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SizedBox(height: ScreenUtil().setHeight(250)),
+                  SizedBox(height: ScreenUtil().setHeight(230)),
                   Text('How Can I Help You ?'),
                   SizedBox(
                     height: ScreenUtil().setHeight(10),
@@ -77,10 +76,11 @@ class _ChatBotState extends State<ChatBot> {
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: ScreenUtil().setHeight(10),
-                  ),
-                  Image.asset('assets/Image/Chat_Bot/bro.png')
+                  Container(
+                    child: Image.asset(
+                      'assets/Image/Chat_Bot/bro.png',
+                    ),
+                  )
                 ],
               ),
             ),

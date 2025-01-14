@@ -1,3 +1,5 @@
+import 'package:curved_labeled_navigation_bar/curved_navigation_bar.dart';
+import 'package:curved_labeled_navigation_bar/curved_navigation_bar_item.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,6 +18,65 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int _curre_ = 0;
+  List CALL = [Hom_p(), MentalMain(), Physicalmain(), ChatBot(), Profile()];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      bottomNavigationBar: CurvedNavigationBar(
+        backgroundColor: Colors.black,
+        items: const [
+          CurvedNavigationBarItem(
+            child: Icon(
+              Icons.home_outlined,
+              color: Color.fromARGB(255, 129, 218, 250),
+            ),
+          ),
+          CurvedNavigationBarItem(
+            child: Icon(
+              Icons.health_and_safety,
+              color: Colors.blue,
+            ),
+          ),
+          CurvedNavigationBarItem(
+            child: Icon(
+              Icons.directions_run,
+              color: Colors.red,
+            ),
+          ),
+          CurvedNavigationBarItem(
+            child: Icon(
+              Icons.newspaper,
+              color: Colors.green,
+            ),
+          ),
+          CurvedNavigationBarItem(
+            child: Icon(
+              Icons.perm_identity,
+              color: Colors.blue,
+            ),
+          ),
+        ],
+        onTap: (index) {
+          setState(() {
+            _curre_ = index;
+          });
+        },
+      ),
+      body: CALL[_curre_],
+    );
+  }
+}
+
+class Hom_p extends StatefulWidget {
+  const Hom_p({super.key});
+
+  @override
+  State<Hom_p> createState() => _Hom_pState();
+}
+
+class _Hom_pState extends State<Hom_p> {
   final ScrollController _scrollController = ScrollController();
   String _selectedCategory = 'mental'; // Track the selected category
   final user = FirebaseAuth.instance.currentUser;
@@ -85,48 +146,47 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: SingleChildScrollView(
-          child: Stack(
-            
-            children: [
-              Container(
-                width: 430,
-                height: 932,
-                color: const Color.fromARGB(255, 129, 218, 250),
-              ),
-              Image.asset("assets/Image/Home/main_photo.png"),
-              Positioned(
-                top: ScreenUtil().setHeight(266),
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(50.0),
-                      topRight: Radius.circular(50.0),
-                    ),
-                    color: Colors.white,
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Stack(
+          children: [
+            Container(
+              width: 430,
+              height: 932,
+              color: const Color.fromARGB(255, 129, 218, 250),
+            ),
+            Image.asset("assets/Image/Home/main_photo.png"),
+            Positioned(
+              top: ScreenUtil().setHeight(266),
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(50.0),
+                    topRight: Radius.circular(50.0),
                   ),
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 20),
-                    child: StreamBuilder<Object>(
-                        stream: null,
-                        builder: (context, snapshot) {
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 20.0, vertical: 20),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 20.0),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Column(
+                  color: Colors.white,
+                ),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(vertical: 20),
+                  child: StreamBuilder<Object>(
+                      stream: null,
+                      builder: (context, snapshot) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20.0, vertical: 20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(right: 20.0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Expanded(
+                                      child: Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
@@ -134,7 +194,7 @@ class _HomePageState extends State<HomePage> {
                                             user!.displayName.toString(),
                                             style: TextStyle(
                                               fontFamily: 'Montserrat',
-                                              fontSize: ScreenUtil().setSp(20),
+                                              fontSize: ScreenUtil().setSp(18),
                                               fontWeight: FontWeight.w600,
                                             ),
                                           ),
@@ -148,195 +208,196 @@ class _HomePageState extends State<HomePage> {
                                           ),
                                         ],
                                       ),
-                                      const Flexible(
-                                          child: SizedBox(
-                                        width: 40,
-                                      )),
-                                      InkWell(
-                                          onTap: () {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        Profile()));
-                                          },
-                                          child: ClipOval(
-                                            child: Image.asset(
-                                              'assets/Image/Edit_Profile/unknown.png',
-                                              height:
-                                                  ScreenUtil().setHeight(60),
-                                              width: ScreenUtil().setWidth(60),
-                                            ),
-                                          )),
-                                    ],
-                                  ),
-                                ),
-                                SizedBox(height: ScreenUtil().setHeight(50)),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    _buildCategoryText(
-                                        'Mental Health', 'mental'),
-                                    _buildCategoryText(
-                                        'Physical Health', 'physical'),
-                                    _buildCategoryText('Chat Bot', 'ai'),
+                                    ),
+                                    const Flexible(
+                                        child: SizedBox(
+                                      width: 40,
+                                    )),
+                                    InkWell(
+                                        onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      Profile()));
+                                        },
+                                        child: ClipOval(
+                                          child: Image.asset(
+                                            'assets/Image/Edit_Profile/unknown.png',
+                                            height: ScreenUtil().setHeight(60),
+                                            width: ScreenUtil().setWidth(60),
+                                          ),
+                                        )),
                                   ],
                                 ),
-                                const SizedBox(height: 30),
-                                SingleChildScrollView(
-                                  controller: _scrollController,
-                                  scrollDirection: Axis.horizontal,
-                                  child: Row(
-                                    children: [
-                                      InkWell(
-                                        onTap: () {
-                                          Navigator.push(context, MaterialPageRoute(builder: (context)=>MentalMain()));
-                                        },
-                                        child: Container(
-                                          width: 157,
-                                          height: 239,
-                                          decoration: BoxDecoration(
-                                            color: const Color.fromRGBO(
-                                                118, 207, 226, 0.3),
-                                            borderRadius:
-                                                BorderRadius.circular(15.0),
+                              ),
+                              SizedBox(height: ScreenUtil().setHeight(50)),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  _buildCategoryText('Mental Health', 'mental'),
+                                  _buildCategoryText(
+                                      'Physical Health', 'physical'),
+                                  _buildCategoryText('Chat Bot', 'ai'),
+                                ],
+                              ),
+                              const SizedBox(height: 30),
+                              SingleChildScrollView(
+                                controller: _scrollController,
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  children: [
+                                    InkWell(
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    MentalMain()));
+                                      },
+                                      child: Container(
+                                        width: 157,
+                                        height: 239,
+                                        decoration: BoxDecoration(
+                                          color: const Color.fromRGBO(
+                                              118, 207, 226, 0.3),
+                                          borderRadius:
+                                              BorderRadius.circular(15.0),
+                                        ),
+                                        child: Expanded(
+                                          child: Image.asset(
+                                            'assets/Image/Home/mental_health.png',
                                           ),
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 17),
+                                    InkWell(
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    Physicalmain()));
+                                      },
+                                      child: Container(
+                                        width: 157,
+                                        height: 239,
+                                        decoration: BoxDecoration(
+                                          color: const Color.fromRGBO(
+                                              242, 143, 143, 0.3),
+                                          borderRadius:
+                                              BorderRadius.circular(15.0),
+                                        ),
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 80),
                                           child: Expanded(
                                             child: Image.asset(
-                                              'assets/Image/Home/mental_health.png',
+                                              'assets/Image/Home/physical_health.png',
                                             ),
                                           ),
                                         ),
-                                      ),
-                                      const SizedBox(width: 17),
-                                      InkWell(
-                                        onTap: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      Physicalmain()));
-                                        },
-                                        child: Container(
-                                          width: 157,
-                                          height: 239,
-                                          decoration: BoxDecoration(
-                                            color: const Color.fromRGBO(
-                                                242, 143, 143, 0.3),
-                                            borderRadius:
-                                                BorderRadius.circular(15.0),
-                                          ),
-                                          child: Padding(
-                                            padding:
-                                                const EdgeInsets.only(top: 80),
-                                            child: Expanded(
-                                              child: Image.asset(
-                                                'assets/Image/Home/physical_health.png',
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(width: 17),
-                                      InkWell(
-                                        onTap: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      ChatBot()));
-                                        },
-                                        child: Container(
-                                          width: 157,
-                                          height: 239,
-                                          decoration: BoxDecoration(
-                                            color: const Color.fromRGBO(
-                                                146, 227, 169, 0.4),
-                                            borderRadius:
-                                                BorderRadius.circular(15.0),
-                                          ),
-                                          child: Padding(
-                                            padding:
-                                                const EdgeInsets.only(top: 70),
-                                            child: Expanded(
-                                              child: Image.asset(
-                                                'assets/Image/Home/ai.png',
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 17,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                const SizedBox(height: 35),
-                                const Text(
-                                  'Trending',
-                                  style: TextStyle(
-                                    fontFamily: 'Montserrat',
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                                const SizedBox(height: 20),
-                                Row(
-                                  children: [
-                                    Container(
-                                      width: 74,
-                                      height: 72,
-                                      decoration: BoxDecoration(
-                                        color: const Color.fromRGBO(
-                                            186, 104, 200, 0.22),
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                      ),
-                                      child: Center(
-                                        child: Image.asset(
-                                            'assets/Image/Home/t1.png'),
                                       ),
                                     ),
-                                    const SizedBox(width: 20),
-                                    Expanded(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: const [
-                                          Text(
-                                            'Keep Your body healthy',
-                                            style: TextStyle(
-                                              fontFamily: 'Montserrat',
-                                              fontSize: 16.0,
-                                              fontWeight: FontWeight.w600,
+                                    const SizedBox(width: 17),
+                                    InkWell(
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ChatBot()));
+                                      },
+                                      child: Container(
+                                        width: 157,
+                                        height: 239,
+                                        decoration: BoxDecoration(
+                                          color: const Color.fromRGBO(
+                                              146, 227, 169, 0.4),
+                                          borderRadius:
+                                              BorderRadius.circular(15.0),
+                                        ),
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 70),
+                                          child: Expanded(
+                                            child: Image.asset(
+                                              'assets/Image/Home/ai.png',
                                             ),
-                                            overflow: TextOverflow.ellipsis,
                                           ),
-                                          Text(
-                                            'Weight loss is not just about losing pounds.\n it’s about gaining confidence, self-love, and a healthier, happier life.',
-                                            style: TextStyle(
-                                              fontFamily: 'Montserrat',
-                                              fontSize: 13.0,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                          ),
-                                          SizedBox(height: 20)
-                                        ],
+                                        ),
                                       ),
+                                    ),
+                                    SizedBox(
+                                      width: 17,
                                     ),
                                   ],
                                 ),
-                              ],
-                            ),
-                          );
-                        }),
-                  ),
+                              ),
+                              const SizedBox(height: 35),
+                              const Text(
+                                'Trending',
+                                style: TextStyle(
+                                  fontFamily: 'Montserrat',
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              const SizedBox(height: 20),
+                              Row(
+                                children: [
+                                  Container(
+                                    width: 74,
+                                    height: 72,
+                                    decoration: BoxDecoration(
+                                      color: const Color.fromRGBO(
+                                          186, 104, 200, 0.22),
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
+                                    child: Center(
+                                      child: Image.asset(
+                                          'assets/Image/Home/t1.png'),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 20),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: const [
+                                        Text(
+                                          'Keep Your body healthy',
+                                          style: TextStyle(
+                                            fontFamily: 'Montserrat',
+                                            fontSize: 16.0,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                        Text(
+                                          'Weight loss is not just about losing pounds.\n it’s about gaining confidence, self-love, and a healthier, happier life.',
+                                          style: TextStyle(
+                                            fontFamily: 'Montserrat',
+                                            fontSize: 13.0,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                        SizedBox(height: 20)
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        );
+                      }),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

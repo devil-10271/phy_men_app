@@ -53,6 +53,7 @@ dependencies:
   numberpicker: ^2.1.2
   audioplayers: ^6.1.0
   google_generative_ai: ^0.4.6
+  curved_labeled_navigation_bar: ^2.0.5
 
 
 dev_dependencies:
