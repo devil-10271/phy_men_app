@@ -1,8 +1,13 @@
+import "package:firebase_auth/firebase_auth.dart";
+import "package:firebase_database/firebase_database.dart";
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:image_picker/image_picker.dart";
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import "package:phy_men_app/main.dart";
+import 'package:basic_utils/basic_utils.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import "dart:io";
 
 class Edit_Profile extends StatefulWidget {
@@ -14,6 +19,23 @@ class Edit_Profile extends StatefulWidget {
 
 class _Edit_ProfileState extends State<Edit_Profile> {
   File? image;
+  final user = FirebaseAuth.instance.currentUser;
+  DatabaseReference ref = FirebaseDatabase.instance.ref().child('users');
+  void uploadImage(BuildContext context) async{
+    firebase_storage.Reference StorageRef = firebase_storage.FirebaseStorage.instance.ref('/profileImage'+user!.uid.toString());
+    firebase_storage.UploadTask uploadTask = StorageRef.putFile(File(image!.path).absolute);
+
+    await Future.value(uploadTask);
+    final newUrl = await StorageRef.getDownloadURL();
+
+    ref.child(user!.uid.toString()).update({
+      'profile' : newUrl.toString()
+    }).then((value){
+        Fluttertoast.showToast(msg: "Profile Updated");
+    }).onError((error, stackTrace){
+        Fluttertoast.showToast(msg: error.toString());
+    });
+  }
 
   Future pickimage(ImageSource sour) async {
     try {
@@ -230,7 +252,9 @@ class _Edit_ProfileState extends State<Edit_Profile> {
                           children: [
                             Expanded(
                               child: InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                  uploadImage(context);
+                                },
                                 child: Container(
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),

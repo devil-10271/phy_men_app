@@ -54,6 +54,9 @@ dependencies:
   audioplayers: ^6.1.0
   google_generative_ai: ^0.4.6
   curved_labeled_navigation_bar: ^2.0.5
+  firebase_storage: ^12.4.0
+  basic_utils: ^5.7.0
+  fluttertoast: ^8.2.10
 
 
 dev_dependencies:
