@@ -21,7 +21,7 @@ class _StartGkState extends State<StartGk> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(height: ScreenUtil().setHeight(233)),
+              SizedBox(height: ScreenUtil().setHeight(190)),
               Container(
                 //color: Colors.red,
                 child: Text(
@@ -48,7 +48,7 @@ class _StartGkState extends State<StartGk> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => GKScreen(),
+                        builder: (context) => GkScreen(),
                       ),
                     );
                   },

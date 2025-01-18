@@ -5,16 +5,14 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:phy_men_app/Home/Mental/GkTest/StrartGk.dart';
+import 'package:phy_men_app/Quiz/Startquiz.dart';
 
-class GKScreen extends StatefulWidget {
-  const GKScreen({super.key});
-
+class GkScreen extends StatefulWidget {
   @override
-  State<GKScreen> createState() => _GKScreenState();
+  _GkScreenState createState() => _GkScreenState();
 }
 
-class _GKScreenState extends State<GKScreen> {
+class _GkScreenState extends State<GkScreen> {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   int _currentQuestionIndex = 0;
   List _questions = [];
@@ -29,7 +27,7 @@ class _GKScreenState extends State<GKScreen> {
   }
 
   Future<void> _loadQuestions() async {
-    final snapshot = await _firestore.collection('quizzes').get();
+    final snapshot = await _firestore.collection('gk').get();
     setState(() {
       _questions = snapshot.docs.map((doc) => doc.data()).toList();
     });
@@ -111,7 +109,7 @@ class _GKScreenState extends State<GKScreen> {
                       width: ScreenUtil().setWidth(354),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(25),
-                        color: Color.fromRGBO(184, 218, 226, 1),
+                        color: Color.fromRGBO(198, 224, 215, 1),
                         border: Border.all(
                           color: Color.fromRGBO(255, 231, 102, 1),
                           width: ScreenUtil().setWidth(1.5),
@@ -173,7 +171,7 @@ class _GKScreenState extends State<GKScreen> {
                     }).toList(),
 
                     // Continue Button
-                    SizedBox(height: ScreenUtil().setHeight(75)),
+                    SizedBox(height: ScreenUtil().setHeight(50)),
                     Padding(
                       padding: EdgeInsets.symmetric(
                           horizontal: ScreenUtil().setWidth(93)),
@@ -240,11 +238,11 @@ class ResultScreen extends StatelessWidget {
     String time = "${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}";
 
     // Database path
-    String path = "users/$uid/mental_health/gk_score/$date/time/$time";
+    String path = "users/$uid/mental_health/iq_score/$date/time/$time";
 
     // Update database
     await _database.child(path).set({
-      "reading_gkscore": score,
+      "reading_iqscore": score,
     });
   }
 
@@ -288,7 +286,7 @@ class ResultScreen extends StatelessWidget {
                     fontSize: 32,
                     fontWeight: FontWeight.w500,
                     fontFamily: 'Montserrat',
-                    color: Color.fromRGBO(184, 218, 226, 1),
+                    color: Color.fromRGBO(198, 224, 215, 1),
                   ),
                 ),
                 SizedBox(height: ScreenUtil().setHeight(35)),
@@ -306,7 +304,7 @@ class ResultScreen extends StatelessWidget {
                     onPressed: () {
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => StartGk()),
+                        MaterialPageRoute(builder: (context) => Startquiz()),
                       );
                     },
                     child: Text(
@@ -329,7 +327,7 @@ class ResultScreen extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
-                      backgroundColor: Color.fromRGBO(184, 218, 226, 1),
+                      backgroundColor: Color.fromRGBO(198, 224, 215, 1),
                     ),
                     onPressed: () async {
                       // Update the score in Realtime Database
@@ -358,3 +356,4 @@ class ResultScreen extends StatelessWidget {
     );
   }
 }
+

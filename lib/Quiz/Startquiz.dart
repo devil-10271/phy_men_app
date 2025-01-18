@@ -21,7 +21,7 @@ class _StartquizState extends State<Startquiz> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(height: ScreenUtil().setHeight(233)),
+              SizedBox(height: ScreenUtil().setHeight(190)),
               Container(
                 //color: Colors.red,
                 child: Text(

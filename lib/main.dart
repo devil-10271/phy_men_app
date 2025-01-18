@@ -6,6 +6,7 @@ import 'package:phy_men_app/Auth/login.dart';
 import 'package:phy_men_app/Home/ChatBot/chatfile.dart';
 import 'package:phy_men_app/Home/Mental/Blog/main_blog.dart';
 import 'package:phy_men_app/Home/Mental/Calm/main_calm.dart';
+import 'package:phy_men_app/Home/Mental/GkTest/GkScreen.dart';
 import 'package:phy_men_app/Home/Mental/GkTest/StrartGk.dart';
 import 'package:phy_men_app/Home/Physical/Exercise/Exercise.dart';
 import 'package:phy_men_app/Auth/signup.dart';
@@ -22,6 +23,8 @@ import 'package:phy_men_app/Home/Physical/WeightLogging/WeightData.dart';
 import 'package:phy_men_app/Profile/Profile.dart';
 import 'package:phy_men_app/Home/Mental/Mentalmain.dart';
 import 'package:phy_men_app/Home/Physical/PhysicalMain.dart';
+import 'package:phy_men_app/Quiz/QuizScreen.dart';
+import 'package:phy_men_app/Quiz/Startquiz.dart';
 import 'package:phy_men_app/Splash_Screen/splash_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -50,7 +53,7 @@ class MyApp extends StatelessWidget {
                 useMaterial3: true,
               ),
 
-              home: SplashScreen()
+              home: Startquiz()
           );
 
         });

@@ -171,7 +171,7 @@ class _QuizScreenState extends State<QuizScreen> {
                     }).toList(),
 
                     // Continue Button
-                    SizedBox(height: ScreenUtil().setHeight(75)),
+                    SizedBox(height: ScreenUtil().setHeight(40)),
                     Padding(
                       padding: EdgeInsets.symmetric(
                           horizontal: ScreenUtil().setWidth(93)),
