@@ -69,4 +69,9 @@
             <data android:mimeType="text/plain"/>
         </intent>
     </queries>
+    <!-- Permissions -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+
 </manifest>

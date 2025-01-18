@@ -21,6 +21,16 @@ class _Edit_ProfileState extends State<Edit_Profile> {
   File? image;
   final user = FirebaseAuth.instance.currentUser;
   DatabaseReference ref = FirebaseDatabase.instance.ref().child('users');
+  final String? uid = FirebaseAuth.instance.currentUser?.uid;
+
+  void getData() async{
+    DatabaseReference ref = FirebaseDatabase.instance.ref().child('users/$uid');
+    ref.onValue.listen((DatabaseEvent event){
+      var img = event.snapshot.value;
+    });
+  }
+
+
   void uploadImage(BuildContext context) async{
     firebase_storage.Reference StorageRef = firebase_storage.FirebaseStorage.instance.ref('/profileImage'+user!.uid.toString());
     firebase_storage.UploadTask uploadTask = StorageRef.putFile(File(image!.path).absolute);
@@ -104,7 +114,7 @@ class _Edit_ProfileState extends State<Edit_Profile> {
                                               padding: EdgeInsets.all(
                                                   ScreenUtil().setWidth(50)),
                                               child: Text(
-                                                "Galary",
+                                                "Gallery",
                                                 style: TextStyle(
                                                     color: Color(
                                                         methods.hex("76CFE2"))),

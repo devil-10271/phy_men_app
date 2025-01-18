@@ -164,7 +164,7 @@ class _ProfileState extends State<Profile> {
                        Navigator.push(context, MaterialPageRoute(builder: (context)=>Edit_Profile()));
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromRGBO(175, 175, 175, 1.0),
+                      backgroundColor:  Colors.grey.shade300,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5),
                       ),
@@ -195,7 +195,7 @@ class _ProfileState extends State<Profile> {
                       // Navigate to Register
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromRGBO(255, 121, 121, 1.0),
+                      backgroundColor: Colors.red.shade100,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5),
                       ),
@@ -204,12 +204,13 @@ class _ProfileState extends State<Profile> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(Icons.logout,
-                            color: const Color.fromRGBO(244, 69, 69, 1)),
+                            color: Colors.redAccent
+                        ),
                         SizedBox(width: screen.size.width * wt(context, 10)),
                         Text(
                           'Logout',
                           style: TextStyle(
-                            color: const Color.fromRGBO(244, 69, 69, 1),
+                            color: Colors.redAccent,
                             fontSize: screen.size.width * wt(context, 16),
                           ),
                         ),

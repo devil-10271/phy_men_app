@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:phy_men_app/Home/Home_page.dart';
 import 'package:phy_men_app/firebase_auth_implementation/firebase_auth_services.dart';
 import 'package:phy_men_app/main.dart';
@@ -49,7 +50,7 @@ class _Sign_UpState extends State<Sign_Up> {
     databaseURL:
         'https://phymenapp-default-rtdb.asia-southeast1.firebasedatabase.app',
   ).ref();
-  
+
   Future<void> registration() async {
     if (_formkey.currentState!.validate() &&
         _password.text.isNotEmpty &&
@@ -602,41 +603,39 @@ class _Sign_UpState extends State<Sign_Up> {
                           ),
                         ),
                         SizedBox(
-                          height: 20,
+                          height: ScreenUtil().setHeight(30),
                         ),
 
                         Container(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              ElevatedButton.icon(
-                                onPressed: () {
-                                  AuthMethods().signInWithGoogle(context);
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.white,
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 15, horizontal: 20),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(40),
-                                  ),
-                                  shadowColor: Colors.grey.withOpacity(0.9),
-                                  elevation: 5,
-                                ),
-                                icon: Image.asset(
-                                  'assets/Company_icon/google.png',
-                                  height: 30,
-                                  width: 30,
-                                ),
-                                label: Text(
-                                  'Google',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 16,
-                                  ),
-                                ),
+                          width: MediaQuery.sizeOf(context).height * 0.80,
+                          child: ElevatedButton.icon(
+                            onPressed: () {
+                              AuthMethods().signInWithGoogle(context);
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white,
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 15, horizontal: 20),
+                              shape: RoundedRectangleBorder(
+
+                                borderRadius: BorderRadius.circular(40),
                               ),
-                            ],
+
+
+                              elevation: 5,
+                            ),
+                            icon: Image.asset(
+                              'assets/Company_icon/google.png',
+                              height: 30,
+                              width: 30,
+                            ),
+                            label: Text(
+                              'Google',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 16,
+                              ),
+                            ),
                           ),
                         ),
                         SizedBox(
@@ -655,6 +654,7 @@ class _Sign_UpState extends State<Sign_Up> {
                                       MaterialPageRoute(
                                           builder: (context) => Log_in()));
                                 },
+
                                 child: Text(
                                   'Log in',
                                   style: TextStyle(
