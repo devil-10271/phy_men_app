@@ -79,142 +79,140 @@ class _Calm2State extends State<Calm2> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-      body: Stack(
-        children: [
-          SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(top: ScreenUtil().setHeight(20), left: ScreenUtil().setWidth(10)),
-                  child: IconButton(
-                    icon: Image.asset(
-                      'assets/Frame.png',
-                      width: ScreenUtil().setWidth(30),
-                      height: ScreenUtil().setHeight(30),
-                      color: const Color(0xFF76CFE2),
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+        body: Stack(
+          children: [
+            SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(top: ScreenUtil().setHeight(10), left: ScreenUtil().setWidth(20)),
+                    child: IconButton(
+                      icon: Icon(Icons.arrow_back_ios, size: ScreenUtil().setSp(30)),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
                     ),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
                   ),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(10)),
-                  child: Center(
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(ScreenUtil().setWidth(20)),
-                      child: Image.asset(
-                        'assets/calm2.png',
-                        width: ScreenUtil().setWidth(300),
-                        height: ScreenUtil().setHeight(400),
-                        fit: BoxFit.cover,
+                  SizedBox(height: ScreenUtil().setHeight(15)),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(10)),
+                    child: Center(
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(ScreenUtil().setWidth(20)),
+                        child: Image.asset(
+                          'assets/Image/Mental_Health/Calm/calm2.png',
+                          width: ScreenUtil().setWidth(350),
+                          height: ScreenUtil().setHeight(530),
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                Center(
-                  child: RichText(
-                    textAlign: TextAlign.center,
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
-                          text: 'Sparkless \n',
-                          style: TextStyle(
-                            fontSize: ScreenUtil().setSp(40),
-                            color: Colors.black,
+                  Center(
+                    child: RichText(
+                      textAlign: TextAlign.center,
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: 'Cloudycloud \n',
+                            style: TextStyle(
+                              fontSize: ScreenUtil().setSp(40),
+                              color: Colors.black,
+                            ),
                           ),
-                        ),
-                        TextSpan(
-                          text: 'SLEEP MUSIC',
-                          style: TextStyle(
-                            fontSize: ScreenUtil().setSp(20),
-                            color: Color.fromRGBO(152, 161, 189, 1),
+                          TextSpan(
+                            text: 'SLEEP MUSIC',
+                            style: TextStyle(
+                              fontSize: ScreenUtil().setSp(20),
+                              color: Color.fromRGBO(152, 161, 189, 1),
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(height: ScreenUtil().setHeight(10)),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    _buildIconButton(Icons.replay_30, skipBackward),
-                    SizedBox(width: ScreenUtil().setWidth(30)),
-                    _buildPlayPauseButton(),
-                    SizedBox(width: ScreenUtil().setWidth(30)),
-                    _buildIconButton(Icons.forward_30, skipForward),
-                  ],
-                ),
-                SizedBox(height: ScreenUtil().setHeight(10)),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "${(value / 60).floor()}:${(value % 60).floor().toString().padLeft(2, '0')}",
-                      style: TextStyle(color: Colors.grey, fontSize: ScreenUtil().setSp(20)),
-                    ),
-                    if (duration != null)
-                      Slider(
-                        value: value.clamp(0.0, duration!.inSeconds.toDouble()),
-                        min: 0.0,
-                        max: duration!.inSeconds.toDouble(),
-                        onChanged: (v) {
-                          setState(() {
-                            value = v.clamp(0.0, duration!.inSeconds.toDouble());
-                          });
-                        },
-                        onChangeEnd: (newValue) async {
-                          await player.seek(Duration(seconds: newValue.toInt()));
-                          if (isPlaying) {
-                            await player.resume();
-                          }
-                        },
-                        activeColor: Colors.grey,
-                      ),
-                    if (duration != null)
+                  SizedBox(height: ScreenUtil().setHeight(10)),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      _buildIconButton(Icons.replay_30, skipBackward),
+                      SizedBox(width: ScreenUtil().setWidth(40)),
+                      _buildPlayPauseButton(),
+                      SizedBox(width: ScreenUtil().setWidth(40)),
+                      _buildIconButton(Icons.forward_30, skipForward),
+                    ],
+                  ),
+                  SizedBox(height: ScreenUtil(). setHeight(10)),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
                       Text(
-                        "${duration!.inMinutes}:${(duration!.inSeconds % 60).toString().padLeft(2, '0')}",
+                        "${(value / 60).floor()}:${(value % 60).floor().toString().padLeft(2, '0')}",
                         style: TextStyle(color: Colors.grey, fontSize: ScreenUtil().setSp(20)),
                       ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          Positioned(
-            top: ScreenUtil().setHeight(30),
-            right: ScreenUtil().setWidth(15),
-            child: Row(
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    print("Liked!");
-                  },
-                  child: Image.asset(
-                    'assets/like.png',
-                    width: ScreenUtil().setWidth(40),
-                    height: ScreenUtil().setHeight(40),
+                      if (duration != null)
+                        Slider(
+                          value: value.clamp(0.0, duration!.inSeconds.toDouble()),
+                          min: 0.0,
+                          max: duration!.inSeconds.toDouble(),
+                          onChanged: (v) {
+                            setState(() {
+                              value = v.clamp(0.0, duration!.inSeconds.toDouble());
+                            });
+                          },
+                          onChangeEnd: (newValue) async {
+                            await player.seek(Duration(seconds: newValue.toInt()));
+                            if (isPlaying) {
+                              await player.resume();
+                            }
+                          },
+                          activeColor: Colors.grey,
+                        ),
+                      if (duration != null)
+                        Text(
+                          "${duration!.inMinutes}:${(duration!.inSeconds % 60).toString().padLeft(2, '0')}",
+                          style: TextStyle(color: Colors.grey, fontSize: ScreenUtil().setSp(20)),
+                        ),
+                    ],
                   ),
-                ),
-                SizedBox(width: ScreenUtil().setWidth(10)),
-                GestureDetector(
-                  onTap: () {
-                    print("Saved!");
-                  },
-                  child: Image.asset(
-                    'assets/save.png',
-                    width: ScreenUtil().setWidth(40),
-                    height: ScreenUtil().setHeight(40),
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+            Positioned(
+              top: ScreenUtil().setHeight(30),
+              right: ScreenUtil().setWidth(15),
+              child: Row(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      print("Liked!");
+                    },
+                    child: Image.asset(
+                      'assets/Image/Mental_Health/Calm/like.png',
+                      width: ScreenUtil().setWidth(50),
+                      height: ScreenUtil().setHeight(50),
+                    ),
+                  ),
+                  SizedBox(width: ScreenUtil().setWidth(10)),
+                  GestureDetector(
+                    onTap: () {
+                      print("Saved!");
+                    },
+                    child: Image.asset(
+                      'assets/Image/Mental_Health/Calm/save.png',
+                      width: ScreenUtil().setWidth(50),
+                      height: ScreenUtil().setHeight(50),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -224,7 +222,7 @@ class _Calm2State extends State<Calm2> {
       width: ScreenUtil().setWidth(70),
       height: ScreenUtil().setHeight(70),
       child: IconButton(
-        icon: Icon(icon, size: ScreenUtil().setSp(30), color: Colors.blueGrey),
+        icon: Icon(icon, size: ScreenUtil().setSp(50), color: Colors.blueGrey),
         onPressed: onPressed,
       ),
     );
@@ -233,7 +231,7 @@ class _Calm2State extends State<Calm2> {
   Widget _buildPlayPauseButton() {
     return Container(
       width: ScreenUtil().setWidth(60),
-      height: ScreenUtil().setHeight(50),
+      height: ScreenUtil().setHeight(60),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(ScreenUtil().setWidth(60)),
         color: Colors.blueGrey,
@@ -252,7 +250,7 @@ class _Calm2State extends State<Calm2> {
         },
         child: Icon(
           isPlaying ? Icons.pause : Icons.play_arrow,
-          size: ScreenUtil().setSp(30),
+          size: ScreenUtil().setSp(40),
           color: Colors.white,
         ),
       ),

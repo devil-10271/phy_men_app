@@ -12,6 +12,7 @@ class StartGk extends StatefulWidget {
   State<StartGk> createState() => _StartGkState();
 }
 
+
 class _StartGkState extends State<StartGk> {
   @override
   Widget build(BuildContext context) {
@@ -19,114 +20,127 @@ class _StartGkState extends State<StartGk> {
       child: Scaffold(
         body: SingleChildScrollView(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Padding(
+                padding:  EdgeInsets.only(left: 20,top: 20),
+                child: InkWell(
+                onTap: ()=>Navigator.pop(context)
+
+                ,child: Icon(Icons.arrow_back_ios)),
+              ),
               SizedBox(height: ScreenUtil().setHeight(190)),
-              Container(
-                //color: Colors.red,
-                child: Text(
-                  'Test Your GK',
-                  style: TextStyle(
-                    fontSize: 40,
-                    fontWeight: FontWeight.w700,
-                    fontFamily: 'Montserrat',
+              Center(
+                child: Container(
+                  //color: Colors.red,
+                  child: Text(
+                    'Test Your GK',
+                    style: TextStyle(
+                      fontSize: 40,
+                      fontWeight: FontWeight.w700,
+                      fontFamily: 'Montserrat',
+                    ),
                   ),
                 ),
               ),
               SizedBox(height: ScreenUtil().setHeight(31)),
-              Container(
-                height: ScreenUtil().setHeight(52),
-                width: ScreenUtil().setWidth(218),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Color.fromRGBO(184, 218, 226, 1),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+              Center(
+                child: Container(
+                  height: ScreenUtil().setHeight(52),
+                  width: ScreenUtil().setWidth(218),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color.fromRGBO(184, 218, 226, 1),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                     ),
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => GkScreen(),
-                      ),
-                    );
-                  },
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        'Start now',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          fontFamily: 'Montserrat',
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => GkScreen(),
                         ),
-                      ),
-                      SizedBox(width: ScreenUtil().setWidth(3.5)),
-                      Container(
-                        height: ScreenUtil().setHeight(11.83),
-                        width: ScreenUtil().setWidth(13.68),
-                        child: Image.asset(
-                          'assets/Image/Mental_Health/Quiz/Group.png',
+                      );
+                    },
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          'Start now',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                            fontFamily: 'Montserrat',
+                          ),
                         ),
-                      ),
-                    ],
+                        SizedBox(width: ScreenUtil().setWidth(3.5)),
+                        Container(
+                          height: ScreenUtil().setHeight(11.83),
+                          width: ScreenUtil().setWidth(13.68),
+                          child: Image.asset(
+                            'assets/Image/Mental_Health/Quiz/Group.png',
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
               SizedBox(height: ScreenUtil().setHeight(20),),
-              Container(
-                height: ScreenUtil().setHeight(52),
-                width: ScreenUtil().setWidth(218),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Color.fromRGBO(184, 218, 226, 1),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+              Center(
+                child: Container(
+                  height: ScreenUtil().setHeight(52),
+                  width: ScreenUtil().setWidth(218),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color.fromRGBO(184, 218, 226, 1),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                     ),
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => GKData(),
-                      ),
-                    );
-                  },
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        'View GK Score',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          fontFamily: 'Montserrat',
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => GKData(),
                         ),
-                      ),
-                      SizedBox(width: ScreenUtil().setWidth(3.5)),
-                      // Container(
-                      //   height: ScreenUtil().setHeight(11.83),
-                      //   width: ScreenUtil().setWidth(13.68),
-                      //   child: Image.asset(
-                      //     'assets/Image/Quiz/Group.png',
-                      //   ),
-                      // ),
-                    ],
+                      );
+                    },
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          'View GK Score',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                            fontFamily: 'Montserrat',
+                          ),
+                        ),
+                        SizedBox(width: ScreenUtil().setWidth(3.5)),
+                        // Container(
+                        //   height: ScreenUtil().setHeight(11.83),
+                        //   width: ScreenUtil().setWidth(13.68),
+                        //   child: Image.asset(
+                        //     'assets/Image/Quiz/Group.png',
+                        //   ),
+                        // ),
+                      ],
+                    ),
                   ),
                 ),
               ),
               SizedBox(height: ScreenUtil().setHeight(50)),
-              Container(
-                height: ScreenUtil().setHeight(422.32),
-                width: ScreenUtil().setWidth(440.31),
-                //color: Colors.yellow,
-                child: Image.asset(
-                  'assets/Image/Mental_Health/GK/bro.png',
-                  fit: BoxFit.cover,
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal:10.0),
+                child: Flexible(
+                  child: Image.asset(
+                    'assets/Image/Mental_Health/GK/bro.png',
+
+                  ),
                 ),
               ),
             ],

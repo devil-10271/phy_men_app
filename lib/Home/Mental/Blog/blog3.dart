@@ -39,7 +39,7 @@ Self-care is not a luxury but a necessity for a healthy mind and body. By incorp
             children: [
               Container(
                 width: MediaQuery.of(context).size.width,
-                height: ScreenUtil().setHeight(300),
+                height: ScreenUtil().setHeight(380),
                 decoration: BoxDecoration(
                   color: const Color.fromRGBO(171, 147, 175, 1),
                   borderRadius: BorderRadius.only(
@@ -57,7 +57,9 @@ Self-care is not a luxury but a necessity for a healthy mind and body. By incorp
                               top: ScreenUtil().setHeight(20),
                               left: ScreenUtil().setWidth(20)),
                           child: InkWell(
-                            onTap: (){Navigator.pop(context);},
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
                             child: Icon(
                               Icons.arrow_back_ios,
                               color: Colors.white,
@@ -70,7 +72,7 @@ Self-care is not a luxury but a necessity for a healthy mind and body. By incorp
                             child: Text(
                               'Breaking Mental Health Stigmas',
                               style: TextStyle(
-                                  fontSize: ScreenUtil().setSp(28),
+                                  fontSize: ScreenUtil().setSp(25),
                                   fontWeight: FontWeight.bold,
                                   color: const Color.fromRGBO(203, 208, 222, 1),
                                   overflow: TextOverflow.clip),
@@ -84,9 +86,9 @@ Self-care is not a luxury but a necessity for a healthy mind and body. By incorp
                       padding: EdgeInsets.all(10.0),
                       child: Image.asset(
                         'assets/Image/Mental_Health/Blog/blog_image3.png',
-                        height: ScreenUtil().setHeight(150),
-                        width: ScreenUtil().setWidth(150),
-
+                        height: ScreenUtil().setHeight(250),
+                        width: ScreenUtil().setWidth(250),
+                        fit: BoxFit.fill,
                       ),
                     ),
                   ],
@@ -102,7 +104,7 @@ Self-care is not a luxury but a necessity for a healthy mind and body. By incorp
                     child: Text(
                       textContent[index],
                       style: TextStyle(
-                        fontSize: ScreenUtil().setSp(16),
+                        fontSize: ScreenUtil().setSp(18),
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
                       ),
@@ -114,6 +116,6 @@ Self-care is not a luxury but a necessity for a healthy mind and body. By incorp
           ),
         ),
       ),
-    );;
+    );
   }
 }

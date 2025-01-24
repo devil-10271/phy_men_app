@@ -23,48 +23,52 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: CurvedNavigationBar(
-        backgroundColor: Colors.grey.shade200,
-        items: const [
-          CurvedNavigationBarItem(
-            child: Icon(
-              Icons.home_outlined,
-              color: Color.fromARGB(255, 129, 218, 250),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home:  Scaffold(
+        bottomNavigationBar: CurvedNavigationBar(
+          backgroundColor: Colors.grey.shade200,
+          items: const [
+            CurvedNavigationBarItem(
+              child: Icon(
+                Icons.home_outlined,
+                color: Color.fromARGB(255, 129, 218, 250),
+              ),
             ),
-          ),
-          CurvedNavigationBarItem(
-            child: Icon(
-              Icons.health_and_safety,
-              color: Colors.blue,
+            CurvedNavigationBarItem(
+              child: Icon(
+                Icons.health_and_safety,
+                color: Colors.blue,
+              ),
             ),
-          ),
-          CurvedNavigationBarItem(
-            child: Icon(
-              Icons.directions_run,
-              color: Colors.red,
+            CurvedNavigationBarItem(
+              child: Icon(
+                Icons.directions_run,
+                color: Colors.red,
+              ),
             ),
-          ),
-          CurvedNavigationBarItem(
-            child: Icon(
-              Icons.newspaper,
-              color: Colors.green,
+            CurvedNavigationBarItem(
+              child: Icon(
+                Icons.newspaper,
+                color: Colors.green,
+              ),
             ),
-          ),
-          CurvedNavigationBarItem(
-            child: Icon(
-              Icons.perm_identity,
-              color: Colors.blue,
+            CurvedNavigationBarItem(
+              child: Icon(
+                Icons.perm_identity,
+                color: Colors.blue,
+              ),
             ),
-          ),
-        ],
-        onTap: (index) {
-          setState(() {
-            _curre_ = index;
-          });
-        },
+          ],
+          onTap: (index) {
+            setState(() {
+              _curre_ = index;
+            });
+          },
+        ),
+        body: CALL[_curre_],
       ),
-      body: CALL[_curre_],
+
     );
   }
 }

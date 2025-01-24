@@ -36,7 +36,7 @@ Incorporating a balanced diet full of whole, nutrientdense foods can significant
             children: [
               Container(
                 width: MediaQuery.of(context).size.width,
-                height: ScreenUtil().setHeight(300),
+                height: ScreenUtil().setHeight(425),
                 decoration: BoxDecoration(
                   color: const Color.fromRGBO(171, 147, 175, 1),
                   borderRadius: BorderRadius.only(
@@ -54,7 +54,7 @@ Incorporating a balanced diet full of whole, nutrientdense foods can significant
                               top: ScreenUtil().setHeight(20),
                               left: ScreenUtil().setWidth(20)),
                           child: InkWell(
-                            onTap: (){
+                            onTap: () {
                               Navigator.pop(context);
                             },
                             child: Icon(
@@ -65,19 +65,15 @@ Incorporating a balanced diet full of whole, nutrientdense foods can significant
                         ),
                         Center(
                           child: Container(
-                            width: ScreenUtil().setWidth(350),
-                            child: Expanded(
-                              child: Text(
-                                'How Nutrition Impacts Mental Health',
-                                style: TextStyle(
-                                  fontSize: ScreenUtil().setSp(28),
+                            width: ScreenUtil().setWidth(330),
+                            child: Text(
+                              'How Nutrition Impacts Mental Health',
+                              style: TextStyle(
+                                  fontSize: ScreenUtil().setSp(25),
                                   fontWeight: FontWeight.bold,
                                   color: const Color.fromRGBO(203, 208, 222, 1),
-                                ),
-                                textAlign: TextAlign.center,
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 2,
-                              ),
+                                  overflow: TextOverflow.clip),
+                              textAlign: TextAlign.center,
                             ),
                           ),
                         ),
@@ -87,8 +83,9 @@ Incorporating a balanced diet full of whole, nutrientdense foods can significant
                       padding: EdgeInsets.all(10.0),
                       child: Image.asset(
                         'assets/Image/Mental_Health/Blog/blog_image2.png',
-                        height: ScreenUtil().setHeight(150),
-                        width: ScreenUtil().setWidth(150),
+                        height: ScreenUtil().setHeight(250),
+                        width: ScreenUtil().setWidth(250),
+
                       ),
                     ),
                   ],
@@ -104,11 +101,10 @@ Incorporating a balanced diet full of whole, nutrientdense foods can significant
                     child: Text(
                       textContent[index],
                       style: TextStyle(
-                        fontSize: ScreenUtil().setSp(16),
+                        fontSize: ScreenUtil().setSp(18),
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
                       ),
-                      overflow: TextOverflow.clip,
                     ),
                   );
                 },
@@ -120,5 +116,3 @@ Incorporating a balanced diet full of whole, nutrientdense foods can significant
     );
   }
 }
-
-//

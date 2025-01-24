@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'Medi.dart';
 import 'audio1.dart';
 import 'audio2.dart';
 import 'audio3.dart';
@@ -14,250 +15,195 @@ class Medi2 extends StatefulWidget {
 }
 
 class _Medi2State extends State<Medi2> {
+  final List<Map<String, dynamic>> audioItems = [
+    {
+      'image': 'assets/Image/Mental_Health/Medi/audio_image1.png',
+      'page': Audio1(),
+    },
+    {
+      'image': 'assets/Image/Mental_Health/Medi/audio_image2.png',
+      'page': Audio2(),
+    },
+    {
+      'image': 'assets/Image/Mental_Health/Medi/audio_image3.png',
+      'page': Audio3(),
+    },
+    {
+      'image': 'assets/Image/Mental_Health/Medi/audio_image4.png',
+      'page': Audio4(),
+    },
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 30),
-              child: IconButton(
-                icon: Image.asset(
-                  'assets/Frame.png',
-                  width: 30.w,
-                  height: 30.h,
-                  color: const Color(0xFF76CFE2),
-                ),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(
+                    top: ScreenUtil().setHeight(30),
+                    left: ScreenUtil().setWidth(20)),
+                child: InkWell(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Icon(
+                      Icons.arrow_back_ios,
+                      size: ScreenUtil().setSp(30),
+                    )),
               ),
-            ),
-            Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Meditate",
-                    style: TextStyle(
-                      fontSize: 35.sp,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: 5.h),
-                  Text(
-                    "Take some time to make your \n soul happy^^",
-                    style: TextStyle(
-                      fontSize: 18.sp,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 25),
-            Center(
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  Container(
-                    height: 80.h,
-                    width: MediaQuery.of(context).size.width * 0.88,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(15),
-                      child: Image.asset(
-                        "assets/Rectangle.png",
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    height: 80.h,
-                    width: MediaQuery.of(context).size.width * 0.88,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(15),
-                      child: Image.asset(
-                        "assets/Maskgroup.png",
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    right: 16.w,
-                    top: 18.h,
-                    child: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          print("Play button pressed");
-                        });
-                      },
-                      child: Image.asset(
-                        "assets/play_button.png",
-                        width: 50.w,
-                        height: 50.h,
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    top: 20.h,
-                    left: 35.w,
-                    child: Text(
-                      "Daily Calm",
+              Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Meditate",
                       style: TextStyle(
-                        fontSize: 24.sp,
+                        fontSize: ScreenUtil().setSp(45),
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                  ),
-                  Positioned(
-                    top: 50.h,
-                    left: 35.w,
-                    child: Text(
-                      "${DateFormat('MMM').format(DateTime.now())} ${DateTime.now().day}: PAUSE PRACTICE",
+                    SizedBox(height: ScreenUtil().setHeight(5)),
+                    Text(
+                      "Take some time to make your \n soul happy^^",
                       style: TextStyle(
-                        fontSize: 16.sp,
+                        fontSize: ScreenUtil().setSp(24),
                       ),
+                      textAlign: TextAlign.center,
                     ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 20.h),
-            Center(
-              child: Container(
-                height: 1.5.h,
-                color: Colors.grey,
-                width: MediaQuery.of(context).size.width * 0.95,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 16.0),
-              child: Text(
-                "Recommended for you",
-                style: TextStyle(
-                  fontSize: 25.sp,
-                  fontWeight: FontWeight.bold,
+                  ],
                 ),
               ),
-            ),
-            SizedBox(height: 15.h),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => Audio1()),
-                          );
-                        },
-                        child: Container(
-                          height: 170.h,
-                          width: MediaQuery.of(context).size.width * 0.44,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Image.asset(
-                              "assets/audio_image1.png",
-                              fit: BoxFit.cover,
+              SizedBox(height: ScreenUtil().setHeight(15)),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: ScreenUtil().setWidth(33),
+                    vertical: ScreenUtil().setHeight(25)),
+                child: Stack(
+                  children: [
+                    // Background image
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(30),
+                      child: Image.asset(
+                        "assets/Image/Mental_Health/Medi/Maskgroup.png",
+                        fit: BoxFit.cover,
+                        width: ScreenUtil().setWidth(370),
+                        height: ScreenUtil().setHeight(120),
+                      ),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Color.fromRGBO(255, 215, 215, 0.6),
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: ScreenUtil().setWidth(25),
+                            vertical: ScreenUtil().setHeight(30)),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              children: [
+                                Text("Daily Calm",
+                                    style: TextStyle(
+                                        fontSize: ScreenUtil().setSp(25))),
+                                Text(
+                                    "${DateFormat('MMM').format(DateTime.now())} ${DateTime.now().day}: PAUSE PRACTICE",
+                                    style: TextStyle(
+                                        fontSize: ScreenUtil().setSp(17))),
+                              ],
                             ),
-                          ),
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Medi()));
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Color.fromRGBO(63, 65, 78, 1),
+                                  borderRadius: BorderRadius.circular(90),
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.all(14),
+                                  child: Icon(Icons.play_arrow,
+                                      color: Colors.white),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => Audio2()),
-                          );
-                        },
-                        child: Container(
-                          height: 170.h,
-                          width: MediaQuery.of(context).size.width * 0.44,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Image.asset(
-                              "assets/audio_image2.png",
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 5.h),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => Audio3()),
-                          );
-                        },
-                        child: Container(
-                          height: 170.h,
-                          width: MediaQuery.of(context).size.width * 0.44,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Image.asset(
-                              "assets/audio_image3.png",
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => Audio4()),
-                          );
-                        },
-                        child: Container(
-                          height: 170.h,
-                          width: MediaQuery.of(context).size.width * 0.44,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Image.asset(
-                              "assets/audio_image4.png",
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+              SizedBox(height: ScreenUtil().setHeight(20)),
+              Center(
+                child: Container(
+                  height: ScreenUtil().setHeight(1.5),
+                  color: Colors.grey,
+                  width: MediaQuery.of(context).size.width * 0.95,
+                ),
+              ),
+              SizedBox(height: ScreenUtil().setHeight(10)),
+              Padding(
+                padding: const EdgeInsets.only(left: 16.0),
+                child: Text(
+                  "Recommended for you",
+                  style: TextStyle(
+                    fontSize: ScreenUtil().setSp(25),
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              SizedBox(height: ScreenUtil().setHeight(20)),
+              Padding(
+                padding:
+                    EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(16)),
+                child: GridView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    childAspectRatio: 0.7,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10,
+                  ),
+                  itemCount: audioItems.length,
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => audioItems[index]['page']),
+                        );
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          image: DecorationImage(
+                            image: AssetImage(audioItems[index]['image']),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+              SizedBox(
+                height: ScreenUtil().setHeight(20),
+              )
+            ],
+          ),
         ),
       ),
     );

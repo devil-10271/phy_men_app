@@ -90,6 +90,7 @@ class _PhysicalmainState extends State<Physicalmain> {
                         onPressed: () {
                           Navigator.push(
                             context,
+
                             MaterialPageRoute(
                                 builder: (context) => HeartRate()),
                           );

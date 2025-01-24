@@ -85,102 +85,101 @@ class _Audio3State extends State<Audio3> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: EdgeInsets.only(top: 30.h),
-              child: IconButton(
-                icon: Image.asset(
-                  'assets/Frame.png',
-                  width: 30.w,
-                  height: 30.h,
-                  color: const Color(0xFF76CFE2),
-                ),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-            ),
-            Center(
-              child: Text(
-                'Deep Breath',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 45.sp, fontWeight: FontWeight.bold),
-              ),
-            ),
-            SizedBox(height: 10),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 10.h),
-              child: Center(
-                child: TweenAnimationBuilder<double>(
-                  tween: Tween<double>(
-                      begin: 300.h, end: isPlaying ? 300.h : 320.h),
-                  duration: const Duration(milliseconds: 300),
-                  builder: (context, size, child) {
-                    return ClipOval(
-                      child: RotationTransition(
-                        turns: _animation,
-                        child: Image.asset(
-                          'assets/audio_image3.png',
-                          width: size,
-                          height: size,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    );
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(top: ScreenUtil().setHeight(10), left: ScreenUtil().setWidth(20)),
+                child: IconButton(
+                  icon: Icon(Icons.arrow_back_ios, size: ScreenUtil().setSp(30)),
+                  onPressed: () {
+                    Navigator.pop(context);
                   },
                 ),
               ),
-            ),
-            SizedBox(height: 40.h),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _buildIconButton(Icons.replay_30, skipBackward),
-                SizedBox(width: 30.w),
-                _buildPlayPauseButton(),
-                SizedBox(width: 30.w),
-                _buildIconButton(Icons.forward_30, skipForward),
-              ],
-            ),
-            SizedBox(height: 10.h),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "${(value / 60).floor()}:${(value % 60).floor().toString().padLeft(2, '0')}",
-                  style: TextStyle(color: Colors.grey, fontSize: 20.sp),
+              Center(
+                child: Text(
+                  'Deep Breath',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: ScreenUtil().setSp(55), fontWeight: FontWeight.bold),
                 ),
-                if (duration != null)
-                  Slider(
-                    value: value.clamp(0.0, duration!.inSeconds.toDouble()),
-                    min: 0.0,
-                    max: duration!.inSeconds.toDouble(),
-                    onChanged: (v) {
-                      setState(() {
-                        value = v.clamp(0.0, duration!.inSeconds.toDouble());
-                      });
+              ),
+              SizedBox(height: ScreenUtil().setHeight(10)),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(10)),
+                child: Center(
+                  child: TweenAnimationBuilder<double>(
+                    tween: Tween<double>(
+                      begin: ScreenUtil().setHeight(400),
+                      end: isPlaying ? ScreenUtil().setHeight(400) : ScreenUtil().setHeight(420),
+                    ),
+                    duration: const Duration(milliseconds: 300),
+                    builder: (context, size, child) {
+                      return ClipOval(
+                        child: RotationTransition(
+                          turns: _animation,
+                          child: Image.asset(
+                            'assets/Image/Mental_Health/Medi/audio_image3.png',
+                            width: size,
+                            height: size,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      );
                     },
-                    onChangeEnd: (newValue) async {
-                      await player.seek(Duration(seconds: newValue.toInt()));
-                      if (isPlaying) {
-                        await player.resume();
-                      }
-                    },
-                    activeColor: Colors.grey,
                   ),
-                if (duration != null)
+                ),
+              ),
+              SizedBox(height: ScreenUtil().setHeight(40)),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  _buildIconButton(Icons.replay_30, skipBackward),
+                  SizedBox(width: ScreenUtil().setWidth(30)),
+                  _buildPlayPauseButton(),
+                  SizedBox(width: ScreenUtil().setWidth(30)),
+                  _buildIconButton(Icons.forward_30, skipForward),
+                ],
+              ),
+              SizedBox(height: ScreenUtil().setHeight(10 )),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
                   Text(
-                    "${duration!.inMinutes}:${(duration!.inSeconds % 60).toString().padLeft(2, '0')}",
-                    style: TextStyle(color: Colors.grey, fontSize: 20.sp),
+                    "${(value / 60).floor()}:${(value % 60).floor().toString().padLeft(2, '0')}",
+                    style: TextStyle(color: Colors.grey, fontSize: ScreenUtil().setSp(20)),
                   ),
-              ],
-            ),
-          ],
+                  if (duration != null)
+                    Slider(
+                      value: value.clamp(0.0, duration!.inSeconds.toDouble()),
+                      min: 0.0,
+                      max: duration!.inSeconds.toDouble(),
+                      onChanged: (v) {
+                        setState(() {
+                          value = v.clamp(0.0, duration!.inSeconds.toDouble());
+                        });
+                      },
+                      onChangeEnd: (newValue) async {
+                        await player.seek(Duration(seconds: newValue.toInt()));
+                        if (isPlaying) {
+                          await player.resume();
+                        }
+                      },
+                      activeColor: Colors.grey,
+                    ),
+                  if (duration != null)
+                    Text(
+                      "${duration!.inMinutes}:${(duration!.inSeconds % 60).toString().padLeft(2, '0')}",
+                      style: TextStyle(color: Colors.grey, fontSize: ScreenUtil().setSp(20)),
+                    ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -188,10 +187,10 @@ class _Audio3State extends State<Audio3> with TickerProviderStateMixin {
 
   Widget _buildIconButton(IconData icon, VoidCallback onPressed) {
     return Container(
-      width: 70.w,
-      height: 70.h,
+      width: ScreenUtil().setWidth(90),
+      height: ScreenUtil().setHeight(90),
       child: IconButton(
-        icon: Icon(icon, size: 30.sp, color: Colors.blueGrey),
+        icon: Icon(icon, size: ScreenUtil().setSp(50), color: Colors.blueGrey),
         onPressed: onPressed,
       ),
     );
@@ -199,10 +198,10 @@ class _Audio3State extends State<Audio3> with TickerProviderStateMixin {
 
   Widget _buildPlayPauseButton() {
     return Container(
-      width: 60.w,
-      height: 50.h,
+      width: ScreenUtil().setWidth(60),
+      height: ScreenUtil().setHeight(60),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(60),
+        borderRadius: BorderRadius.circular(50),
         color: Colors.blueGrey,
         border: Border.all(color: Colors.grey),
       ),
@@ -221,7 +220,7 @@ class _Audio3State extends State<Audio3> with TickerProviderStateMixin {
         },
         child: Icon(
           isPlaying ? Icons.pause : Icons.play_arrow,
-          size: 30.sp,
+          size: ScreenUtil().setSp(40),
           color: Colors.white,
         ),
       ),

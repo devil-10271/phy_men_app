@@ -28,7 +28,7 @@ class _Blog1State extends State<Blog1> {
             children: [
               Container(
                 width: MediaQuery.of(context).size.width,
-                height: ScreenUtil().setHeight(300),
+                height: ScreenUtil().setHeight(380),
                 decoration: BoxDecoration(
                   color: const Color.fromRGBO(171, 147, 175, 1),
                   borderRadius: BorderRadius.only(
@@ -57,11 +57,11 @@ class _Blog1State extends State<Blog1> {
                         ),
                         Center(
                           child: Container(
-                            width: ScreenUtil().setWidth(350),
+                            width: ScreenUtil().setWidth(340),
                             child: Text(
                               'Breaking Mental Health Stigmas',
                               style: TextStyle(
-                                  fontSize: ScreenUtil().setSp(28),
+                                  fontSize: ScreenUtil().setSp(30),
                                   fontWeight: FontWeight.bold,
                                   color: const Color.fromRGBO(203, 208, 222, 1),
                                   overflow: TextOverflow.clip),
@@ -75,8 +75,9 @@ class _Blog1State extends State<Blog1> {
                       padding: EdgeInsets.all(10.0),
                       child: Image.asset(
                         'assets/Image/Mental_Health/Blog/blog_image1.png',
-                        height: ScreenUtil().setHeight(150),
-                        width: ScreenUtil().setWidth(150),
+                        height: ScreenUtil().setHeight(250),
+                        width: ScreenUtil().setWidth(250),
+                        fit: BoxFit.fill,
                       ),
                     ),
                   ],
@@ -92,7 +93,7 @@ class _Blog1State extends State<Blog1> {
                     child: Text(
                       textContent[index],
                       style: TextStyle(
-                        fontSize: ScreenUtil().setSp(16),
+                        fontSize: ScreenUtil().setSp(18),
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
                       ),
@@ -107,72 +108,3 @@ class _Blog1State extends State<Blog1> {
     );
   }
 }
-
-//Stack(
-//               clipBehavior: Clip.none,
-//               children: [
-//                 Container(
-//                   width: MediaQuery.of(context).size.width,
-//                   height: ScreenUtil().setHeight(300),
-//                   decoration: BoxDecoration(
-//                     color: const Color.fromRGBO(171, 147, 175, 1),
-//                     borderRadius: BorderRadius.all(
-//                         Radius.circular(ScreenUtil().setWidth(35))),
-//                   ),
-//                   child: Padding(
-//                     padding: EdgeInsets.symmetric(
-//                       horizontal: ScreenUtil().setWidth(20),
-//                       vertical: ScreenUtil().setHeight(80),
-//                     ),
-//                     child: Column(
-//                       mainAxisAlignment: MainAxisAlignment.start,
-//                       crossAxisAlignment: CrossAxisAlignment.center,
-//                       children: [
-//                         Text(
-//                           'Breaking Mental Health Stigmas',
-//                           style: TextStyle(
-//                             fontSize: ScreenUtil().setSp(31),
-//                             fontWeight: FontWeight.bold,
-//                             color: const Color.fromRGBO(203, 208, 222, 1),
-//                           ),
-//                           textAlign: TextAlign.center,
-//                         ),
-//                       ],
-//                     ),
-//                   ),
-//                 ),
-//                 IconButton(
-//                   icon: Icon(Icons.arrow_back_ios),
-//                   onPressed: () {
-//                     Navigator.pop(context);
-//                   },
-//                 ),
-//                 Flexible(
-//                   child: Image.asset(
-//                     'assets/Image/Mental_Health/Blog/blog_image1.png',
-//                     width: ScreenUtil().setWidth(150),
-//                     height: ScreenUtil().setHeight(150),
-//                     fit: BoxFit.cover,
-//                   ),
-//                 ),
-//               ],
-//             ),
-
-// ListView.builder(
-//               shrinkWrap: true,
-//               physics: NeverScrollableScrollPhysics(),
-//               itemCount: textContent.length,
-//               itemBuilder: (context, index) {
-//                 return Padding(
-//                   padding: EdgeInsets.all(ScreenUtil().setWidth(20)),
-//                   child: Text(
-//                     textContent[index],
-//                     style: TextStyle(
-//                       fontSize: ScreenUtil().setSp(16),
-//                       fontWeight: FontWeight.bold,
-//                       color: Colors.black,
-//                     ),
-//                   ),
-//                 );
-//               },
-//             ),

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:phy_men_app/Home/Mental/Blog/main_blog.dart';
+import 'package:phy_men_app/Home/Mental/Calm/main_calm.dart';
 import 'package:phy_men_app/Home/Mental/GkTest/StrartGk.dart';
+import 'package:phy_men_app/Home/Mental/Medi/Medi2.dart';
 import 'package:phy_men_app/Quiz/Startquiz.dart';
 
 class MentalMain extends StatefulWidget {
@@ -59,18 +62,26 @@ class _MentalMainState extends State<MentalMain> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  _buildEmotionImageButton(
-                      'assets/Image/Mental_Health/face1.png',
-                      const Color.fromRGBO(255, 194, 188, 1)),
-                  _buildEmotionImageButton('assets/Image/Mental_Health/face2.png',
-                      const Color.fromRGBO(198, 224, 215, 1)),
-                  _buildEmotionImageButton(
-                      'assets/Image/Mental_Health/face3.png',
-                      const Color.fromRGBO(240, 188, 103, 1)),
-                  _buildEmotionImageButton(
-                      'assets/Image/Mental_Health/face4.png',
-                      const Color.fromRGBO(184, 218, 226, 1),
-                      isLast: true),
+                  InkWell(
+                    child: _buildEmotionImageButton(
+                        'assets/Image/Mental_Health/face1.png',
+                        const Color.fromRGBO(255, 194, 188, 1)),
+                  ),
+                  InkWell(
+                    child: _buildEmotionImageButton('assets/Image/Mental_Health/face2.png',
+                        const Color.fromRGBO(198, 224, 215, 1)),
+                  ),
+                  InkWell(
+                    child: _buildEmotionImageButton(
+                        'assets/Image/Mental_Health/face3.png',
+                        const Color.fromRGBO(240, 188, 103, 1)),
+                  ),
+                  InkWell(
+                    child: _buildEmotionImageButton(
+                        'assets/Image/Mental_Health/face4.png',
+                        const Color.fromRGBO(184, 218, 226, 1),
+                        isLast: true),
+                  ),
                 ],
               ),
             ),
@@ -137,7 +148,7 @@ class _MentalMainState extends State<MentalMain> {
                       assetImagePath:
                           'assets/Image/Mental_Health/s1.png',
                       onPressed: () {
-                        print('Navigate to Meditation Page');
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>Medi2()));
                       },
                     ),
                     buildHealthCard(
@@ -147,7 +158,7 @@ class _MentalMainState extends State<MentalMain> {
                       assetImagePath:
                           'assets/Image/Mental_Health/s2.png',
                       onPressed: () {
-                        print('Navigate to Music Page');
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>Main_calm()));
                       },
                     ),
                     buildHealthCard(
@@ -170,7 +181,7 @@ class _MentalMainState extends State<MentalMain> {
                       buttonColor: Color.fromRGBO(156, 128, 161, 1),
                       assetImagePath: 'assets/Image/Mental_Health/s4.png',
                       onPressed: () {
-                        print('Navigate to Blog Page');
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>Main_blog()));
                       },
                     ),
                     buildHealthCard(
