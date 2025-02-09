@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:phy_men_app/Home/Physical/Exercise/Yoga/videoplayer.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class Yogapage extends StatefulWidget {
   const Yogapage({super.key});
@@ -42,17 +44,31 @@ class _YogapageState extends State<Yogapage> {
     "Full Body"
   ];
   final List<String> duration = [
-    "Beginner : 2 min",
-    "Intermediate : 3 min",
-    "Beginner : 2 min",
-    "Beginner : 2 min",
-    "Beginner : 2 min",
-    "Beginner : 2 min",
-    "Beginner : 2 min",
+    "5 min",
+    "3 min",
+    "2 min",
+    "2 min",
+    "2 min",
+    "2 min",
+    "2 min",
   ];
+
+  final url = [
+    'https://youtu.be/inpok4MKVLM?si=T96GCx-KyvKgX5BR',
+    'https://youtu.be/J93h_072d3M?si=sm0Q54h6ggT72rm2',
+    'https://youtu.be/nvFm30ZAZRY?si=sh-xx0gSUj86hqrl',
+    'https://youtu.be/VpHz8Mb13_Y?si=-5N0cSsjvZxmz9KW',
+    'https://youtu.be/OvICfrfnnxA?si=lsp-WpQUS-ZupvPQ',
+    'https://youtu.be/2WE-L8iyu0U?si=klBbIQZjVZ1Bv5-u',
+    'https://youtu.be/8IBl8CfRyEA?si=xtvyciWXcO1KxqP1'
+  ];
+
 
   @override
   Widget build(BuildContext context) {
+
+
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: Color(0xFF76CFE2),
@@ -126,81 +142,88 @@ class _YogapageState extends State<Yogapage> {
                         child: ListView.builder(
                           itemCount: title_exer.length,
                           itemBuilder: (context, index) {
-                            return Container(
-                              height: ScreenUtil().setHeight(130),
-                              padding: const EdgeInsets.all(20.0),
-                              margin: const EdgeInsets.only(bottom: 20),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(10),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.2),
-                                    spreadRadius: 2,
-                                    blurRadius: 5,
-                                    offset: Offset(0, 3),
-                                  ),
-                                ],
-                              ),
-                              child: Row(
-                                children: [
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(10),
-                                    child: Image.asset(
-                                      ass_pos[index],
-                                      height: ScreenUtil().setHeight(100),
-                                      width: ScreenUtil().setWidth(100),
+                            return InkWell(
+                              onTap: (){
+                                final id=YoutubePlayer.convertUrlToId(url[index]);
+                                
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=>Videoplayer(videoid: id!)));
+                              },
+                              child: Container(
+                                height: ScreenUtil().setHeight(130),
+                                padding: const EdgeInsets.all(20.0),
+                                margin: const EdgeInsets.only(bottom: 20),
+                                decoration: BoxDecoration(
+                                  color: Colors.grey,
+                                  borderRadius: BorderRadius.circular(20),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.2),
+                                      spreadRadius: 2,
+                                      blurRadius: 5,
+                                      offset: Offset(0, 3),
                                     ),
-                                  ),
-                                  const SizedBox(width: 16),
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Expanded(
-                                          child: Text(
-                                            title_exer[index],
-                                            style: const TextStyle(
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: RichText(
-                                            text: TextSpan(
-                                              style: TextStyle(
-                                                  color: Colors.grey[600],
-                                                  fontSize: 15),
-                                              children: [
-                                                TextSpan(
-                                                  text: type[index] + "\n",
-                                                  style: const TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w500),
-                                                ),
-                                                TextSpan(
-                                                  text: duration[index],
-                                                  style: const TextStyle(
-                                                      color: Color(0xFF76CFE2),
-                                                      fontWeight:
-                                                          FontWeight.w500),
-                                                ),
-                                              ],
+                                  ],
+                                ),
+                                child: Row(
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: Image.asset(
+                                        ass_pos[index],
+                                        height: ScreenUtil().setHeight(100),
+                                        width: ScreenUtil().setWidth(100),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 16),
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Expanded(
+                                            child: Text(
+                                              title_exer[index],
+                                              style: const TextStyle(
+                                                  fontWeight: FontWeight.bold),
                                             ),
                                           ),
-                                        ),
-                                      ],
+                                          Expanded(
+                                            child: RichText(
+                                              text: TextSpan(
+                                                style: TextStyle(
+                                                    color: Colors.grey[600],
+                                                    fontSize: 15),
+                                                children: [
+                                                  TextSpan(
+                                                    text: type[index] + "\n",
+                                                    style: const TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
+                                                  TextSpan(
+                                                    text: duration[index],
+                                                    style: const TextStyle(
+                                                        color: Color(0xFF76CFE2),
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                  IconButton(
-                                    icon: const ImageIcon(
-                                      AssetImage(
-                                          'assets/Image/Physical_Health/Exercise/Yoga/play.png'),
-                                      color: Color(0xFF76CFE2),
+                                    IconButton(
+                                      icon: const ImageIcon(
+                                        AssetImage(
+                                            'assets/Image/Physical_Health/Exercise/Yoga/play.png'),
+                                        color: Color(0xFF76CFE2),
+                                      ),
+                                      onPressed: _onPlayTapped,
                                     ),
-                                    onPressed: _onPlayTapped,
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             );
                           },
