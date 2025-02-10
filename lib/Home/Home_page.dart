@@ -1,6 +1,7 @@
 import 'package:curved_labeled_navigation_bar/curved_navigation_bar.dart';
 import 'package:curved_labeled_navigation_bar/curved_navigation_bar_item.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:phy_men_app/Home/Mental/Mentalmain.dart';
@@ -18,8 +19,29 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  String? profilePictureUrl;
+  final user = FirebaseAuth.instance.currentUser;
+  String currentUserId = FirebaseAuth.instance.currentUser?.uid ?? "";
   int _curre_ = 0;
   List CALL = [Hom_p(), MentalMain(), Physicalmain(), ChatBot(), Profile()];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    fetchProfilePictureUrl();
+  }
+Future<void> fetchProfilePictureUrl() async {
+    DatabaseReference ref = FirebaseDatabase.instance.ref("users/$currentUserId/profile");
+    DataSnapshot snapshot = await ref.get();
+    if (snapshot.exists) {
+      setState(() {
+        profilePictureUrl = snapshot.value.toString();
+      });
+    }else{
+      print("Not found");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
                 useMaterial3: true,
               ),
 
-              home: Yogapage()
+              home: Log_in()
           );
 
         });

@@ -70,6 +70,14 @@ class _Edit_ProfileState extends State<Edit_Profile> {
         body: SingleChildScrollView(
           child: Column(
             children: [
+              InkWell(
+                borderRadius: BorderRadius.circular(90),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: const Icon(Icons.arrow_back_ios,
+                    size: 23, color: Colors.white),
+              ),
               SizedBox(height: ScreenUtil().setHeight(56)),
               Center(
                 child: Container(

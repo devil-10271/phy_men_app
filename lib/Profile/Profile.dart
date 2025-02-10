@@ -17,9 +17,29 @@ class _ProfileState extends State<Profile> {
   bool _laa = true;
   bool _lbn = true;
   bool _ls = false;
+  String? profilePictureUrl;
   final user = FirebaseAuth.instance.currentUser;
   String currentUserId = FirebaseAuth.instance.currentUser?.uid ?? "";
-  final ref = FirebaseDatabase.instance.ref('user');
+  final ref = FirebaseDatabase.instance.ref();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    fetchProfilePictureUrl();
+  }
+Future<void> fetchProfilePictureUrl() async {
+    DatabaseReference ref = FirebaseDatabase.instance.ref("users/$currentUserId/profile");
+    DataSnapshot snapshot = await ref.get();
+    if (snapshot.exists) {
+      setState(() {
+        profilePictureUrl = snapshot.value.toString();
+      });
+    }else{
+      print("Profile picture not found");
+    }
+}
+
   @override
   Widget build(BuildContext context) {
     var screen = MediaQuery.of(context);
@@ -87,10 +107,13 @@ class _ProfileState extends State<Profile> {
                       padding: EdgeInsets.only(
                           top: hei * ht(context, 130), left: 20),
                       child: ClipOval(
-                        child: Image.asset(
-                          'assets/Image/Edit_Profile/girl.png',
-                          height: 110,
-                          width: 110,
+                        child: profilePictureUrl == null
+                        ? CircularProgressIndicator()
+                        : Image.network(
+                          profilePictureUrl!,
+                          width: 100,
+                          height: 100,
+                          fit: BoxFit.cover,
                         ),
                       ),
                     ),

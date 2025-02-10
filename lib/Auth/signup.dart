@@ -336,7 +336,8 @@ class _Sign_UpState extends State<Sign_Up> {
           }
         },
         "uname": _username.text,
-        "email": _email.text
+        "email": _email.text,
+        "profile": ""
       });
     } catch (e) {
       _showError("Failed to add user to the database.");
