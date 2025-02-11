@@ -20,6 +20,7 @@ import 'package:phy_men_app/Home/Physical/HeartRate/PulseData.dart';
 import 'package:phy_men_app/Home/Physical/HeartRate/PulseGraph.dart';
 import 'package:phy_men_app/Home/Physical/WeightLogging/Weight.dart';
 import 'package:phy_men_app/Home/Physical/WeightLogging/WeightData.dart';
+import 'package:phy_men_app/Profile/Data_retrive.dart';
 import 'package:phy_men_app/Profile/Profile.dart';
 import 'package:phy_men_app/Home/Mental/Mentalmain.dart';
 import 'package:phy_men_app/Home/Physical/PhysicalMain.dart';
@@ -27,11 +28,18 @@ import 'package:phy_men_app/Quiz/QuizScreen.dart';
 import 'package:phy_men_app/Quiz/Startquiz.dart';
 import 'package:phy_men_app/Splash_Screen/splash_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+        create: (_) => ProfileProvider(),
+        child: MyApp()
+    )
+
+  );
 }
 
 class MyApp extends StatelessWidget {

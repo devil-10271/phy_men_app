@@ -1,9 +1,13 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:phy_men_app/Auth/login.dart';
-import 'package:phy_men_app/Profile/edit_profile.dart'; // For CupertinoSwitch
+import 'package:phy_men_app/Profile/edit_profile.dart';
+import 'package:provider/provider.dart';
+
+import 'Data_retrive.dart'; // For CupertinoSwitch
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -32,9 +36,9 @@ Future<void> fetchProfilePictureUrl() async {
     DatabaseReference ref = FirebaseDatabase.instance.ref("users/$currentUserId/profile");
     DataSnapshot snapshot = await ref.get();
     if (snapshot.exists) {
-      setState(() {
-        profilePictureUrl = snapshot.value.toString();
-      });
+      String url = snapshot.child("profilePictureUrl").value.toString();
+
+      Provider.of<ProfileProvider>(context, listen: false).setProfilePictureUrl(url);
     }else{
       print("Profile picture not found");
     }
@@ -107,14 +111,22 @@ Future<void> fetchProfilePictureUrl() async {
                       padding: EdgeInsets.only(
                           top: hei * ht(context, 130), left: 20),
                       child: ClipOval(
-                        child: profilePictureUrl == null
-                        ? CircularProgressIndicator()
-                        : Image.network(
-                          profilePictureUrl!,
-                          width: 100,
-                          height: 100,
-                          fit: BoxFit.cover,
-                        ),
+                        child: Consumer<ProfileProvider>(
+                            builder: (context, profileProvider, child){
+                              return profileProvider.profilePictureUrl == null
+                                  ? CircularProgressIndicator()
+                                  : CachedNetworkImage(
+                                imageUrl: profileProvider.profilePictureUrl!,
+                                width: 100,
+                                height: 100,
+                                fit: BoxFit.cover,
+                                placeholder: (context, url) => CircularProgressIndicator(),
+                                errorWidget: (context, error, stackTrace){
+                                  return Icon(Icons.error);
+                                },
+                              );
+                            }
+                        )
                       ),
                     ),
                     Padding(

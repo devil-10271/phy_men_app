@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:curved_labeled_navigation_bar/curved_navigation_bar.dart';
 import 'package:curved_labeled_navigation_bar/curved_navigation_bar_item.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -6,7 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:phy_men_app/Home/Mental/Mentalmain.dart';
 import 'package:phy_men_app/Home/Physical/PhysicalMain.dart';
+import 'package:phy_men_app/Profile/Data_retrive.dart';
 import 'package:phy_men_app/Profile/Profile.dart';
+import 'package:provider/provider.dart';
 
 import 'ChatBot/Chatbot.dart';
 //developed by ayush
@@ -250,11 +253,22 @@ class _Hom_pState extends State<Hom_p> {
                                                       Profile()));
                                         },
                                         child: ClipOval(
-                                          child: Image.asset(
-                                            'assets/Image/Edit_Profile/unknown.png',
-                                            height: ScreenUtil().setHeight(60),
-                                            width: ScreenUtil().setWidth(60),
-                                          ),
+                                          child: Consumer<ProfileProvider>(
+                                              builder: (context, profileProvider, child){
+                                                return profileProvider.profilePictureUrl == null
+                                                    ? CircularProgressIndicator()
+                                                    : CachedNetworkImage(
+                                                  imageUrl: profileProvider.profilePictureUrl!,
+                                                  width: 100,
+                                                  height: 100,
+                                                  fit: BoxFit.cover,
+                                                  placeholder: (context, url) => CircularProgressIndicator(),
+                                                  errorWidget: (context, error, stackTrace){
+                                                    return Icon(Icons.error);
+                                                  },
+                                                );
+                                              }
+                                          )
                                         )),
                                   ],
                                 ),
