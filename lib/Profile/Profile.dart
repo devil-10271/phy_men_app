@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:phy_men_app/Auth/login.dart';
 import 'package:phy_men_app/Profile/edit_profile.dart';
+import 'package:phy_men_app/firebase_auth_implementation/firebase_auth_services.dart';
 import 'package:provider/provider.dart';
 
 import 'Data_retrive.dart'; // For CupertinoSwitch
@@ -32,19 +33,31 @@ class _ProfileState extends State<Profile> {
     super.initState();
     fetchProfileData();
   }
-Future<void> fetchProfileData() async {
-    DatabaseReference ref = FirebaseDatabase.instance.ref("users/$currentUserId");
+
+  Future<void> fetchProfileData() async {
+    DatabaseReference ref = FirebaseDatabase.instance.ref(
+        "users/$currentUserId");
     DataSnapshot snapshot = await ref.get();
     if (snapshot.exists) {
-      String url = snapshot.child("profilePictureUrl").value.toString();
-      String name = snapshot.child("uname").value.toString();
-      String email = snapshot.child("email").value.toString();
+      String url = snapshot
+          .child("profile")
+          .value
+          .toString();
+      String name = snapshot
+          .child("uname")
+          .value
+          .toString();
+      String email = snapshot
+          .child("email")
+          .value
+          .toString();
 
-      Provider.of<ProfileProvider>(context, listen: false).setProfileData(url, name, email);
-    }else{
+      Provider.of<ProfileProvider>(context, listen: false).setProfileData(
+          url, name, email);
+    } else {
       print("Profile picture not found");
     }
-}
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -113,33 +126,32 @@ Future<void> fetchProfileData() async {
                       padding: EdgeInsets.only(
                           top: hei * ht(context, 130), left: 20),
                       child: ClipOval(
-                        child: Consumer<ProfileProvider>(
-                            builder: (context, profileProvider, child){
-                            if(profileProvider.profilePictureUrl == null || profileProvider.profilePictureUrl!.isEmpty)
-                              {
-                                return Image.asset(
-                                  'assets/Image/Edit_Profile/unknown.png',
-                                  width: 100,
-                                  height: 100,
-                                  fit: BoxFit.cover,
-                                );
-                              } else{
+                          child: Consumer<ProfileProvider>(
+                              builder: (context, profileProvider, child) {
                                 return CachedNetworkImage(
-                                  imageUrl: profileProvider.profilePictureUrl!,
+                                  imageUrl: profileProvider.profilePictureUrl ??
+                                      "",
+                                  // Guaranteed to be non-null & non-empty
                                   width: 100,
                                   height: 100,
                                   fit: BoxFit.cover,
-                                  placeholder: (context, url) => CircularProgressIndicator(),
-                                  errorWidget: (context, url, error) => Image.asset(
-                                    'assets/Image/Edit_Profile/unknown.png',
-                                    width: 150,
-                                    height: 150,
-                                    fit: BoxFit.cover,
-                                  )
+                                  placeholder: (context, url) =>
+                                      SizedBox(
+                                        width: 30,
+                                        height: 30,
+                                        child: CircularProgressIndicator(
+                                            strokeWidth: 2),
+                                      ),
+                                  errorWidget: (context, url, error) =>
+                                      Image.asset(
+                                        'assets/Image/Edit_Profile/unknown.png',
+                                        width: 100,
+                                        height: 100,
+                                        fit: BoxFit.cover,
+                                      ),
                                 );
-                                }
-                            }
-                        )
+                              }
+                          )
                       ),
                     ),
                     Padding(
@@ -147,31 +159,33 @@ Future<void> fetchProfileData() async {
                           top: screen.size.height * ht(context, 145),
                           left: 145),
                       child: Consumer<ProfileProvider>(
-                        builder: (context, profileProvider, child) {
-                          return Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
+                          builder: (context, profileProvider, child) {
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
                                   profileProvider.name ?? "No name Available",
-                                style: TextStyle(
-                                  color: Color.fromRGBO(245, 245, 245, 1),
-                                  fontSize: screen.size.width * wt(context, 16),
-                                  fontWeight: FontWeight.w700,
-                                  fontFamily: 'Montserrat',
+                                  style: TextStyle(
+                                    color: Color.fromRGBO(245, 245, 245, 1),
+                                    fontSize: screen.size.width *
+                                        wt(context, 16),
+                                    fontWeight: FontWeight.w700,
+                                    fontFamily: 'Montserrat',
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                profileProvider.email ?? "No Email Available",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: screen.size.width * wt(context, 16),
-                                  fontWeight: FontWeight.w300,
-                                  fontFamily: 'Montserrat',
+                                Text(
+                                  profileProvider.email ?? "No Email Available",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: screen.size.width *
+                                        wt(context, 16),
+                                    fontWeight: FontWeight.w300,
+                                    fontFamily: 'Montserrat',
+                                  ),
                                 ),
-                              ),
-                            ],
-                          );
-                        }
+                              ],
+                            );
+                          }
                       ),
                     ),
                   ],
@@ -208,10 +222,11 @@ Future<void> fetchProfileData() async {
 
                   ElevatedButton(
                     onPressed: () {
-                       Navigator.push(context, MaterialPageRoute(builder: (context)=>Edit_Profile()));
+                      Navigator.push(context, MaterialPageRoute(
+                          builder: (context) => Edit_Profile()));
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor:  Colors.grey.shade300,
+                      backgroundColor: Colors.grey.shade300,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5),
                       ),
@@ -273,7 +288,7 @@ Future<void> fetchProfileData() async {
   Widget _buildNotificationSettings(MediaQueryData screen) {
     return Padding(
       padding:
-          EdgeInsets.symmetric(horizontal: screen.size.width * wt(context, 20)),
+      EdgeInsets.symmetric(horizontal: screen.size.width * wt(context, 20)),
       child: Container(
         padding: const EdgeInsets.all(15.0),
         decoration: BoxDecoration(
@@ -303,8 +318,8 @@ Future<void> fetchProfileData() async {
     );
   }
 
-  Widget _buildSwitchRow(
-      String label, bool value, ValueChanged<bool> onChanged) {
+  Widget _buildSwitchRow(String label, bool value,
+      ValueChanged<bool> onChanged) {
     var screen = MediaQuery.of(context);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -314,7 +329,7 @@ Future<void> fetchProfileData() async {
           style: TextStyle(
             color: Colors.black,
             fontSize:
-                screen.size.width * wt(context, 16), // Responsive font size
+            screen.size.width * wt(context, 16), // Responsive font size
             fontWeight: FontWeight.w400,
             fontFamily: 'Montserrat',
           ),
@@ -335,20 +350,19 @@ Future<void> fetchProfileData() async {
   double wt(BuildContext context, int a) {
     return a / 428;
   }
-}
 
-Future<void> _logout(BuildContext context) async{
-  bool confirmLogout = await showDialog(context: context,
-      builder: (context) => AlertDialog(
-        title: Text("Logout"),
-        content: Text("Are you sure you want to log out?"),
-          actions: [
-            TextButton(
-          onPressed: ()=> Navigator.pop(context, false),
-                child: Text("Cancel")
-            ),
-            TextButton(onPressed: ()=> Navigator.pop(context,true), child: Text("Logout"))
-        ],
-      )
-  );
+}
+Future<void> _logout(BuildContext context) async {
+  try {
+    await FirebaseAuth.instance.signOut(); // Sign out the usery
+    print("User signed out successfully"); // Debugging
+    // Force navigation to the LoginScreen
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(builder: (context) => Log_in()),
+          (route) => false, // Remove all routes from the stack
+    );
+    print("Navigated to LoginScreen"); // Debugging
+  } catch (e) {
+    print("Logout failed: $e"); // Debugging
+  }
 }

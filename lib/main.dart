@@ -7,6 +7,7 @@ import 'package:phy_men_app/Home/ChatBot/chatfile.dart';
 import 'package:phy_men_app/Home/Mental/Blog/main_blog.dart';
 import 'package:phy_men_app/Home/Mental/Calm/main_calm.dart';
 import 'package:phy_men_app/Home/Mental/GkTest/GkScreen.dart';
+import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:phy_men_app/Home/Mental/GkTest/StrartGk.dart';
 import 'package:phy_men_app/Home/Physical/Exercise/Exercise.dart';
 import 'package:phy_men_app/Auth/signup.dart';
@@ -34,6 +35,9 @@ import 'package:provider/provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await FirebaseAppCheck.instance.activate(
+    androidProvider: AndroidProvider.debug,
+  );
   runApp(
     ChangeNotifierProvider(
         create: (_) => ProfileProvider(),
