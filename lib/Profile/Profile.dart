@@ -30,15 +30,17 @@ class _ProfileState extends State<Profile> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    fetchProfilePictureUrl();
+    fetchProfileData();
   }
-Future<void> fetchProfilePictureUrl() async {
-    DatabaseReference ref = FirebaseDatabase.instance.ref("users/$currentUserId/profile");
+Future<void> fetchProfileData() async {
+    DatabaseReference ref = FirebaseDatabase.instance.ref("users/$currentUserId");
     DataSnapshot snapshot = await ref.get();
     if (snapshot.exists) {
       String url = snapshot.child("profilePictureUrl").value.toString();
+      String name = snapshot.child("uname").value.toString();
+      String email = snapshot.child("email").value.toString();
 
-      Provider.of<ProfileProvider>(context, listen: false).setProfilePictureUrl(url);
+      Provider.of<ProfileProvider>(context, listen: false).setProfileData(url, name, email);
     }else{
       print("Profile picture not found");
     }
@@ -113,18 +115,29 @@ Future<void> fetchProfilePictureUrl() async {
                       child: ClipOval(
                         child: Consumer<ProfileProvider>(
                             builder: (context, profileProvider, child){
-                              return profileProvider.profilePictureUrl == null
-                                  ? CircularProgressIndicator()
-                                  : CachedNetworkImage(
-                                imageUrl: profileProvider.profilePictureUrl!,
-                                width: 100,
-                                height: 100,
-                                fit: BoxFit.cover,
-                                placeholder: (context, url) => CircularProgressIndicator(),
-                                errorWidget: (context, error, stackTrace){
-                                  return Icon(Icons.error);
-                                },
-                              );
+                            if(profileProvider.profilePictureUrl == null || profileProvider.profilePictureUrl!.isEmpty)
+                              {
+                                return Image.asset(
+                                  'assets/Image/Edit_Profile/unknown.png',
+                                  width: 100,
+                                  height: 100,
+                                  fit: BoxFit.cover,
+                                );
+                              } else{
+                                return CachedNetworkImage(
+                                  imageUrl: profileProvider.profilePictureUrl!,
+                                  width: 100,
+                                  height: 100,
+                                  fit: BoxFit.cover,
+                                  placeholder: (context, url) => CircularProgressIndicator(),
+                                  errorWidget: (context, url, error) => Image.asset(
+                                    'assets/Image/Edit_Profile/unknown.png',
+                                    width: 150,
+                                    height: 150,
+                                    fit: BoxFit.cover,
+                                  )
+                                );
+                                }
                             }
                         )
                       ),
@@ -133,14 +146,13 @@ Future<void> fetchProfilePictureUrl() async {
                       padding: EdgeInsets.only(
                           top: screen.size.height * ht(context, 145),
                           left: 145),
-                      child: StreamBuilder(
-                        stream: ref.child(currentUserId).onValue,
-                        builder: (context,AsyncSnapshot snapshot) {
+                      child: Consumer<ProfileProvider>(
+                        builder: (context, profileProvider, child) {
                           return Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                  user!.displayName.toString(),
+                                  profileProvider.name ?? "No name Available",
                                 style: TextStyle(
                                   color: Color.fromRGBO(245, 245, 245, 1),
                                   fontSize: screen.size.width * wt(context, 16),
@@ -149,7 +161,7 @@ Future<void> fetchProfilePictureUrl() async {
                                 ),
                               ),
                               Text(
-                                user!.email.toString(),
+                                profileProvider.email ?? "No Email Available",
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: screen.size.width * wt(context, 16),

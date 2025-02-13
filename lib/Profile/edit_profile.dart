@@ -153,10 +153,13 @@ class _Edit_ProfileState extends State<Edit_Profile> {
                                             ),
                                           ),
                                         ),
+
                                       ],
-                                    )),
+                                    )
+                                    ),
                                   );
-                                }),
+                                }
+                                ),
                             child: image != null
                                 ? ClipOval(
                                     child: Image.file(

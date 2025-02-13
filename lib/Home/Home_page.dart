@@ -29,24 +29,6 @@ class _HomePageState extends State<HomePage> {
   List CALL = [Hom_p(), MentalMain(), Physicalmain(), ChatBot(), Profile()];
 
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    fetchProfilePictureUrl();
-  }
-Future<void> fetchProfilePictureUrl() async {
-    DatabaseReference ref = FirebaseDatabase.instance.ref("users/$currentUserId/profile");
-    DataSnapshot snapshot = await ref.get();
-    if (snapshot.exists) {
-      setState(() {
-        profilePictureUrl = snapshot.value.toString();
-      });
-    }else{
-      print("Not found");
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -201,9 +183,8 @@ class _Hom_pState extends State<Hom_p> {
                 ),
                 child: Padding(
                   padding: EdgeInsets.symmetric(vertical: 20),
-                  child: StreamBuilder<Object>(
-                      stream: null,
-                      builder: (context, snapshot) {
+                  child: Consumer<ProfileProvider>(
+                      builder: (context, profileProvider, child) {
                         return Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 20.0, vertical: 20),
@@ -222,7 +203,7 @@ class _Hom_pState extends State<Hom_p> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            user!.displayName.toString(),
+                                            profileProvider.name ?? "No name provided" ,
                                             style: TextStyle(
                                               fontFamily: 'Montserrat',
                                               fontSize: ScreenUtil().setSp(18),
@@ -255,18 +236,29 @@ class _Hom_pState extends State<Hom_p> {
                                         child: ClipOval(
                                           child: Consumer<ProfileProvider>(
                                               builder: (context, profileProvider, child){
-                                                return profileProvider.profilePictureUrl == null
-                                                    ? CircularProgressIndicator()
-                                                    : CachedNetworkImage(
-                                                  imageUrl: profileProvider.profilePictureUrl!,
-                                                  width: 100,
-                                                  height: 100,
-                                                  fit: BoxFit.cover,
-                                                  placeholder: (context, url) => CircularProgressIndicator(),
-                                                  errorWidget: (context, error, stackTrace){
-                                                    return Icon(Icons.error);
-                                                  },
-                                                );
+                                                if (profileProvider.profilePictureUrl == null || profileProvider.profilePictureUrl!.isEmpty)
+                                                  {
+                                                    return Image.asset(
+                                                      'assets/Image/Edit_Profile/unknown.png',
+                                                      width: 100,
+                                                      height: 100,
+                                                      fit: BoxFit.cover,
+                                                    );
+                                                  } else{
+                                                  return CachedNetworkImage(
+                                                      imageUrl: profileProvider.profilePictureUrl!,
+                                                      width: 100,
+                                                      height: 100,
+                                                      fit: BoxFit.cover,
+                                                      placeholder: (context, url) => CircularProgressIndicator(),
+                                                      errorWidget: (context, url, error) => Image.asset(
+                                                        'assets/Image/Edit_Profile/unknown.png',
+                                                        width: 150,
+                                                        height: 150,
+                                                        fit: BoxFit.cover,
+                                                      )
+                                                  );
+                                                }
                                               }
                                           )
                                         )),
