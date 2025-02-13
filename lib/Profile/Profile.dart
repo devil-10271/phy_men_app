@@ -235,10 +235,7 @@ Future<void> fetchProfileData() async {
                   // Padding between buttons
                   ElevatedButton(
                     onPressed: () async {
-                      await FirebaseAuth.instance.signOut();
-                      Navigator.of(context).pushReplacement(
-
-                          MaterialPageRoute(builder: ((context) => Log_in())));
+                      await _logout(context);
                       // Navigate to Register
                     },
                     style: ElevatedButton.styleFrom(
@@ -338,4 +335,20 @@ Future<void> fetchProfileData() async {
   double wt(BuildContext context, int a) {
     return a / 428;
   }
+}
+
+Future<void> _logout(BuildContext context) async{
+  bool confirmLogout = await showDialog(context: context,
+      builder: (context) => AlertDialog(
+        title: Text("Logout"),
+        content: Text("Are you sure you want to log out?"),
+          actions: [
+            TextButton(
+          onPressed: ()=> Navigator.pop(context, false),
+                child: Text("Cancel")
+            ),
+            TextButton(onPressed: ()=> Navigator.pop(context,true), child: Text("Logout"))
+        ],
+      )
+  );
 }

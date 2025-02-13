@@ -28,6 +28,7 @@ import 'package:phy_men_app/Quiz/QuizScreen.dart';
 import 'package:phy_men_app/Quiz/Startquiz.dart';
 import 'package:phy_men_app/Splash_Screen/splash_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:phy_men_app/firebase_auth_implementation/Auth_Wrapper.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -61,7 +62,7 @@ class MyApp extends StatelessWidget {
                 useMaterial3: true,
               ),
 
-              home: Log_in()
+              home: AuthWrapper()
           );
 
         });
