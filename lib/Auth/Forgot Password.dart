@@ -59,7 +59,7 @@ class _Forgot_PasswordState extends State<Forgot_Password> {
                     padding: EdgeInsets.only(top: ScreenUtil().setWidth(20)),
                     child: Container(
                       decoration: BoxDecoration(boxShadow: List.empty()),
-                      child: Icon(Icons.arrow_back),
+                      child: Icon(Icons.arrow_back_ios),
                     ),
                   ),
                 ),
@@ -140,9 +140,9 @@ class _Forgot_PasswordState extends State<Forgot_Password> {
                   ),
                   child: Center(
                     child: Text(
-                      'Send Otp',
+                      'Send Email',
                       style: TextStyle(
-                        color: Colors.black,
+                        color: Colors.white,
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
