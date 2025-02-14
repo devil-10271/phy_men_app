@@ -1,3 +1,4 @@
+import "package:cached_network_image/cached_network_image.dart";
 import "package:firebase_auth/firebase_auth.dart";
 import "package:firebase_database/firebase_database.dart";
 import "package:flutter/material.dart";
@@ -25,6 +26,7 @@ class _Edit_ProfileState extends State<Edit_Profile> {
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
+  String? profileImageUrl;
   
   @override
   void initState() {
@@ -42,6 +44,7 @@ class _Edit_ProfileState extends State<Edit_Profile> {
         setState(() {
           _emailController.text = snapshot.child('email').value.toString();
           _usernameController.text = snapshot.child('uname').value.toString();
+          profileImageUrl = snapshot.child('profile').value.toString();
         });
       }
     }
@@ -209,22 +212,41 @@ class _Edit_ProfileState extends State<Edit_Profile> {
                                   );
                                 }
                                 ),
-                            child: image != null
-                                ? ClipOval(
-                                    child: Image.file(
-                                      image!,
-                                      height: ScreenUtil().setHeight(179),
+                            child: ClipOval(
+                              child: image != null
+                                  ? Image.file(
+                                image!,
+                                height: ScreenUtil().setHeight(179),
+                                width: ScreenUtil().setWidth(179),
+                                fit: BoxFit.cover,
+                              )
+                                  : profileImageUrl != null
+                                  ? Image.network(
+                                  profileImageUrl!,
+                                height: ScreenUtil().setHeight(179),
+                                width: ScreenUtil().setWidth(179),
+                                fit: BoxFit.cover,
+                                loadingBuilder: (context, child, loadingProgress){
+                                    if(loadingProgress == null) return child;
+                                    return CircularProgressIndicator();
+                                },
+                                errorBuilder: (context, error, stackTrace){
+                                    return Image.asset(
+                                      'assets/Image/Edit_Profile/unknown.png',
+                                      height: ScreenUtil().setWidth(179),
                                       width: ScreenUtil().setWidth(179),
                                       fit: BoxFit.cover,
-                                    ),
-                                  )
-                                : ClipOval(
-                                  child: Image(
-                                      image: AssetImage(
-                                          "assets/Image/Edit_Profile/unknown.png"),
-                                      height: 169,
-                                    ),
-                                )),
+                                    );
+                                },
+                              )
+                                  :Image.asset(
+                                'assets/Image/Edit_Profile/unknown.png',
+                                height: ScreenUtil().setWidth(179),
+                                width: ScreenUtil().setWidth(179),
+                                fit: BoxFit.cover,
+                              )
+                            ),
+                        ),
                         SizedBox(
                           height: ScreenUtil().setHeight(76),
                         ),
