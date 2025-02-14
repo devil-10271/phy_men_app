@@ -96,6 +96,7 @@ class _CardioState extends State<Cardiopage> {
               ),
               const SizedBox(height: 20),
               Container(
+
                 padding: const EdgeInsets.all(20),
                 margin: const EdgeInsets.only(top: 20, bottom: 30),
                 decoration: BoxDecoration(
@@ -144,15 +145,10 @@ class _CardioState extends State<Cardiopage> {
                           itemCount: title_exer.length,
                           itemBuilder: (context, index) {
                             return InkWell(
-                              onTap: () {
-                                final id =
-                                    YoutubePlayer.convertUrlToId(url[index]);
+                              onTap: (){
+                                final id=YoutubePlayer.convertUrlToId(url[index]);
 
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            Videoplayer(videoid: id!)));
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=>Videoplayer(videoid: id!)));
                               },
                               child: Container(
                                 height: ScreenUtil().setHeight(130),
@@ -161,7 +157,8 @@ class _CardioState extends State<Cardiopage> {
                                 decoration: BoxDecoration(
                                     color: Colors.white24,
                                     borderRadius: BorderRadius.circular(20),
-                                    border: Border.all(color: Colors.black)),
+                                    border: Border.all(color: Colors.black)
+                                ),
                                 child: Row(
                                   children: [
                                     ClipRRect(
@@ -176,7 +173,7 @@ class _CardioState extends State<Cardiopage> {
                                     Expanded(
                                       child: Column(
                                         crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        CrossAxisAlignment.start,
                                         children: [
                                           Expanded(
                                             child: Text(
@@ -196,15 +193,14 @@ class _CardioState extends State<Cardiopage> {
                                                     text: type[index] + "\n",
                                                     style: const TextStyle(
                                                         fontWeight:
-                                                            FontWeight.w500),
+                                                        FontWeight.w500),
                                                   ),
                                                   TextSpan(
                                                     text: duration[index],
                                                     style: const TextStyle(
-                                                        color:
-                                                            Color(0xFF76CFE2),
+                                                        color: Color(0xFF76CFE2),
                                                         fontWeight:
-                                                            FontWeight.w500),
+                                                        FontWeight.w500),
                                                   ),
                                                 ],
                                               ),

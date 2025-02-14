@@ -17,7 +17,7 @@ class _Calm1State extends State<Calm1> {
   Duration? duration;
 
   final List<String> playlist = [
-    "Image/Mental_Health/Calm/calm1.mp3",
+    "calm1.mp3",
   ];
   int currentSongIndex = 0;
 

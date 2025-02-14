@@ -152,7 +152,7 @@ class _BloodGraphState extends State<BloodGraph> {
             size: 20,
           ),
         ),
-        backgroundColor: Color.fromRGBO(248, 132, 146, 1),
+        backgroundColor: Color.fromRGBO(190, 227, 246, 1),
         foregroundColor: Colors.white,
         title: Text(
           "Blood Pressure",
@@ -180,7 +180,7 @@ class _BloodGraphState extends State<BloodGraph> {
                             width: ScreenUtil().setWidth(189),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15),
-                              color: Color.fromRGBO(248, 132, 146, 0.29),
+                              color:  Color.fromRGBO(190, 227, 246, 0.2),
                             ),
                             child: Column(
                               children: [
@@ -227,76 +227,78 @@ class _BloodGraphState extends State<BloodGraph> {
                             width: ScreenUtil().setWidth(189),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15),
-                              color: Color.fromRGBO(245, 245, 245, 1),
+                              color:   Color.fromRGBO(190, 227, 246, 0.2),
                             ),
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Container(
-                                      margin: EdgeInsets.only(
-                                          top: ScreenUtil().setHeight(15),
-                                          left: ScreenUtil().setWidth(15)),
-                                      child: Text(
-                                        'Standard Limits',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w700,
-                                            fontSize: 18),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Container(
-                                      child: Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 10),
-                                        child: Column(
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Text(
-                                                  'Systolic: ',
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.w400,
-                                                    fontSize: 14,
-                                                  ),
-                                                ),
-                                                Text(
-                                                  '<120 mmHg',
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.w400,
-                                                    fontSize: 14,
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                Text(
-                                                  'Diastolic: ',
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.w400,
-                                                    fontSize: 14,
-                                                  ),
-                                                ),
-                                                Text(
-                                                  '<80 mmHg',
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.w400,
-                                                    fontSize: 14,
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                          ],
+                            child: Expanded(
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.only(
+                                            top: ScreenUtil().setHeight(15),
+                                            left: ScreenUtil().setWidth(15)),
+                                        child: Text(
+                                          'Standard Limits',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w700,
+                                              fontSize: 18),
                                         ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Container(
+                                        child: Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 10),
+                                          child: Column(
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    'Systolic: ',
+                                                    style: TextStyle(
+                                                      fontWeight: FontWeight.w400,
+                                                      fontSize: 14,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    '<120 mmHg',
+                                                    style: TextStyle(
+                                                      fontWeight: FontWeight.w400,
+                                                      fontSize: 14,
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    'Diastolic: ',
+                                                    style: TextStyle(
+                                                      fontWeight: FontWeight.w400,
+                                                      fontSize: 14,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    '<80 mmHg',
+                                                    style: TextStyle(
+                                                      fontWeight: FontWeight.w400,
+                                                      fontSize: 14,
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ],
@@ -327,7 +329,7 @@ class _BloodGraphState extends State<BloodGraph> {
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w300,
-                                  color: Color.fromRGBO(248, 132, 146, 1),
+                                  color:  Color.fromRGBO(190, 227, 246, 1),
                                 ),
                               ),
                             ),
@@ -458,7 +460,7 @@ class _BloodGraphState extends State<BloodGraph> {
                             },
                             style: ElevatedButton.styleFrom(
                               foregroundColor: Colors.white,
-                              backgroundColor: Color.fromRGBO(248, 132, 146, 1),
+                              backgroundColor: Color.fromRGBO(190, 227, 246, 1),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(
                                     100), // Adjust the radius as needed
