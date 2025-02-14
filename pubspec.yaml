@@ -104,7 +104,7 @@ flutter:
     - assets/Image/Mental_Health/Medi/
     - assets/Image/Mental_Health/GK/
     - assets/Image/Mental_Health/Quiz/
-    - assets/Image/Mental_Health/Calm/calm1.mp3
+    - assets/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -69,11 +69,7 @@ class _WeightState extends State<Weight> {
                         width: ScreenUtil().setWidth(388),
                         child: ElevatedButton(
                           onPressed: () {
-                            showModalBottomSheet<void>(
-                              isScrollControlled: true,
-                              context: context,
-                              builder: (context) => AddWeight(),
-                            );
+                            showCenteredDialog(context);
                           },
                           style: ElevatedButton.styleFrom(
                             foregroundColor: Colors.white,

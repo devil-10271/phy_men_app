@@ -23,7 +23,7 @@ class _AddWeightState extends State<AddWeight> {
   final DatabaseReference _database = FirebaseDatabase.instanceFor(
     app: FirebaseDatabase.instance.app,
     databaseURL:
-    'https://phymenapp-default-rtdb.asia-southeast1.firebasedatabase.app',
+        'https://phymenapp-default-rtdb.asia-southeast1.firebasedatabase.app',
   ).ref();
 
   @override
@@ -60,7 +60,8 @@ class _AddWeightState extends State<AddWeight> {
 
     try {
       // Reference to the user's weight data
-      final DatabaseReference weightRef = _database.child('users/$uid/physical_health/weight');
+      final DatabaseReference weightRef =
+          _database.child('users/$uid/physical_health/weight');
 
       // Check if data for the given date exists
       final DataSnapshot snapshot = await weightRef.child(date).get();
@@ -126,17 +127,14 @@ class _AddWeightState extends State<AddWeight> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: EdgeInsets.only(
-          bottom: MediaQuery.of(context).viewInsets.bottom,
+    return Center( // Ensure it appears at the center
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20.r),
         ),
-        child: SizedBox(
-          height: ScreenUtil().setHeight(466),
-          width: ScreenUtil().setWidth(428),
-          child: Padding(
-            padding: EdgeInsets.only(top: ScreenUtil().setHeight(35)),
-            child: Column(
+        child: Column(
               children: [
                 const Center(
                   child: Text(
@@ -145,212 +143,110 @@ class _AddWeightState extends State<AddWeight> {
                   ),
                 ),
                 SizedBox(height: ScreenUtil().setHeight(30)),
-                Container(
-                  //color: Colors.green,
-                  height: ScreenUtil().setHeight(54),
-                  width: ScreenUtil().setWidth(388),
-                  margin: EdgeInsets.only(top: ScreenUtil().setHeight(10)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Date',
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.w400),
-                      ),
-                      Container(
-                        height: ScreenUtil().setHeight(54),
-                        width: ScreenUtil().setWidth(150),
-                        child: TextField(
-                          controller: _dateController, // Set the controller here
-                          decoration: InputDecoration(border: InputBorder.none),
-                          keyboardType: TextInputType.datetime, // Ensure the keyboard supports date input
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700,
-                            fontFamily: 'Montserrat',
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                _buildInputRow("Date", _dateController, TextInputType.datetime),
                 _buildDivider(),
-                Container(
-                  //color: Colors.green,
-                  height: ScreenUtil().setHeight(54),
-                  width: ScreenUtil().setWidth(388),
-                  margin: EdgeInsets.only(top: ScreenUtil().setHeight(10)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Time',
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.w400),
-                      ),
-                      Container(
-                        height: ScreenUtil().setHeight(54),
-                        width: ScreenUtil().setWidth(150),
-                        child: TextField(
-                          controller: _timeController, // Set the controller here
-                          decoration: InputDecoration(border: InputBorder.none),
-                          keyboardType: TextInputType.datetime, // Ensure the keyboard supports date input
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700,
-                            fontFamily: 'Montserrat',
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                _buildInputRow("Time", _timeController, TextInputType.datetime),
                 _buildDivider(),
-            Container(
-              height: ScreenUtil().setHeight(54),
-              width: ScreenUtil().setWidth(388),
-              margin: EdgeInsets.only(top: ScreenUtil().setHeight(10)),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Weight (kg)',
-                    style: const TextStyle(
-                        fontSize: 18, fontWeight: FontWeight.w400),
-                  ),
-                  Container(
-                    height: ScreenUtil().setHeight(54),
-                    width: ScreenUtil().setWidth(100),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(5),
-                      //color: Colors.yellow
+                _buildInputRow("Weight (kg)", _weightController, TextInputType.datetime),
+                _buildDivider(),
+                SizedBox(height: 20.h),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    _buildButton(
+                      label: 'Cancel',
+                      color: Colors.white,
+                      textColor: Color.fromRGBO(171, 222, 232, 1),
+                      onPressed: () => Navigator.pop(context),
                     ),
-                    child: TextField(
-                      controller: _weightController,
-                      decoration:
-                      const InputDecoration(border: InputBorder.none),
-                      keyboardType: TextInputType.number,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w700,
-                        fontFamily: 'Montserrat',
-                      ),
+                    _buildButton(
+                      label: 'Save',
+                      color: Color.fromRGBO(171, 222, 232, 1),
+                      textColor: Colors.white,
+                      onPressed: _saveDataToFirebase,
                     ),
-                  ),
-                ],
-              ),
-            ),
-
-                // Buttons Row
-                Padding(
-                  padding: EdgeInsets.only(
-                    top: ScreenUtil().setHeight(30),
-                    left: ScreenUtil().setWidth(20),
-                    right: ScreenUtil().setWidth(20),
-                  ),
-                  child: Row(
-                    children: [
-                      _buildButton(
-                        label: 'Cancel',
-                        color: Colors.white,
-                        textColor: Color.fromRGBO(118, 207, 226, 1),
-                        onPressed: () => Navigator.pop(context),
-                      ),
-                      SizedBox(width: ScreenUtil().setWidth(10)),
-                      _buildButton(
-                        label: 'Save',
-                        color: Color.fromRGBO(171, 222, 232, 1),
-                        textColor: Colors.white,
-                        onPressed: _saveDataToFirebase,
-                      ),
-                    ],
-                  ),
+                  ],
                 ),
               ],
             ),
           ),
-        ),
-      ),
-    );
+        );
   }
 }
 
-Widget _buildInputRow(String label) {
-  return Container(
-    //color: Colors.green,
-    height: ScreenUtil().setHeight(54),
-    width: ScreenUtil().setWidth(388),
-    margin: EdgeInsets.only(top: ScreenUtil().setHeight(10)),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
+Widget _buildInputRow(
+    String label, TextEditingController controller, TextInputType type) {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: [
+      Expanded(
+        child: Text(
           label,
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
+          style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w400),
         ),
-        Container(
-          height: ScreenUtil().setHeight(54),
-          width: ScreenUtil().setWidth(100),
-          //margin: EdgeInsets.only(top: ScreenUtil().setHeight(5)),
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey),
-            borderRadius: BorderRadius.circular(5),
-            //color: Colors.yellow
-          ),
-          child: TextField(
-            decoration: InputDecoration(border: InputBorder.none),
-            keyboardType: TextInputType.number,
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
-          ),
+      ),
+      Container(
+        height: 50.h,
+        width: 150.w,
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.black),
+          borderRadius: BorderRadius.circular(20.r),
         ),
-      ],
-    ),
+        child: TextField(
+          controller: controller,
+          decoration: InputDecoration(border: InputBorder.none),
+          keyboardType: type,
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w400),
+        ),
+      ),
+    ],
   );
 }
 
-// Divider between input rows
 Widget _buildDivider() {
-  return Container(
-    height: ScreenUtil().setHeight(1),
-    width: ScreenUtil().setWidth(388),
-    color: Color.fromRGBO(234, 234, 234, 1),
-    margin: EdgeInsets.only(top: ScreenUtil().setHeight(10)),
-  );
+  return Divider(color: Colors.grey, height: 20.h);
 }
 
-// Reusable button
 Widget _buildButton({
   required String label,
   required Color color,
   required Color textColor,
   required VoidCallback onPressed,
 }) {
-  return Container(
-    height: ScreenUtil().setHeight(54),
-    width: ScreenUtil().setWidth(189),
-    child: ElevatedButton(
-      onPressed: onPressed,
-      style: ElevatedButton.styleFrom(
-        backgroundColor: color,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(100),
-        ),
+  return ElevatedButton(
+    onPressed: onPressed,
+    style: ElevatedButton.styleFrom(
+      backgroundColor: color,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.r)),
+    ),
+    child: Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+      child: Text(
+        label,
+        style: TextStyle(
+            color: textColor, fontSize: 16.sp, fontWeight: FontWeight.w700),
       ),
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setHeight(20)),
-        child: Text(
-          label,
-          style: TextStyle(
-            color: textColor,
-            fontSize: 16,
-            fontWeight: FontWeight.w700,
+    ),
+  );
+}
+
+void showCenteredDialog(BuildContext context) {
+  showModalBottomSheet(
+    context: context,
+    isScrollControlled: true,
+    backgroundColor: Colors.transparent,
+    builder: (context) => Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20.w),
+      child: Center(
+        child: Container(
+          height: 450.h,
+          width: 400.w,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20.r),
           ),
+          child: AddWeight(),
         ),
       ),
     ),

@@ -67,11 +67,7 @@ class _HeartRateState extends State<HeartRate> {
                         width: ScreenUtil().setWidth(388),
                         child: ElevatedButton(
                           onPressed: () {
-                            showModalBottomSheet<void>(
-                              isScrollControlled: true,
-                              context: context,
-                              builder: (context) => AddHeartRate(),
-                            );
+                            showCenteredDialog(context);
                           },
                           style: ElevatedButton.styleFrom(
                             foregroundColor: Colors.white,

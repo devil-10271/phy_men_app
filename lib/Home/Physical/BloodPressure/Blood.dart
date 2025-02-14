@@ -68,11 +68,7 @@ class _BloodState extends State<Blood> {
                         width: ScreenUtil().setWidth(388),
                         child: ElevatedButton(
                           onPressed: () {
-                            showModalBottomSheet<void>(
-                              isScrollControlled: true,
-                              context: context,
-                              builder: (context) => AddBloodPressure(),
-                            );
+                            showCenteredDialog(context);
                           },
                           style: ElevatedButton.styleFrom(
                             foregroundColor: Colors.white,
