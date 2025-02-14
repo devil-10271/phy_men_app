@@ -180,22 +180,24 @@ class _PulseGraphState extends State<PulseGraph> {
                                     ),
                                   ],
                                 ),
-                                Row(
-                                  children: [
-                                    Container(
-                                      margin: EdgeInsets.only(
-                                          top: ScreenUtil().setHeight(15),
-                                          left: ScreenUtil().setWidth(15)),
-                                      //color: Colors.yellow,
-                                      child: Text(
-                                        '70',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w700,
-                                          fontSize: 40,
+                                Expanded(
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.only(
+                                            top: ScreenUtil().setHeight(15),
+                                            left: ScreenUtil().setWidth(15)),
+                                        //color: Colors.yellow,
+                                        child: Text(
+                                          '70',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w700,
+                                            fontSize: 40,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),

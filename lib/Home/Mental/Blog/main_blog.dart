@@ -104,25 +104,7 @@ class _Main_blogState extends State<Main_blog> {
                             ),
                           ),
                           SizedBox(width: ScreenUtil().setWidth(20)),
-                          ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Color.fromRGBO(171, 147, 175, 1),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Drafts',
-                                  style: TextStyle(
-                                    fontSize: ScreenUtil().setSp(20),
-                                    fontWeight: FontWeight.bold,
-                                    color: Color.fromRGBO(203, 208, 222, 1),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+
                         ],
                       ),
                     ),
@@ -187,8 +169,8 @@ class _Main_blogState extends State<Main_blog> {
                                     ),
                                     Image.asset(
                                       blogs[index]['image'],
-                                      width: ScreenUtil().setWidth(250),
-                                      height: ScreenUtil().setHeight(250),
+                                      width: ScreenUtil().setWidth(200),
+                                      height: ScreenUtil().setHeight(200),
                                     ),
                                   ],
                                 ),
@@ -202,19 +184,7 @@ class _Main_blogState extends State<Main_blog> {
                   ],
                 ),
               ),
-              Positioned(
-                right: ScreenUtil().setWidth(20),
-                child: IconButton(
-                  icon: Image.asset(
-                    'assets/Image/Mental_Health/Blog/add.png',
-                    width: ScreenUtil().setWidth(70),
-                    height: ScreenUtil().setHeight(70),
-                  ),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-              ),
+
             ],
           ),
         ),

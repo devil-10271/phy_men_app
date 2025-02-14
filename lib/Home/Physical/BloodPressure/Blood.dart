@@ -34,7 +34,7 @@ class _BloodState extends State<Blood> {
             size: 20,
           ),
         ),
-        backgroundColor: Color.fromRGBO(171, 222, 232, 1),
+        backgroundColor: Color.fromRGBO(190, 227, 246, 1),
         foregroundColor: Colors.white,
         title: Text(
           "Blood Pressure",

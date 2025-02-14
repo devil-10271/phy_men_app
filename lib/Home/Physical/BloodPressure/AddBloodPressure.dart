@@ -127,61 +127,59 @@ class _AddBloodPressureState extends State<AddBloodPressure> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: EdgeInsets.only(
-          bottom: MediaQuery.of(context).viewInsets.bottom,
-        ),
-        child: SizedBox(
-          height: ScreenUtil().setHeight(466),
-          width: ScreenUtil().setWidth(428),
-          child: Padding(
-            padding: EdgeInsets.only(top: ScreenUtil().setHeight(35)),
-            child: Column(
-              children: [
-                const Center(
-                  child: Text(
-                    'Blood Pressure Reading',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
-                  ),
+    return Padding(
+      padding: EdgeInsets.only(
+        bottom: MediaQuery.of(context).viewInsets.bottom,
+      ),
+      child: SizedBox(
+        height: ScreenUtil().setHeight(466),
+        width: ScreenUtil().setWidth(428),
+        child: Padding(
+          padding: EdgeInsets.only(top: ScreenUtil().setHeight(35)),
+          child: Column(
+            children: [
+              const Center(
+                child: Text(
+                  'Blood Pressure Reading',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
                 ),
-                SizedBox(height: ScreenUtil().setHeight(10)),
-                _buildInputRow("Date", _dateController, TextInputType.datetime),
-                _buildDivider(),
-                _buildInputRow("Time", _timeController, TextInputType.datetime),
-                _buildDivider(),
-                _buildInputRow("Systolic (mmHg)", _systolicController,
-                    TextInputType.number),
-                _buildDivider(),
-                _buildInputRow("Diastolic (mmHg)", _diastolicController,
-                    TextInputType.number),
-                _buildDivider(),
-                Padding(
-                  padding: EdgeInsets.only(
-                    top: ScreenUtil().setHeight(30),
-                    left: ScreenUtil().setWidth(20),
-                    right: ScreenUtil().setWidth(20),
-                  ),
-                  child: Row(
-                    children: [
-                      _buildButton(
-                        label: 'Cancel',
-                        color: Colors.white,
-                        textColor: const Color.fromRGBO(118, 207, 226, 1),
-                        onPressed: () => Navigator.pop(context),
-                      ),
-                      SizedBox(width: ScreenUtil().setWidth(10)),
-                      _buildButton(
-                        label: 'Save',
-                        color: const Color.fromRGBO(171, 222, 232, 1),
-                        textColor: Colors.white,
-                        onPressed: _saveDataToFirebase,
-                      ),
-                    ],
-                  ),
+              ),
+              SizedBox(height: ScreenUtil().setHeight(10)),
+              _buildInputRow("Date", _dateController, TextInputType.datetime),
+              _buildDivider(),
+              _buildInputRow("Time", _timeController, TextInputType.datetime),
+              _buildDivider(),
+              _buildInputRow("Systolic (mmHg)", _systolicController,
+                  TextInputType.number),
+              _buildDivider(),
+              _buildInputRow("Diastolic (mmHg)", _diastolicController,
+                  TextInputType.number),
+              _buildDivider(),
+              Padding(
+                padding: EdgeInsets.only(
+                  top: 30,
+                  left: 20,
+                  // right: 20,
                 ),
-              ],
-            ),
+                child: Row(
+                  children: [
+                    _buildButton(
+                      label: 'Cancel',
+                      color: Colors.white,
+                      textColor: const Color.fromRGBO(190, 227, 246, 1),
+                      onPressed: () => Navigator.pop(context),
+                    ),
+                    SizedBox(width: ScreenUtil().setWidth(10)),
+                    _buildButton(
+                      label: 'Save',
+                      color: const Color.fromRGBO(190, 227, 246, 1),
+                      textColor: Colors.white,
+                      onPressed: _saveDataToFirebase,
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
       ),
@@ -199,21 +197,21 @@ class _AddBloodPressureState extends State<AddBloodPressure> {
         children: [
           Text(
             label,
-            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
+            style:TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
           ),
           Container(
             height: ScreenUtil().setHeight(54),
             width: ScreenUtil().setWidth(150),
+            decoration: BoxDecoration(border: Border.all(color: Colors.black),
+            borderRadius: BorderRadius.circular(20)),
+            
             child: TextField(
               controller: controller,
-              decoration: const InputDecoration(border: InputBorder.none),
+              decoration:  InputDecoration(border: InputBorder.none),
               keyboardType: type,
               textAlign: TextAlign.center,
-              style: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w700,
-                fontFamily: 'Montserrat',
-              ),
+              style:  TextStyle(
+                  fontSize: 18, fontWeight: FontWeight.w400),
             ),
           ),
         ],
@@ -238,7 +236,7 @@ class _AddBloodPressureState extends State<AddBloodPressure> {
   }) {
     return SizedBox(
       height: ScreenUtil().setHeight(54),
-      width: ScreenUtil().setWidth(189),
+      width: ScreenUtil().setWidth(180),
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(

@@ -30,54 +30,50 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home:  SafeArea(
-        child: Scaffold(
-          bottomNavigationBar: CurvedNavigationBar(
-            backgroundColor: Colors.grey.shade200,
-            items: const [
-              CurvedNavigationBarItem(
-                child: Icon(
-                  Icons.home_outlined,
-                  color: Color.fromARGB(255, 129, 218, 250),
-                ),
+    return SafeArea(
+      child: Scaffold(
+        bottomNavigationBar: CurvedNavigationBar(
+          backgroundColor: Colors.grey.shade200,
+          items: const [
+            CurvedNavigationBarItem(
+              child: Icon(
+                Icons.home_outlined,
+                color: Color.fromARGB(255, 129, 218, 250),
               ),
-              CurvedNavigationBarItem(
-                child: Icon(
-                  Icons.health_and_safety,
-                  color: Colors.blue,
-                ),
+            ),
+            CurvedNavigationBarItem(
+              child: Icon(
+                Icons.health_and_safety,
+                color: Colors.blue,
               ),
-              CurvedNavigationBarItem(
-                child: Icon(
-                  Icons.directions_run,
-                  color: Colors.red,
-                ),
+            ),
+            CurvedNavigationBarItem(
+              child: Icon(
+                Icons.directions_run,
+                color: Colors.red,
               ),
-              CurvedNavigationBarItem(
-                child: Icon(
-                  Icons.newspaper,
-                  color: Colors.green,
-                ),
+            ),
+            CurvedNavigationBarItem(
+              child: Icon(
+                Icons.newspaper,
+                color: Colors.green,
               ),
-              CurvedNavigationBarItem(
-                child: Icon(
-                  Icons.perm_identity,
-                  color: Colors.blue,
-                ),
+            ),
+            CurvedNavigationBarItem(
+              child: Icon(
+                Icons.perm_identity,
+                color: Colors.blue,
               ),
-            ],
-            onTap: (index) {
-              setState(() {
-                _curre_ = index;
-              });
-            },
-          ),
-          body: CALL[_curre_],
+            ),
+          ],
+          onTap: (index) {
+            setState(() {
+              _curre_ = index;
+            });
+          },
         ),
+        body: CALL[_curre_],
       ),
-
     );
   }
 }
@@ -240,15 +236,15 @@ class _Hom_pState extends State<Hom_p> {
                                                   {
                                                     return Image.asset(
                                                       'assets/Image/Edit_Profile/unknown.png',
-                                                      width: 100,
-                                                      height: 100,
+                                                      width: 70,
+                                                      height: 70,
                                                       fit: BoxFit.cover,
                                                     );
                                                   } else{
                                                   return CachedNetworkImage(
                                                       imageUrl: profileProvider.profilePictureUrl!,
-                                                      width: 100,
-                                                      height: 100,
+                                                      width: 70,
+                                                      height: 70,
                                                       fit: BoxFit.cover,
                                                       placeholder: (context, url) => CircularProgressIndicator(),
                                                       errorWidget: (context, url, error) => Image.asset(

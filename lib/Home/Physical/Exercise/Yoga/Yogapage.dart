@@ -98,10 +98,10 @@ class _YogapageState extends State<Yogapage> {
             Expanded(
               child: Container(
                 padding: const EdgeInsets.all(20),
-                margin: const EdgeInsets.only(top: 20, bottom: 30),
+                margin: const EdgeInsets.only(top: 20),
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: const BorderRadius.all(Radius.circular(30)),
+                  borderRadius: const BorderRadius.only(topRight: Radius.circular(30),topLeft: Radius.circular(30)),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.grey.withOpacity(0.2),
@@ -153,16 +153,9 @@ class _YogapageState extends State<Yogapage> {
                                 padding: const EdgeInsets.all(20.0),
                                 margin: const EdgeInsets.only(bottom: 20),
                                 decoration: BoxDecoration(
-                                  color: Colors.grey,
+                                  color: Colors.white24,
                                   borderRadius: BorderRadius.circular(20),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.2),
-                                      spreadRadius: 2,
-                                      blurRadius: 5,
-                                      offset: Offset(0, 3),
-                                    ),
-                                  ],
+                                  border: Border.all(color: Colors.black)
                                 ),
                                 child: Row(
                                   children: [

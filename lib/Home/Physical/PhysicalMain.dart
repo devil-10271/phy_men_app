@@ -24,7 +24,18 @@ class _PhysicalmainState extends State<Physicalmain> {
     return SafeArea(
       child: Scaffold(
         body: Column(
+
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Padding(
+              padding: EdgeInsets.only(top: ScreenUtil().setHeight(10), left: ScreenUtil().setWidth(20)),
+              child: IconButton(
+                icon: Icon(Icons.arrow_back_ios, size: ScreenUtil().setSp(20)),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ),
             Container(
               // decoration: BoxDecoration(border: Border.all()),
               height: ScreenUtil().setHeight(70),

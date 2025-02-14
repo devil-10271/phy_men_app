@@ -27,7 +27,7 @@ class _Audio1State extends State<Audio1> with TickerProviderStateMixin {
   Duration? duration;
 
   final List<String> playlist = [
-    "dekha_ek_khawab.mp3",
+    "calm1.mp3",
   ];
   int currentSongIndex = 0;
 
@@ -63,11 +63,17 @@ class _Audio1State extends State<Audio1> with TickerProviderStateMixin {
     if (index >= 0 && index < playlist.length) {
       currentSongIndex = index;
       await player.setSource(AssetSource(playlist[currentSongIndex]));
-      await player.resume();
       duration = await player.getDuration();
-      setState(() {});
+
+      if (duration != null) {
+        await player.resume();
+        setState(() {
+          isPlaying = true;
+        });
+      }
     }
   }
+
 
   void skipForward() async {
     final newValue = value + 30;

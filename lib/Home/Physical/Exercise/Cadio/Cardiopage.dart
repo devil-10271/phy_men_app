@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+
+import '../Yoga/videoplayer.dart';
 
 class Cardiopage extends StatefulWidget {
   const Cardiopage({super.key});
@@ -51,6 +54,15 @@ class _CardioState extends State<Cardiopage> {
     "Beginner : 2 min",
   ];
 
+  final List<String> url = [
+    "https://youtu.be/pH5bl36t-ik?si=uhej5YF24feAB9bN",
+    "htt://youtu.be/0LaoF369azs?si=nHfd2L2FYY47loNj",
+    "https://youtu.be/xcomIo8MWyc?si=0kMetqi5T78OCDys",
+    "https://youtu.be/l5ij5MJpVP0?si=O2xjtCQCjmjgJ2uV",
+    "https://youtu.be/FI51zRzgIe4?si=et3KNSONBlgJSuPh",
+    "https://youtu.be/u-e0ZO5L0s0?si=qhnOlKJhk6LbA2KB",
+    "https://youtu.be/TIEjZggRC_w?si=sNXT8cwJKW9b6hD-"
+  ];
   // Custom heights
 
   @override
@@ -105,7 +117,8 @@ class _CardioState extends State<Cardiopage> {
                   children: [
                     const Text(
                       "Cardio",
-                      style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
                     ),
                     Row(
                       children: [
@@ -126,88 +139,94 @@ class _CardioState extends State<Cardiopage> {
                     ),
                     const SizedBox(height: 30),
                     SizedBox(
-                      height: 400.h,
-                      child: ListView.builder(
-                        itemCount: title_exer.length,
-                        itemBuilder: (context, index) {
-                          return Container(
-                            height: 150.h,
-                            padding: const EdgeInsets.all(20.0),
-                            margin: const EdgeInsets.only(bottom: 20),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.3),
-                                  blurRadius: 6,
-                                  offset: const Offset(5, 5),
-                                ),
-                              ],
-                            ),
-                            child: Row(
-                              children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: Image.asset(
-                                    ass_pos[index],
-                                    height: ScreenUtil().setHeight(100),
-                                    width: ScreenUtil().setWidth(100),
-                                  ),
-                                ),
-                                const SizedBox(width: 16),
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Expanded(
-                                        child: Text(
-                                          title_exer[index],
-                                          style: const TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold),
-                                        ),
+                        height: 400.h,
+                        child: ListView.builder(
+                          itemCount: title_exer.length,
+                          itemBuilder: (context, index) {
+                            return InkWell(
+                              onTap: () {
+                                final id =
+                                    YoutubePlayer.convertUrlToId(url[index]);
+
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            Videoplayer(videoid: id!)));
+                              },
+                              child: Container(
+                                height: ScreenUtil().setHeight(130),
+                                padding: const EdgeInsets.all(20.0),
+                                margin: const EdgeInsets.only(bottom: 20),
+                                decoration: BoxDecoration(
+                                    color: Colors.white24,
+                                    borderRadius: BorderRadius.circular(20),
+                                    border: Border.all(color: Colors.black)),
+                                child: Row(
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: Image.asset(
+                                        ass_pos[index],
+                                        height: ScreenUtil().setHeight(100),
+                                        width: ScreenUtil().setWidth(100),
                                       ),
-                                      const SizedBox(height: 4),
-                                      Expanded(
-                                        child: RichText(
-                                          text: TextSpan(
-                                            style: TextStyle(
-                                                color: Colors.grey[600],
-                                                fontSize: 15),
-                                            children: [
-                                              TextSpan(
-                                                text: type[index] + "\n",
-                                                style: const TextStyle(
-                                                    fontWeight: FontWeight.w500),
-                                              ),
-                                              TextSpan(
-                                                text: duration[index],
-                                                style: const TextStyle(
-                                                    color: Color(0xFF76CFE2),
-                                                    fontWeight: FontWeight.w500),
-                                              ),
-                                            ],
+                                    ),
+                                    const SizedBox(width: 16),
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Expanded(
+                                            child: Text(
+                                              title_exer[index],
+                                              style: const TextStyle(
+                                                  fontWeight: FontWeight.bold),
+                                            ),
                                           ),
-                                        ),
+                                          Expanded(
+                                            child: RichText(
+                                              text: TextSpan(
+                                                style: TextStyle(
+                                                    color: Colors.grey[600],
+                                                    fontSize: 15),
+                                                children: [
+                                                  TextSpan(
+                                                    text: type[index] + "\n",
+                                                    style: const TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
+                                                  TextSpan(
+                                                    text: duration[index],
+                                                    style: const TextStyle(
+                                                        color:
+                                                            Color(0xFF76CFE2),
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                    IconButton(
+                                      icon: const ImageIcon(
+                                        AssetImage(
+                                            'assets/Image/Physical_Health/Exercise/Yoga/play.png'),
+                                        color: Color(0xFF76CFE2),
+                                      ),
+                                      onPressed: _onPlayTapped,
+                                    ),
+                                  ],
                                 ),
-                                IconButton(
-                                  icon: const ImageIcon(
-                                    AssetImage(
-                                        'assets/Image/Physical_Health/Exercise/Yoga/play.png'),
-                                    color: Color(0xFF76CFE2),
-                                  ),
-                                  onPressed: _onPlayTapped,
-                                ),
-                              ],
-                            ),
-                          );
-                        },
-                      ),
-                    ),
+                              ),
+                            );
+                          },
+                        )),
                   ],
                 ),
               ),

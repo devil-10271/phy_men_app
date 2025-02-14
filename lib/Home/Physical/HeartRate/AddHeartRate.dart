@@ -126,91 +126,89 @@ class _AddHeartRateState extends State<AddHeartRate> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: EdgeInsets.only(
-          bottom: MediaQuery.of(context).viewInsets.bottom,
-        ),
-        child: SizedBox(
-          height: ScreenUtil().setHeight(466),
-          width: ScreenUtil().setWidth(428),
-          child: Padding(
-            padding: EdgeInsets.only(top: ScreenUtil().setHeight(35)),
-            child: Column(
-              children: [
-                const Center(
-                  child: Text(
-                    'Heart Rate Reading',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
-                  ),
+    return Padding(
+      padding: EdgeInsets.only(
+        bottom: MediaQuery.of(context).viewInsets.bottom,
+      ),
+      child: SizedBox(
+        height: ScreenUtil().setHeight(466),
+        width: ScreenUtil().setWidth(428),
+        child: Padding(
+          padding: EdgeInsets.only(top: ScreenUtil().setHeight(35)),
+          child: Column(
+            children: [
+              const Center(
+                child: Text(
+                  'Heart Rate Reading',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
                 ),
-                SizedBox(height: ScreenUtil().setHeight(30)),
-                _buildInputRow("Date", _dateController, TextInputType.datetime),
-                _buildDivider(),
-                _buildInputRow("Time", _timeController, TextInputType.datetime),
-                _buildDivider(),
-                Container(
-                  height: ScreenUtil().setHeight(54),
-                  width: ScreenUtil().setWidth(388),
-                  margin: EdgeInsets.only(top: ScreenUtil().setHeight(10)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Pulse Rate (bpm)',
+              ),
+              SizedBox(height: ScreenUtil().setHeight(30)),
+              _buildInputRow("Date", _dateController, TextInputType.datetime),
+              _buildDivider(),
+              _buildInputRow("Time", _timeController, TextInputType.datetime),
+              _buildDivider(),
+              Container(
+                height: ScreenUtil().setHeight(54),
+                width: ScreenUtil().setWidth(388),
+                margin: EdgeInsets.only(top: ScreenUtil().setHeight(10)),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Pulse Rate (bpm)',
+                      style: const TextStyle(
+                          fontSize: 18, fontWeight: FontWeight.w400),
+                    ),
+                    Container(
+                      height: ScreenUtil().setHeight(54),
+                      width: ScreenUtil().setWidth(100),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey),
+                        borderRadius: BorderRadius.circular(5),
+                        //color: Colors.yellow
+                      ),
+                      child: TextField(
+                        controller: _pulseController,
+                        decoration:
+                            const InputDecoration(border: InputBorder.none),
+                        keyboardType: TextInputType.number,
+                        textAlign: TextAlign.center,
                         style: const TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.w400),
-                      ),
-                      Container(
-                        height: ScreenUtil().setHeight(54),
-                        width: ScreenUtil().setWidth(100),
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.grey),
-                          borderRadius: BorderRadius.circular(5),
-                          //color: Colors.yellow
-                        ),
-                        child: TextField(
-                          controller: _pulseController,
-                          decoration:
-                              const InputDecoration(border: InputBorder.none),
-                          keyboardType: TextInputType.number,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700,
-                            fontFamily: 'Montserrat',
-                          ),
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                          fontFamily: 'Montserrat',
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-                Padding(
-                  padding: EdgeInsets.only(
-                    top: ScreenUtil().setHeight(30),
-                    left: ScreenUtil().setWidth(20),
-                    right: ScreenUtil().setWidth(20),
-                  ),
-                  child: Row(
-                    children: [
-                      _buildButton(
-                        label: 'Cancel',
-                        color: Colors.white,
-                        textColor: const Color.fromRGBO(118, 207, 226, 1),
-                        onPressed: () => Navigator.pop(context),
-                      ),
-                      SizedBox(width: ScreenUtil().setWidth(10)),
-                      _buildButton(
-                        label: 'Save',
-                        color: const Color.fromRGBO(171, 222, 232, 1),
-                        textColor: Colors.white,
-                        onPressed: _saveDataToFirebase,
-                      ),
-                    ],
-                  ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(
+                  top: ScreenUtil().setHeight(30),
+                  left: ScreenUtil().setWidth(20),
+                  right: ScreenUtil().setWidth(20),
                 ),
-              ],
-            ),
+                child: Row(
+                  children: [
+                    _buildButton(
+                      label: 'Cancel',
+                      color: Colors.white,
+                      textColor: const  Color.fromRGBO(248, 132, 146, 1),
+                      onPressed: () => Navigator.pop(context),
+                    ),
+                    SizedBox(width: ScreenUtil().setWidth(10)),
+                    _buildButton(
+                      label: 'Save',
+                      color: const  Color.fromRGBO(248, 132, 146, 1),
+                      textColor: Colors.white,
+                      onPressed: _saveDataToFirebase,
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
       ),
