@@ -122,6 +122,8 @@ class _Log_inState extends State<Log_in> {
                             child: Column(
                               children: [
                                 TextFormField(
+                                  cursorColor: Color(0xff76CFE2),
+
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
                                       return "Enter Email";
@@ -157,6 +159,8 @@ class _Log_inState extends State<Log_in> {
                                 SizedBox(height: 10),
 
                                 TextFormField(
+                                  cursorColor: Color(0xff76CFE2),
+
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
                                       return "Enter password ";
@@ -166,6 +170,7 @@ class _Log_inState extends State<Log_in> {
                                   controller: _password,
                                   style: TextStyle(color: Colors.black),
                                   decoration: InputDecoration(
+
                                     fillColor: Color(methods.hex('76CFE2')),
                                     enabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(40),
@@ -213,7 +218,7 @@ class _Log_inState extends State<Log_in> {
                                     child: Text(
                                       'Log In',
                                       style: TextStyle(
-                                        color: Colors.black,
+                                        color: Colors.white,
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -234,37 +239,35 @@ class _Log_inState extends State<Log_in> {
                         ),
 
                         Container(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              ElevatedButton.icon(
-                                onPressed: () {
-                                  AuthMethods().signInWithGoogle(context);
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.white,
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 15, horizontal: 20),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(40),
-                                  ),
-                                  shadowColor: Colors.grey.withOpacity(0.9),
-                                  elevation: 5,
-                                ),
-                                icon: Image.asset(
-                                  'assets/Company_icon/google.png',
-                                  height: 30,
-                                  width: 30,
-                                ),
-                                label: Text(
-                                  'Google',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 16,
-                                  ),
-                                ),
+                          width: MediaQuery.sizeOf(context).height * 0.80,
+                          child: ElevatedButton.icon(
+                            onPressed: () {
+                              AuthMethods().signInWithGoogle(context);
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white,
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 15, horizontal: 20),
+                              shape: RoundedRectangleBorder(
+
+                                borderRadius: BorderRadius.circular(40),
                               ),
-                            ],
+
+
+                              elevation: 5,
+                            ),
+                            icon: Image.asset(
+                              'assets/Company_icon/google.png',
+                              height: 30,
+                              width: 30,
+                            ),
+                            label: Text(
+                              'Google',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 16,
+                              ),
+                            ),
                           ),
                         ),
                         SizedBox(

@@ -7,7 +7,7 @@ import 'package:phy_men_app/Auth/login.dart';
 import 'package:phy_men_app/Profile/edit_profile.dart';
 import 'package:phy_men_app/firebase_auth_implementation/firebase_auth_services.dart';
 import 'package:provider/provider.dart';
-
+import 'package:phy_men_app/Profile/Notification.dart';
 import 'Data_retrive.dart'; // For CupertinoSwitch
 
 class Profile extends StatefulWidget {
@@ -63,224 +63,233 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     var screen = MediaQuery.of(context);
     var hei = screen.size.height;
-    return Scaffold(
-      body: Column(
-        children: [
-          SingleChildScrollView(
-            child: Column(
-              children: [
-                Stack(
-                  children: [
-                    Container(
-                      height: screen.size.height * ht(context, 210),
-                      width: screen.size.width * wt(context, 432),
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(30),
-                          bottomRight: Radius.circular(30),
-                        ),
-                        color: Color.fromRGBO(171, 222, 232, 1),
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                        left: screen.size.width * wt(context, 20),
-                        top: screen.size.height * ht(context, 66),
-                        right: screen.size.width * wt(context, 170),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          InkWell(
-                            borderRadius: BorderRadius.circular(90),
-                            onTap: () {
-                              Navigator.pop(context);
-                            },
-                            child: const Icon(Icons.arrow_back_ios,
-                                size: 23, color: Colors.white),
-                          ),
-                          Text(
-                            'Profile',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.w700,
-                              fontSize: screen.size.width * wt(context, 23),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                        top: screen.size.height * ht(context, 105),
-                        left: screen.size.width * wt(context, 20),
-                      ),
-                      child: Container(
-                        height: 0.3,
-                        width: screen.size.width * wt(context, 388),
-                        color: Colors.grey,
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                          top: hei * ht(context, 130), left: 20),
-                      child: ClipOval(
-                          child: Consumer<ProfileProvider>(
-                              builder: (context, profileProvider, child) {
-                                return CachedNetworkImage(
-                                  imageUrl: profileProvider.profilePictureUrl ??
-                                      "",
-                                  // Guaranteed to be non-null & non-empty
-                                  width: 100,
-                                  height: 100,
-                                  fit: BoxFit.cover,
-                                  placeholder: (context, url) =>
-                                      SizedBox(
-                                        width: 30,
-                                        height: 30,
-                                        child: CircularProgressIndicator(
-                                            strokeWidth: 2),
-                                      ),
-                                  errorWidget: (context, url, error) =>
-                                      Image.asset(
-                                        'assets/Image/Edit_Profile/unknown.png',
-                                        width: 100,
-                                        height: 100,
-                                        fit: BoxFit.cover,
-                                      ),
-                                );
-                              }
-                          )
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                          top: screen.size.height * ht(context, 145),
-                          left: 145),
-                      child: Consumer<ProfileProvider>(
-                          builder: (context, profileProvider, child) {
-                            return Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  profileProvider.name ?? "No name Available",
-                                  style: TextStyle(
-                                    color: Color.fromRGBO(245, 245, 245, 1),
-                                    fontSize: screen.size.width *
-                                        wt(context, 16),
-                                    fontWeight: FontWeight.w700,
-                                    fontFamily: 'Montserrat',
-                                  ),
-                                ),
-                                Text(
-                                  profileProvider.email ?? "No Email Available",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: screen.size.width *
-                                        wt(context, 16),
-                                    fontWeight: FontWeight.w300,
-                                    fontFamily: 'Montserrat',
-                                  ),
-                                ),
-                              ],
-                            );
-                          }
-                      ),
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 20, top: 30, bottom: 10),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      'Settings',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: screen.size.width * wt(context, 20),
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ),
-                ),
-                _buildNotificationSettings(screen),
-              ],
-            ),
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: EdgeInsets.only(
-                left: screen.size.width * wt(context, 20),
-                right: screen.size.width * wt(context, 20),
-                bottom: screen.size.height * ht(context, 20),
-              ),
+    return SafeArea(
+      child: Scaffold(
+        body: Column(
+          children: [
+            SingleChildScrollView(
               child: Column(
-                mainAxisSize: MainAxisSize.min,
                 children: [
-
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(
-                          builder: (context) => Edit_Profile()));
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.grey.shade300,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5),
+                  Stack(
+                    children: [
+                      Container(
+                        height: screen.size.height * ht(context, 180),
+                        width: screen.size.width * wt(context, 432),
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(30),
+                            bottomRight: Radius.circular(30),
+                          ),
+                          color: Color.fromRGBO(171, 222, 232, 1),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          left: screen.size.width * wt(context, 20),
+                          top: screen.size.height * ht(context, 33),
+                          right: screen.size.width * wt(context, 170),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            InkWell(
+                              borderRadius: BorderRadius.circular(90),
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                              child: const Icon(Icons.arrow_back_ios,
+                                  size: 23, color: Colors.white),
+                            ),
+                            Text(
+                              'Profile',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.w700,
+                                fontSize: screen.size.width * wt(context, 23),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          top: screen.size.height * ht(context, 75),
+                          left: screen.size.width * wt(context, 20),
+                        ),
+                        child: Container(
+                          height: 0.3,
+                          width: screen.size.width * wt(context, 388),
+                          color: Colors.grey,
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                            top: hei * ht(context, 100), left: 20),
+                        child: ClipOval(
+                            child: Consumer<ProfileProvider>(
+                                builder: (context, profileProvider, child) {
+                                  return CachedNetworkImage(
+                                    imageUrl: profileProvider.profilePictureUrl ??
+                                        "",
+                                    // Guaranteed to be non-null & non-empty
+                                    width: 100,
+                                    height: 100,
+                                    fit: BoxFit.cover,
+                                    placeholder: (context, url) =>
+                                        SizedBox(
+                                          width: 30,
+                                          height: 30,
+                                          child: CircularProgressIndicator(
+                                              strokeWidth: 2),
+                                        ),
+                                    errorWidget: (context, url, error) =>
+                                        Image.asset(
+                                          'assets/Image/Edit_Profile/unknown.png',
+                                          width: 100,
+                                          height: 100,
+                                          fit: BoxFit.cover,
+                                        ),
+                                  );
+                                }
+                            )
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                            top: screen.size.height * ht(context, 115),
+                            left: 145),
+                        child: Consumer<ProfileProvider>(
+                            builder: (context, profileProvider, child) {
+                              return Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    profileProvider.name ?? "No name Available",
+                                    style: TextStyle(
+                                      color: Color.fromRGBO(245, 245, 245, 1),
+                                      fontSize: screen.size.width *
+                                          wt(context, 16),
+                                      fontWeight: FontWeight.w700,
+                                      fontFamily: 'Montserrat',
+                                    ),
+                                  ),
+                                  Text(
+                                    profileProvider.email ?? "No Email Available",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: screen.size.width *
+                                          wt(context, 16),
+                                      fontWeight: FontWeight.w300,
+                                      fontFamily: 'Montserrat',
+                                    ),
+                                  ),
+                                ],
+                              );
+                            }
+                        ),
+                      ),
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20, top: 30, bottom: 10),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'Settings',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: screen.size.width * wt(context, 20),
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.edit,
-                            color: const Color.fromRGBO(0, 0, 0, 1)),
-                        SizedBox(width: screen.size.width * wt(context, 10)),
-                        Text(
-                          'Edit Profile',
-                          style: TextStyle(
-                            color: const Color.fromRGBO(0, 0, 0, 1),
-                            fontSize: screen.size.width * wt(context, 16),
-                          ),
-                        ),
-                      ],
-                    ),
                   ),
-                  // Padding between buttons
-                  ElevatedButton(
-                    onPressed: () async {
-                      await _logout(context);
-                      // Navigate to Register
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.red.shade100,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.logout,
-                            color: Colors.redAccent
-                        ),
-                        SizedBox(width: screen.size.width * wt(context, 10)),
-                        Text(
-                          'Logout',
-                          style: TextStyle(
-                            color: Colors.redAccent,
-                            fontSize: screen.size.width * wt(context, 16),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  _buildNotificationSettings(screen),
                 ],
               ),
             ),
-          ),
-        ],
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: EdgeInsets.only(
+                  left: screen.size.width * wt(context, 20),
+                  right: screen.size.width * wt(context, 20),
+                  bottom: screen.size.height * ht(context, 20),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(height: 30,),
+      
+                    Column(
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(
+                                builder: (context) => Edit_Profile()));
+      
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.grey.shade300,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.edit,
+                                  color: const Color.fromRGBO(0, 0, 0, 1)),
+                              SizedBox(width: screen.size.width * wt(context, 10)),
+                              Text(
+                                'Edit Profile',
+                                style: TextStyle(
+                                  color: const Color.fromRGBO(0, 0, 0, 1),
+                                  fontSize: screen.size.width * wt(context, 16),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        ElevatedButton(
+                          onPressed: () async {
+                            await _logout(context);
+                            // Navigate to Register
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.red.shade100,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.logout,
+                                  color: Colors.redAccent
+                              ),
+                              SizedBox(width: screen.size.width * wt(context, 10)),
+                              Text(
+                                'Logout',
+                                style: TextStyle(
+                                  color: Colors.redAccent,
+                                  fontSize: screen.size.width * wt(context, 16),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+      
+                      ],
+                    ),
+                    // Padding between buttons
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -299,19 +308,15 @@ class _ProfileState extends State<Profile> {
           children: [
             _buildSwitchRow('App Notifications ', _ga, (value) {
               setState(() => _ga = value);
+
             }),
-            const Divider(),
-            _buildSwitchRow('Local Area Announcements', _lbn, (value) {
-              setState(() => _lbn = value);
-            }),
+
             const Divider(),
             _buildSwitchRow('Email Notification  ', _laa, (value) {
               setState(() => _laa = value);
             }),
-            const Divider(),
-            _buildSwitchRow('Location Services   ', _ls, (value) {
-              setState(() => _ls = value);
-            }),
+
+
           ],
         ),
       ),

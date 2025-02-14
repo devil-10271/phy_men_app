@@ -606,7 +606,6 @@ class _Sign_UpState extends State<Sign_Up> {
                         SizedBox(
                           height: ScreenUtil().setHeight(30),
                         ),
-
                         Container(
                           width: MediaQuery.sizeOf(context).height * 0.80,
                           child: ElevatedButton.icon(

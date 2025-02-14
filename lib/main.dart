@@ -25,15 +25,18 @@ import 'package:phy_men_app/Profile/Data_retrive.dart';
 import 'package:phy_men_app/Profile/Profile.dart';
 import 'package:phy_men_app/Home/Mental/Mentalmain.dart';
 import 'package:phy_men_app/Home/Physical/PhysicalMain.dart';
+import 'package:phy_men_app/Profile/edit_profile.dart';
 import 'package:phy_men_app/Quiz/QuizScreen.dart';
 import 'package:phy_men_app/Quiz/Startquiz.dart';
 import 'package:phy_men_app/Splash_Screen/splash_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:phy_men_app/firebase_auth_implementation/Auth_Wrapper.dart';
 import 'package:provider/provider.dart';
+import 'package:phy_men_app/Profile/Notification.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  NotificationService().intNotification();
   await Firebase.initializeApp();
   await FirebaseAppCheck.instance.activate(
     androidProvider: AndroidProvider.debug,
@@ -66,7 +69,7 @@ class MyApp extends StatelessWidget {
                 useMaterial3: true,
               ),
 
-              home: AuthWrapper()
+              home: SplashScreen()
           );
 
         });

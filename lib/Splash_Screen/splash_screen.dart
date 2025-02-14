@@ -23,34 +23,32 @@ class _SplashScreenState extends State<SplashScreen> {
     var screen = MediaQuery.of(context);
 
     return Scaffold(
-          body: Stack(
-    children: [
-      Container(
-          height: screen.size.height,
-          width: screen.size.width,
-          decoration: BoxDecoration(
-            color: Color(0xff76CFE2),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Center(
-                child: Image.asset(
-                  'assets/Logo/logo.png',
-                  height: screen.size.height * ht(218),
-                ),
+      body: Stack(
+        children: [
+          Container(
+              height: screen.size.height,
+              width: screen.size.width,
+              decoration: BoxDecoration(
+                color: Color(0xff76CFE2),
               ),
-
-              LoadingAnimationWidget.threeArchedCircle(
-                  color: Colors.black45, size: screen.size.height * ht(70))
-            ],
-          )),
-
-    ],
-
-          ),
-        );
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Center(
+                    child: Image.asset(
+                      'assets/Logo/logo.png',
+                      height: screen.size.height * ht(218),
+                    ),
+                  ),
+                  LoadingAnimationWidget.threeArchedCircle(
+                      color: Colors.black45, size: screen.size.height * ht(70)),
+                  Text("V 1.0.0")
+                ],
+              )),
+        ],
+      ),
+    );
   }
 }
 

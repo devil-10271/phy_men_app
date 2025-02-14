@@ -121,16 +121,20 @@ class _Edit_ProfileState extends State<Edit_Profile> {
         backgroundColor: Color(methods.hex("76CFE2")),
         body: SingleChildScrollView(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              InkWell(
-                borderRadius: BorderRadius.circular(90),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: const Icon(Icons.arrow_back_ios,
-                    size: 23, color: Colors.white),
+              Padding(
+                padding: const EdgeInsets.all(20),
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(90),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Icon(Icons.arrow_back_ios,
+                      size: 23, color: Colors.white),
+                ),
               ),
-              SizedBox(height: ScreenUtil().setHeight(56)),
+              SizedBox(height: ScreenUtil().setHeight(10)),
               Center(
                 child: Container(
                   height: ScreenUtil().setHeight(802),
@@ -351,10 +355,13 @@ class _Edit_ProfileState extends State<Edit_Profile> {
 
                                 },
                                 child: Container(
+                                  height: ScreenUtil().setHeight(70),
                                   decoration: BoxDecoration(
+
                                       borderRadius: BorderRadius.circular(10),
                                       color: Color(methods.hex("D9D9D9"))),
                                   child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Icon(Icons.repeat),
                                       Text("Save Profile Pic"),
@@ -372,10 +379,12 @@ class _Edit_ProfileState extends State<Edit_Profile> {
                                   _saveChanges();
                                 },
                                 child: Container(
+                                  height: ScreenUtil().setHeight(70),
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
                                       color: Color(methods.hex("D9D9D9"))),
                                   child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Icon(Icons.delete),
                                       Text("Save User Details"),
