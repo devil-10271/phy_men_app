@@ -178,7 +178,7 @@ class _MentalMainState extends State<MentalMain> {
                       assetImagePath:
                           'assets/Image/Mental_Health/s2.png',
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>Main_calm()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>main_calm()));
                       },
                     ),
                     buildHealthCard(

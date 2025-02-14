@@ -5,14 +5,15 @@ import 'package:phy_men_app/Home/Mental/Calm/calm2.dart';
 import 'package:phy_men_app/Home/Mental/Calm/calm3.dart';
 import 'package:phy_men_app/Home/Mental/Calm/calm4.dart';
 
-class Main_calm extends StatefulWidget {
-  const Main_calm({super.key});
+
+class main_calm extends StatefulWidget {
+  const main_calm({super.key});
 
   @override
-  State<Main_calm> createState() => _Main_calmState();
+  State<main_calm> createState() => _main_calmState();
 }
 
-class _Main_calmState extends State<Main_calm> {
+class _main_calmState extends State<main_calm> {
   final List<Map<String, dynamic>> calmButtons = [
     {
       'image': 'assets/Image/Mental_Health/Calm/calm_button1.png',
@@ -49,87 +50,61 @@ class _Main_calmState extends State<Main_calm> {
                 children: [
                   Container(
                     width: MediaQuery.of(context).size.width,
-                    height: ScreenUtil().setHeight(0.35 * MediaQuery.of(context).size.height),
+                    height: ScreenUtil().setHeight(220),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
-                          bottomRight: Radius.circular(ScreenUtil().setWidth(35)),
-                          bottomLeft: Radius.circular(ScreenUtil().setWidth(35))),
+                        bottomRight: Radius.circular(35),
+                        bottomLeft: Radius.circular(35),
+                      ),
                       image: DecorationImage(
                         image: AssetImage('assets/Image/Mental_Health/Calm/calm_back.png'),
                         fit: BoxFit.cover,
                       ),
                     ),
                   ),
-                  Positioned(
-                    top: ScreenUtil().setHeight(10),
-                    left: ScreenUtil().setWidth(10),
-                    child: IconButton(
-                      icon: Icon(Icons.arrow_back_ios),
-                      onPressed: () {
+                  Padding(
+                    padding: EdgeInsets.only(
+                      top: ScreenUtil().setHeight(10),
+                      left: ScreenUtil().setWidth(20),
+                    ),
+                    child: InkWell(
+                      onTap: () {
                         Navigator.pop(context);
                       },
-                    ),
-                  ),
-                  Positioned(
-                    top: ScreenUtil().setHeight(30),
-                    right: ScreenUtil().setWidth(15),
-                    child: Row(
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            print("Like");
-                          },
-                          child: Image.asset(
-                            'assets/Image/Mental_Health/Calm/like.png',
-                            width: ScreenUtil().setWidth(50),
-                            height: ScreenUtil().setHeight(50),
-                          ),
-                        ),
-                        SizedBox(width: ScreenUtil().setWidth(10)),
-                        GestureDetector(
-                          onTap: () {
-                            print("Save");
-                          },
-                          child: Image.asset(
-                            'assets/Image/Mental_Health/Calm/save.png',
-                            width: ScreenUtil().setWidth(50),
-                            height: ScreenUtil().setHeight(50),
-                          ),
-                        ),
-                      ],
+                      child: Icon(
+                        Icons.arrow_back_ios,
+                        size: ScreenUtil().setSp(30),
+                      ),
                     ),
                   ),
                 ],
               ),
-              SizedBox(height: ScreenUtil().setHeight(10)),
+              SizedBox(height: ScreenUtil().setHeight(5)),
               Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: ScreenUtil().setWidth(10),
-                  vertical: ScreenUtil().setHeight(10),
-                ),
+                padding: EdgeInsets.all(ScreenUtil().setWidth(10)),
                 child: RichText(
                   text: TextSpan(
                     children: [
                       TextSpan(
                         text: 'CALM MUSIC\n',
                         style: TextStyle(
-                          fontSize: ScreenUtil().setSp(40),
+                          fontSize: ScreenUtil().setSp(35),
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
                         ),
                       ),
                       TextSpan(
-                        text: ' 45 MIN : SLEEP MUSIC\n',
+                        text: '35 MIN : SLEEP MUSIC\n',
                         style: TextStyle(
-                          fontSize: ScreenUtil().setSp(20),
+                          fontSize: ScreenUtil().setSp(18),
                           fontWeight: FontWeight.bold,
                           color: Color.fromRGBO(152, 161, 189, 1),
                         ),
                       ),
                       TextSpan(
-                        text: ' Ease the mind into a restful night’s sleep with these deep, ambient tones.',
+                        text: 'Ease the mind into a restful night’s sleep with these deep, ambient tones.',
                         style: TextStyle(
-                          fontSize: ScreenUtil().setSp(17),
+                          fontSize: ScreenUtil().setSp(16),
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
                         ),
@@ -138,114 +113,74 @@ class _Main_calmState extends State<Main_calm> {
                   ),
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: ScreenUtil().setWidth(10),
-                  vertical: ScreenUtil().setHeight(10),
-                ),
-                child: Row(
-                  children: [
-                    Image.asset(
-                      'assets/Image/Mental_Health/Calm/love.png',
-                      height: ScreenUtil().setHeight(20),
-                      width: ScreenUtil().setWidth(20),
-                    ),
-                    SizedBox(height: ScreenUtil().setHeight(10)),
-                    Text(
-                      'Favorites',
-                      style: TextStyle(
-                        fontSize: ScreenUtil().setSp(18),
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
-                    ),
-                    SizedBox(width: ScreenUtil().setWidth(20)),
-                    Image.asset(
-                      'assets/Image/Mental_Health/Calm/headphone.png',
-                      width: ScreenUtil().setWidth(20),
-                      height: ScreenUtil().setHeight(40),
-                    ),
-                    SizedBox(height: ScreenUtil().setHeight(10)),
-                    Text(
-                      'Listening',
-                      style: TextStyle(
-                        fontSize: ScreenUtil().setSp(18),
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
-                    ),
-                    SizedBox(width: ScreenUtil().setWidth(20)),
-                  ],
-                ),
-              ),
+              SizedBox(height: ScreenUtil().setHeight(10)),
               Center(
                 child: Container(
-                  height: ScreenUtil().setHeight(5),
+                  height: ScreenUtil().setHeight(2),
                   color: Colors.grey,
-                  width: ScreenUtil().setWidth(400),
+                  width: MediaQuery.of(context).size.width * 0.95,
                 ),
               ),
-              SizedBox(height: ScreenUtil().setHeight(30)),
+              SizedBox(height: ScreenUtil().setHeight(20)),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(16.0)),
-                child: GridView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio: 0.8,
-                    crossAxisSpacing: ScreenUtil().setWidth(10),
-                    mainAxisSpacing: ScreenUtil().setHeight(10),
-                  ),
-                  itemCount: calmButtons.length,
-                  itemBuilder: (context, index) {
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => calmButtons[index]['page'],
-                          ),
-                        );
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(ScreenUtil().setWidth(10)),
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(ScreenUtil().setWidth(10)),
-                          child: Column(
-                            children: [
-                              Expanded(
-                                child: Image.asset(
-                                  calmButtons[index]['image'],
-                                  fit: BoxFit.cover,
-                                ),
+                padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(16)),
+                child: Wrap(
+                  spacing: ScreenUtil().setWidth(25),
+                  children: List.generate(calmButtons.length, (index) {
+                    return Column(
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => calmButtons[index]['page'],
                               ),
-                              SizedBox(height: ScreenUtil().setHeight(5)),
-                              Text(
-                                calmButtons[index]['text'],
-                                style: TextStyle(
-                                  fontSize: ScreenUtil().setSp(18),
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                ),
+                            );
+                          },
+                          child: Container(
+                            height: ScreenUtil().setHeight(150),
+                            width: MediaQuery.of(context).size.width * 0.42,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image.asset(
+                                calmButtons[index]['image'],
+                                fit: BoxFit.cover,
                               ),
-                              SizedBox(height: ScreenUtil().setHeight(5)),
-                              Text(
-                                '45 MIN : SLEEP MUSIC',
-                                style: TextStyle(
-                                  fontSize: ScreenUtil().setSp(14),
-                                  color: Color.fromRGBO(152, 161, 189, 1),
-                                ),
-                              ),
-                              SizedBox(height: ScreenUtil().setHeight(20)),
-                            ],
+                            ),
                           ),
                         ),
-                      ),
+                        SizedBox(height: ScreenUtil().setHeight(5)),
+                        Text(
+                          calmButtons[index]['text'],
+                          style: TextStyle(
+                            fontSize: ScreenUtil().setSp(18),
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
+                        SizedBox(height: ScreenUtil().setHeight(5)),
+                        Text(
+                          '15 min : SLEEP MUSIC',
+                          style: TextStyle(
+                            fontSize: ScreenUtil().setSp(14),
+                            color: Color.fromRGBO(152, 161, 189, 1),
+                          ),
+                        ),
+                        SizedBox(height: ScreenUtil().setHeight(20)),
+                      ],
                     );
-                  },
+                  }),
+                ),
+              ),
+              SizedBox(height: ScreenUtil().setHeight(20)),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(16)),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 ),
               ),
             ],

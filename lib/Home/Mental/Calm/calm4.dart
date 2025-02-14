@@ -17,7 +17,7 @@ class _Calm4State extends State<Calm4> {
   Duration? duration;
 
   final List<String> playlist = [
-    "yeh_sham.mp3",
+    "calm4.mp3",
   ];
   int currentSongIndex = 0;
 
@@ -41,7 +41,6 @@ class _Calm4State extends State<Calm4> {
       });
     });
     player.onPlayerStateChanged.listen((state) {
-      print("Player state changed: $state");
       setState(() {
         isPlaying = state == PlayerState.playing;
       });
@@ -58,11 +57,9 @@ class _Calm4State extends State<Calm4> {
     if (index >= 0 && index < playlist.length) {
       currentSongIndex = index;
       await player.setSource(AssetSource(playlist[currentSongIndex]));
-      await player.resume(); // Start playing the song
+      await player.resume();
       duration = await player.getDuration();
-      setState(() {
-        isPlaying = true; // Update the isPlaying state
-      });
+      setState(() {});
     }
   }
 
@@ -85,134 +82,102 @@ class _Calm4State extends State<Calm4> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-        body: Stack(
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(top: ScreenUtil().setHeight(10), left: ScreenUtil().setWidth(20)),
-                    child: IconButton(
-                      icon: Icon(Icons.arrow_back_ios, size: ScreenUtil().setSp(30)),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                    ),
+            Padding(
+              padding: EdgeInsets.only(
+                  top: ScreenUtil().setHeight(10),
+                  left: ScreenUtil().setWidth(20)),
+              child: InkWell(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Icon(
+                    Icons.arrow_back_ios,
+                    size: ScreenUtil().setSp(30),
+                  )),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(10)),
+              child: Center(
+
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: Image.asset(
+                    'assets/Image/Mental_Health/Calm/calm3.png',
+                    width: ScreenUtil().setWidth(300),
+                    height: ScreenUtil().setHeight(400),
                   ),
-                  SizedBox(height: ScreenUtil().setHeight(15)),
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(10)),
-                    child: Center(
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(ScreenUtil().setWidth(20)),
-                        child: Image.asset(
-                          'assets/Image/Mental_Health/Calm/calm4.png',
-                          width: ScreenUtil().setWidth(350),
-                          height: ScreenUtil().setHeight(530),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Center(
-                    child: RichText(
-                      textAlign: TextAlign.center,
-                      text: TextSpan(
-                        children: [
-                          TextSpan(
-                            text: 'Cloudycloud \n',
-                            style: TextStyle(
-                              fontSize: ScreenUtil().setSp(40),
-                              color: Colors.black,
-                            ),
-                          ),
-                          TextSpan(
-                            text: 'SLEEP MUSIC',
-                            style: TextStyle(
-                              fontSize: ScreenUtil().setSp(20),
-                              color: Color.fromRGBO(152, 161, 189, 1),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: ScreenUtil().setHeight(10)),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      _buildIconButton(Icons.replay_30, skipBackward),
-                      SizedBox(width: ScreenUtil().setWidth(40)),
-                      _buildPlayPauseButton(),
-                      SizedBox(width: ScreenUtil().setWidth(40)),
-                      _buildIconButton(Icons.forward_30, skipForward),
-                    ],
-                  ),
-                  SizedBox(height: ScreenUtil(). setHeight(10)),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "${(value / 60).floor()}:${(value % 60).floor().toString().padLeft(2, '0')}",
-                        style: TextStyle(color: Colors.grey, fontSize: ScreenUtil().setSp(20)),
-                      ),
-                      if (duration != null)
-                        Slider(
-                          value: value.clamp(0.0, duration!.inSeconds.toDouble()),
-                          min: 0.0,
-                          max: duration!.inSeconds.toDouble(),
-                          onChanged: (v) {
-                            setState(() {
-                              value = v.clamp(0.0, duration!.inSeconds.toDouble());
-                            });
-                          },
-                          onChangeEnd: (newValue) async {
-                            await player.seek(Duration(seconds: newValue.toInt()));
-                            if (isPlaying) {
-                              await player.resume();
-                            }
-                          },
-                          activeColor: Colors.grey,
-                        ),
-                      if (duration != null)
-                        Text(
-                          "${duration!.inMinutes}:${(duration!.inSeconds % 60).toString().padLeft(2, '0')}",
-                          style: TextStyle(color: Colors.grey, fontSize: ScreenUtil().setSp(20)),
-                        ),
-                    ],
-                  ),
-                ],
+                ),
               ),
             ),
-            Positioned(
-              top: ScreenUtil().setHeight(30),
-              right: ScreenUtil().setWidth(15),
-              child: Row(
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      print("Liked!");
-                    },
-                    child: Image.asset(
-                      'assets/Image/Mental_Health/Calm/like.png',
-                      width: ScreenUtil().setWidth(50),
-                      height: ScreenUtil().setHeight(50),
+            Center(
+              child: RichText(
+                textAlign: TextAlign.center,
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: 'Landscapes\n',
+                      style: TextStyle(
+                        fontSize: ScreenUtil().setSp(40),
+                        color: Colors.black,
+                      ),
                     ),
-                  ),
-                  SizedBox(width: ScreenUtil().setWidth(10)),
-                  GestureDetector(
-                    onTap: () {
-                      print("Saved!");
-                    },
-                    child: Image.asset(
-                      'assets/Image/Mental_Health/Calm/save.png',
-                      width: ScreenUtil().setWidth(50),
-                      height: ScreenUtil().setHeight(50),
+                    TextSpan(
+                      text: 'SLEEP MUSIC',
+                      style: TextStyle(
+                        fontSize: ScreenUtil().setSp(20),
+                        color: Color.fromRGBO(152, 161, 189, 1),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
+            ),
+            SizedBox(height: ScreenUtil().setHeight(10)),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _buildIconButton(Icons.replay_30, skipBackward),
+                SizedBox(width: ScreenUtil().setWidth(30)),
+                _buildPlayPauseButton(),
+                SizedBox(width: ScreenUtil().setWidth(30)),
+                _buildIconButton(Icons.forward_30, skipForward),
+              ],
+            ),
+            SizedBox(height: ScreenUtil().setHeight(10)),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "${(value / 60).floor()}:${(value % 60).floor().toString().padLeft(2, '0')}",
+                  style: TextStyle(color: Colors.grey, fontSize: ScreenUtil().setSp(20)),
+                ),
+                if (duration != null)
+                  Slider(
+                    value: value.clamp(0.0, duration!.inSeconds.toDouble()),
+                    min: 0.0,
+                    max: duration!.inSeconds.toDouble(),
+                    onChanged: (v) {
+                      setState(() {
+                        value = v.clamp(0.0, duration!.inSeconds.toDouble());
+                      });
+                    },
+                    onChangeEnd: (newValue) async {
+                      await player.seek(Duration(seconds: newValue.toInt()));
+                      if (isPlaying) {
+                        await player.resume();
+                      }
+                    },
+                    activeColor: Colors.grey,
+                  ),
+                if (duration != null)
+                  Text(
+                    "${duration!.inMinutes}:${(duration!.inSeconds % 60).toString().padLeft(2, '0')}",
+                    style: TextStyle(color: Colors.grey, fontSize: ScreenUtil().setSp(20)),
+                  ),
+              ],
             ),
           ],
         ),
@@ -224,9 +189,11 @@ class _Calm4State extends State<Calm4> {
     return Container(
       width: ScreenUtil().setWidth(70),
       height: ScreenUtil().setHeight(70),
-      child: IconButton(
-        icon: Icon(icon, size: ScreenUtil().setSp(50), color: Colors.blueGrey),
-        onPressed: onPressed,
+      child: InkWell(
+        onTap: onPressed,
+        highlightColor: Colors.transparent,
+        splashColor: Colors.transparent,
+        child: Icon(icon, size: ScreenUtil().setSp(50), color: Colors.blueGrey),
       ),
     );
   }
@@ -234,9 +201,9 @@ class _Calm4State extends State<Calm4> {
   Widget _buildPlayPauseButton() {
     return Container(
       width: ScreenUtil().setWidth(60),
-      height: ScreenUtil().setHeight(60),
+      height: ScreenUtil().setHeight(50),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(ScreenUtil().setWidth(60)),
+        borderRadius: BorderRadius.circular(60),
         color: Colors.blueGrey,
         border: Border.all(color: Colors.grey),
       ),
@@ -251,6 +218,8 @@ class _Calm4State extends State<Calm4> {
             isPlaying = !isPlaying;
           });
         },
+        highlightColor: Colors.transparent,
+        splashColor: Colors.transparent,
         child: Icon(
           isPlaying ? Icons.pause : Icons.play_arrow,
           size: ScreenUtil().setSp(40),

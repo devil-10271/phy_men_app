@@ -82,107 +82,103 @@ class _Calm1State extends State<Calm1> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-        body: Stack(
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            Padding(
+              padding: EdgeInsets.only(
+                  top: ScreenUtil().setHeight(10),
+                  left: ScreenUtil().setWidth(20)),
+              child: InkWell(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Icon(
+                    Icons.arrow_back_ios,
+                    size: ScreenUtil().setSp(30),
+                  )),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(10)),
+              child: Center(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: Image.asset(
+                    'assets/Image/Mental_Health/Calm/calm1.png',
+                    width: ScreenUtil().setWidth(300),
+                    height: ScreenUtil().setHeight(350),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            ),
+            Center(
+              child: RichText(
+                textAlign: TextAlign.center,
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: 'Cloudycloud \n',
+                      style: TextStyle(
+                        fontSize: ScreenUtil().setSp(40),
+                        color: Colors.black,
+                      ),
+                    ),
+                    TextSpan(
+                      text: 'SLEEP MUSIC',
+                      style: TextStyle(
+                        fontSize: ScreenUtil().setSp(20),
+                        color: Color.fromRGBO(152, 161, 189, 1),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(height: ScreenUtil().setHeight(10)),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Padding(
-                  padding: EdgeInsets.only(top: ScreenUtil().setHeight(10), left: ScreenUtil().setWidth(20)),
-                  child: IconButton(
-                    icon: Icon(Icons.arrow_back_ios, size: ScreenUtil().setSp(20)),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                ),
-                SizedBox(height: ScreenUtil().setHeight(15)),
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(10)),
-                  child: Center(
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(ScreenUtil().setWidth(20)),
-                      child: Image.asset(
-                        'assets/Image/Mental_Health/Calm/calm1.png',
-                        width: ScreenUtil().setWidth(350),
-                        height: ScreenUtil().setHeight(470),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                ),
-                Center(
-                  child: RichText(
-                    textAlign: TextAlign.center,
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
-                          text: 'Cloudycloud \n',
-                          style: TextStyle(
-                            fontSize: ScreenUtil().setSp(40),
-                            color: Colors.black,
-                          ),
-                        ),
-                        TextSpan(
-                          text: 'SLEEP MUSIC',
-                          style: TextStyle(
-                            fontSize: ScreenUtil().setSp(20),
-                            color: Color.fromRGBO(152, 161, 189, 1),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(height: ScreenUtil().setHeight(10)),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    _buildIconButton(Icons.replay_30, skipBackward),
-                    SizedBox(width: ScreenUtil().setWidth(40)),
-                    _buildPlayPauseButton(),
-                    SizedBox(width: ScreenUtil().setWidth(40)),
-                    _buildIconButton(Icons.forward_30, skipForward),
-                  ],
-                ),
-                SizedBox(height: ScreenUtil(). setHeight(10)),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "${(value / 60).floor()}:${(value % 60).floor().toString().padLeft(2, '0')}",
-                      style: TextStyle(color: Colors.grey, fontSize: ScreenUtil().setSp(20)),
-                    ),
-                    if (duration != null)
-                      Slider(
-                        value: value.clamp(0.0, duration!.inSeconds.toDouble()),
-                        min: 0.0,
-                        max: duration!.inSeconds.toDouble(),
-                        onChanged: (v) {
-                          setState(() {
-                            value = v.clamp(0.0, duration!.inSeconds.toDouble());
-                          });
-                        },
-                        onChangeEnd: (newValue) async {
-                          await player.seek(Duration(seconds: newValue.toInt()));
-                          if (isPlaying) {
-                            await player.resume();
-                          }
-                        },
-                        activeColor: Colors.grey,
-                      ),
-                    if (duration != null)
-                      Text(
-                        "${duration!.inMinutes}:${(duration!.inSeconds % 60).toString().padLeft(2, '0')}",
-                        style: TextStyle(color: Colors.grey, fontSize: ScreenUtil().setSp(20)),
-                      ),
-                  ],
-                ),
+                _buildIconButton(Icons.replay_30, skipBackward),
+                SizedBox(width: ScreenUtil().setWidth(30)),
+                _buildPlayPauseButton(),
+                SizedBox(width: ScreenUtil().setWidth(30)),
+                _buildIconButton(Icons.forward_30, skipForward),
               ],
             ),
-
-            SizedBox(width: ScreenUtil().setWidth(10)),
-
+            SizedBox(height: ScreenUtil().setHeight(10)),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "${(value / 60).floor()}:${(value % 60).floor().toString().padLeft(2, '0')}",
+                  style: TextStyle(color: Colors.grey, fontSize: ScreenUtil().setSp(20)),
+                ),
+                if (duration != null)
+                  Slider(
+                    value: value.clamp(0.0, duration!.inSeconds.toDouble()),
+                    min: 0.0,
+                    max: duration!.inSeconds.toDouble(),
+                    onChanged: (v) {
+                      setState(() {
+                        value = v.clamp(0.0, duration!.inSeconds.toDouble());
+                      });
+                    },
+                    onChangeEnd: (newValue) async {
+                      await player.seek(Duration(seconds: newValue.toInt()));
+                      if (isPlaying) {
+                        await player.resume();
+                      }
+                    },
+                    activeColor: Colors.grey,
+                  ),
+                if (duration != null)
+                  Text(
+                    "${duration!.inMinutes}:${(duration!.inSeconds % 60).toString().padLeft(2, '0')}",
+                    style: TextStyle(color: Colors.grey, fontSize: ScreenUtil().setSp(20)),
+                  ),
+              ],
+            ),
           ],
         ),
       ),
@@ -193,9 +189,11 @@ class _Calm1State extends State<Calm1> {
     return Container(
       width: ScreenUtil().setWidth(70),
       height: ScreenUtil().setHeight(70),
-      child: IconButton(
-        icon: Icon(icon, size: ScreenUtil().setSp(50), color: Colors.blueGrey),
-        onPressed: onPressed,
+      child: InkWell(
+        onTap: onPressed,
+        highlightColor: Colors.transparent,
+        splashColor: Colors.transparent,
+        child: Icon(icon, size: ScreenUtil().setSp(50), color: Colors.blueGrey),
       ),
     );
   }
@@ -203,9 +201,9 @@ class _Calm1State extends State<Calm1> {
   Widget _buildPlayPauseButton() {
     return Container(
       width: ScreenUtil().setWidth(60),
-      height: ScreenUtil().setHeight(60),
+      height: ScreenUtil().setHeight(50),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(ScreenUtil().setWidth(60)),
+        borderRadius: BorderRadius.circular(60),
         color: Colors.blueGrey,
         border: Border.all(color: Colors.grey),
       ),
@@ -220,6 +218,8 @@ class _Calm1State extends State<Calm1> {
             isPlaying = !isPlaying;
           });
         },
+        highlightColor: Colors.transparent,
+        splashColor: Colors.transparent,
         child: Icon(
           isPlaying ? Icons.pause : Icons.play_arrow,
           size: ScreenUtil().setSp(40),
