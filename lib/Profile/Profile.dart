@@ -4,6 +4,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:phy_men_app/Auth/login.dart';
+import 'package:phy_men_app/Home/Home_page.dart';
 import 'package:phy_men_app/Profile/edit_profile.dart';
 import 'package:phy_men_app/firebase_auth_implementation/firebase_auth_services.dart';
 import 'package:provider/provider.dart';
@@ -95,7 +96,8 @@ class _ProfileState extends State<Profile> {
                             InkWell(
                               borderRadius: BorderRadius.circular(90),
                               onTap: () {
-                                Navigator.pop(context);
+                                Navigator.push(context, MaterialPageRoute(
+                                    builder: (context) => HomePage()));
                               },
                               child: const Icon(Icons.arrow_back_ios,
                                   size: 23, color: Colors.white),
