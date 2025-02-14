@@ -23,11 +23,28 @@ class _Edit_ProfileState extends State<Edit_Profile> {
   DatabaseReference ref = FirebaseDatabase.instance.ref().child('users');
   final String? uid = FirebaseAuth.instance.currentUser?.uid;
 
-  void getData() async{
-    DatabaseReference ref = FirebaseDatabase.instance.ref().child('users/$uid');
-    ref.onValue.listen((DatabaseEvent event){
-      var img = event.snapshot.value;
-    });
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
+  
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _fetchUserData();
+  }
+
+  Future<void> _fetchUserData() async{
+    if(uid != null){
+      DatabaseReference ref = FirebaseDatabase.instance.ref().child('users/$uid');
+      DataSnapshot snapshot = await ref.get();
+
+      if(snapshot.exists){
+        setState(() {
+          _emailController.text = snapshot.child('email').value.toString();
+          _usernameController.text = snapshot.child('uname').value.toString();
+        });
+      }
+    }
   }
 
 
@@ -46,6 +63,38 @@ class _Edit_ProfileState extends State<Edit_Profile> {
         Fluttertoast.showToast(msg: error.toString());
     });
   }
+
+  Future<void> _saveChanges() async{
+    if(!_validateFields()) return;
+
+    if(uid != null)
+      {
+        try{
+          DatabaseReference ref = FirebaseDatabase.instance.ref().child('users/$uid');
+          await ref.update({
+            'email': _emailController.text,
+            'uname': _usernameController.text,
+          });
+          Fluttertoast.showToast(msg: "Profile Updated");
+        } catch (e)
+    {
+      Fluttertoast.showToast(msg: e.toString());
+    }
+
+      }
+  }
+
+  bool _validateFields() {
+    if (_emailController.text.isEmpty || _usernameController.text.isEmpty) {
+      Fluttertoast.showToast(msg: "Please fill in all fields");
+      return false;
+    }
+    if(!EmailUtils.isEmail(_emailController.text.trim())){
+      Fluttertoast.showToast(msg: "Please enter a valid email");
+      return false;
+    }
+    return true;
+    }
 
   Future pickimage(ImageSource sour) async {
     try {
@@ -180,6 +229,7 @@ class _Edit_ProfileState extends State<Edit_Profile> {
                           height: ScreenUtil().setHeight(76),
                         ),
                         TextFormField(
+                          controller: _usernameController,
                           style: TextStyle(color: Colors.black),
                           decoration: InputDecoration(
                             prefixIcon: Icon(
@@ -210,6 +260,7 @@ class _Edit_ProfileState extends State<Edit_Profile> {
                           height: ScreenUtil().setHeight(20),
                         ),
                         TextFormField(
+                          controller: _emailController,
                           style: TextStyle(color: Colors.black),
                           decoration: InputDecoration(
                             prefixIcon: Icon(
@@ -275,6 +326,7 @@ class _Edit_ProfileState extends State<Edit_Profile> {
                               child: InkWell(
                                 onTap: () {
                                   uploadImage(context);
+
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(
@@ -283,7 +335,7 @@ class _Edit_ProfileState extends State<Edit_Profile> {
                                   child: Column(
                                     children: [
                                       Icon(Icons.repeat),
-                                      Text("Save Detail"),
+                                      Text("Save Profile Pic"),
                                     ],
                                   ),
                                 ),
@@ -294,7 +346,9 @@ class _Edit_ProfileState extends State<Edit_Profile> {
                             ),
                             Expanded(
                               child: InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                  _saveChanges();
+                                },
                                 child: Container(
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
@@ -302,7 +356,7 @@ class _Edit_ProfileState extends State<Edit_Profile> {
                                   child: Column(
                                     children: [
                                       Icon(Icons.delete),
-                                      Text("Delete Account"),
+                                      Text("Save User Details"),
                                     ],
                                   ),
                                 ),
