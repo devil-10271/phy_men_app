@@ -58,6 +58,8 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
+        <meta-data android:name="com.google.android.geo.AIzaSyAwD0a-QAIPS2tu1XX_jiJxVtgCuWQ5ZEw"
+            android:value="AIzaSyAwD0a-QAIPS2tu1XX_jiJxVtgCuWQ5ZEw"/>
     </application>
     <!-- Required to query activities that can process text, see:
          https://developer.android.com/training/package-visibility and

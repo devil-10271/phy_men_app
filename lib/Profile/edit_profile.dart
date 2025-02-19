@@ -4,8 +4,11 @@ import "package:firebase_database/firebase_database.dart";
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
+import "package:google_places_flutter/google_places_flutter.dart";
+import "package:google_places_flutter/model/prediction.dart";
 import "package:image_picker/image_picker.dart";
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import "package:intl/intl.dart";
 import "package:phy_men_app/main.dart";
 import 'package:basic_utils/basic_utils.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -20,21 +23,60 @@ class Edit_Profile extends StatefulWidget {
 
 class _Edit_ProfileState extends State<Edit_Profile> {
   File? image;
+  final  String googleApiKey = "AIzaSyAwD0a-QAIPS2tu1XX_jiJxVtgCuWQ5ZEw";
   final user = FirebaseAuth.instance.currentUser;
   DatabaseReference ref = FirebaseDatabase.instance.ref().child('users');
   final String? uid = FirebaseAuth.instance.currentUser?.uid;
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _fnameController = TextEditingController();
+  final TextEditingController _lnameController = TextEditingController();
+  final TextEditingController _dobController = TextEditingController();
+  final TextEditingController _contactController = TextEditingController();
+  final TextEditingController _addressController = TextEditingController();
   String? profileImageUrl;
-  
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _fetchUserData();
+    _fetchUserDetails();
   }
+  Future<void> _selectDate(BuildContext context)async{
+    DateTime? pickedDate = await showDatePicker(
+        builder: (context, child){
+          return Theme(
+              data: ThemeData.light().copyWith(
+                primaryColor: Colors.teal,
+                hintColor: Colors.teal,
+                colorScheme: ColorScheme.light(
+                    primary: Colors.teal,
+                  onPrimary: Colors.teal.shade50,
+                  onSurface: Colors.black,
+                ),
+                textButtonTheme: TextButtonThemeData(
+                  style: TextButton.styleFrom(
+                    foregroundColor: Colors.teal
+                  )
+                )
+              ),
+              child: child!,
+          );
+        },
+        initialDate: DateTime.now(),
+        firstDate: DateTime(1900),
+        lastDate: DateTime.now(),
+      context: context
 
+    );
+    if(pickedDate != null){
+      setState(() {
+    _dobController.text = DateFormat('dd/MM/yyyy').format(pickedDate);
+      });
+    };
+  }
   Future<void> _fetchUserData() async{
     if(uid != null){
       DatabaseReference ref = FirebaseDatabase.instance.ref().child('users/$uid');
@@ -49,6 +91,24 @@ class _Edit_ProfileState extends State<Edit_Profile> {
       }
     }
   }
+
+  Future<void> _fetchUserDetails() async{
+    if (uid != null) {
+      DatabaseReference ref = FirebaseDatabase.instance.ref().child('users/$uid/details');
+      DataSnapshot snapshot = await ref.get();
+
+      if (snapshot.exists) {
+        setState(() {
+          _fnameController.text = snapshot.child('f_name').value.toString();
+          _lnameController.text = snapshot.child('l_name').value.toString();
+          _dobController.text = snapshot.child('dob').value.toString();
+          _contactController.text = snapshot.child('contact_no').value.toString();
+          _addressController.text = snapshot.child('address').value.toString();
+        });
+      }
+    }
+  }
+
 
 
   void uploadImage(BuildContext context) async{
@@ -86,9 +146,28 @@ class _Edit_ProfileState extends State<Edit_Profile> {
 
       }
   }
+  Future<void> _saveDetails() async {
+    if (!_validateFields()) return;
+
+    if (uid != null) {
+      try {
+        DatabaseReference ref = FirebaseDatabase.instance.ref().child('users/$uid/details');
+        await ref.update({
+          'f_name': _fnameController.text.trim(),
+          'l_name': _lnameController.text.trim(),
+          'dob': _dobController.text.trim(),
+          'contact_no': _contactController.text.trim(),
+          'address': _addressController.text.trim(),
+        });
+        Fluttertoast.showToast(msg: "Profile Updated Successfully");
+      } catch (e) {
+        Fluttertoast.showToast(msg: "Error: ${e.toString()}");
+      }
+    }
+  }
 
   bool _validateFields() {
-    if (_emailController.text.isEmpty || _usernameController.text.isEmpty) {
+    if (_emailController.text.isEmpty || _usernameController.text.isEmpty || _lnameController.text.isEmpty || _fnameController.text.isEmpty || _dobController.text.isEmpty || _contactController.text.isEmpty || _addressController.text.isEmpty) {
       Fluttertoast.showToast(msg: "Please fill in all fields");
       return false;
     }
@@ -124,7 +203,7 @@ class _Edit_ProfileState extends State<Edit_Profile> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.all(20),
+                padding: const EdgeInsets.all(5),
                 child: InkWell(
                   borderRadius: BorderRadius.circular(90),
                   onTap: () {
@@ -137,7 +216,7 @@ class _Edit_ProfileState extends State<Edit_Profile> {
               SizedBox(height: ScreenUtil().setHeight(10)),
               Center(
                 child: Container(
-                  height: ScreenUtil().setHeight(802),
+                  height: ScreenUtil().setHeight(852),
                   width: ScreenUtil().setWidth(397),
                   decoration: BoxDecoration(
                       color: Colors.white,
@@ -148,7 +227,7 @@ class _Edit_ProfileState extends State<Edit_Profile> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         SizedBox(
-                          height: ScreenUtil().setHeight(20),
+                          height: ScreenUtil().setHeight(5),
                         ),
                         InkWell(
                             onTap: () => showModalBottomSheet(
@@ -252,7 +331,7 @@ class _Edit_ProfileState extends State<Edit_Profile> {
                             ),
                         ),
                         SizedBox(
-                          height: ScreenUtil().setHeight(76),
+                          height: ScreenUtil().setHeight(1),
                         ),
                         TextFormField(
                           controller: _usernameController,
@@ -261,6 +340,7 @@ class _Edit_ProfileState extends State<Edit_Profile> {
                             prefixIcon: Icon(
                               Icons.person,
                             ),
+                            hintText: "Username",
                             fillColor: Color(methods.hex('76CFE2')),
                             enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20),
@@ -283,7 +363,7 @@ class _Edit_ProfileState extends State<Edit_Profile> {
                           ),
                         ),
                         SizedBox(
-                          height: ScreenUtil().setHeight(20),
+                          height: ScreenUtil().setHeight(10),
                         ),
                         TextFormField(
                           controller: _emailController,
@@ -292,6 +372,170 @@ class _Edit_ProfileState extends State<Edit_Profile> {
                             prefixIcon: Icon(
                               Icons.email,
                             ),
+                            hintText: "Email",
+                            fillColor: Color(methods.hex('76CFE2')),
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                borderSide: BorderSide(
+                                    color: Color(methods.hex('76CFE2')))),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Color(methods.hex('76CFE2')),
+                                  width: 2),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+
+                            hintStyle: TextStyle(
+                              color: Colors.grey,
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                            // suffixIcon: Icon(Icons.email),
+                          ),
+                        ),
+                        SizedBox(
+                          height: ScreenUtil().setHeight(10),
+                        ),
+                        TextFormField(
+                          controller: _fnameController,
+                          style: TextStyle(color: Colors.black),
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(
+                              Icons.person,
+                            ),
+                            hintText: "FirstName",
+                            fillColor: Color(methods.hex('76CFE2')),
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                borderSide: BorderSide(
+                                    color: Color(methods.hex('76CFE2')))),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Color(methods.hex('76CFE2')),
+                                  width: 2),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+
+                            hintStyle: TextStyle(
+                              color: Colors.grey,
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                            // suffixIcon: Icon(Icons.email),
+                          ),
+                        ),
+                        SizedBox(
+                          height: ScreenUtil().setHeight(10),
+                        ),
+                        TextFormField(
+                          controller: _lnameController,
+                          style: TextStyle(color: Colors.black),
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(
+                              Icons.person_outline,
+                            ),
+                            hintText: "Last Name",
+                            fillColor: Color(methods.hex('76CFE2')),
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                borderSide: BorderSide(
+                                    color: Color(methods.hex('76CFE2')))),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Color(methods.hex('76CFE2')),
+                                  width: 2),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+
+                            hintStyle: TextStyle(
+                              color: Colors.grey,
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                            // suffixIcon: Icon(Icons.email),
+                          ),
+                        ),
+                        SizedBox(
+                          height: ScreenUtil().setHeight(10),
+                        ),
+                        TextFormField(
+                          controller: _dobController,
+                          readOnly: true,
+                          style: TextStyle(color: Colors.black),
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(
+                              Icons.calendar_today,
+                            ),
+                            hintText: "Date Of Birth",
+                            fillColor: Color(methods.hex('76CFE2')),
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                borderSide: BorderSide(
+                                    color: Color(methods.hex('76CFE2')))),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Color(methods.hex('76CFE2')),
+                                  width: 2),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+
+                            hintStyle: TextStyle(
+                              color: Colors.grey,
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                            // suffixIcon: Icon(Icons.email),
+                          ),
+                          onTap: () => _selectDate(context),
+                        ),
+                        SizedBox(
+                          height: ScreenUtil().setHeight(10),
+                        ),
+                        TextFormField(
+                          controller: _contactController,
+                          style: TextStyle(color: Colors.black),
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(
+                              Icons.phone,
+                            ),
+                            hintText: "Contact No.",
+                            fillColor: Color(methods.hex('76CFE2')),
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                borderSide: BorderSide(
+                                    color: Color(methods.hex('76CFE2')))),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Color(methods.hex('76CFE2')),
+                                  width: 2),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+
+                            hintStyle: TextStyle(
+                              color: Colors.grey,
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                            // suffixIcon: Icon(Icons.email),
+                          ),
+                        ),
+                        SizedBox(
+                          height: ScreenUtil().setHeight(10),
+                        ),
+                        TextFormField(
+                          controller: _addressController,
+                          maxLines: 3,
+                          style: TextStyle(color: Colors.black),
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(
+                              Icons.location_on,
+                            ),
+                            hintText: "Address",
                             fillColor: Color(methods.hex('76CFE2')),
                             enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20),
@@ -315,36 +559,6 @@ class _Edit_ProfileState extends State<Edit_Profile> {
                         ),
                         SizedBox(
                           height: ScreenUtil().setHeight(20),
-                        ),
-                        TextFormField(
-                          style: TextStyle(color: Colors.black),
-                          decoration: InputDecoration(
-                            prefixIcon: Icon(
-                              Icons.lock,
-                            ),
-                            fillColor: Color(methods.hex('76CFE2')),
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20),
-                                borderSide: BorderSide(
-                                    color: Color(methods.hex('76CFE2')))),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Color(methods.hex('76CFE2')),
-                                  width: 2),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-
-                            hintStyle: TextStyle(
-                              color: Colors.grey,
-                            ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                            // suffixIcon: Icon(Icons.email),
-                          ),
-                        ),
-                        SizedBox(
-                          height: ScreenUtil().setHeight(120),
                         ),
                         Row(
                           children: [
@@ -377,6 +591,7 @@ class _Edit_ProfileState extends State<Edit_Profile> {
                               child: InkWell(
                                 onTap: () {
                                   _saveChanges();
+                                  _saveDetails();
                                 },
                                 child: Container(
                                   height: ScreenUtil().setHeight(70),
@@ -386,7 +601,7 @@ class _Edit_ProfileState extends State<Edit_Profile> {
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Icon(Icons.delete),
+                                      Icon(Icons.save),
                                       Text("Save User Details"),
                                     ],
                                   ),
