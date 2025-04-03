@@ -205,69 +205,7 @@ class _PulseGraphState extends State<PulseGraph> {
                           SizedBox(
                             width: ScreenUtil().setWidth(10),
                           ),
-                          Container(
-                            height: ScreenUtil().setHeight(141),
-                            width: ScreenUtil().setWidth(189),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              color: Color.fromRGBO(245, 245, 245, 1),
-                            ),
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Container(
-                                      margin: EdgeInsets.only(
-                                          top: ScreenUtil().setHeight(15),
-                                          left: ScreenUtil().setWidth(15)),
-                                      //color: Colors.yellow,
-                                      child: Text(
-                                        'Standards Limits',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w700,
-                                            fontSize: 18),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Container(
-                                      //color: Colors.green,
-                                      child: Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 10),
-                                        child: Row(
-                                          children: [
-                                            Text(
-                                              'Pulse Rate : ',
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 16,
-                                              ),
-                                            ),
-                                            Column(
-                                              children: [
-                                                SizedBox(height: 18),
-                                                Row(
-                                                  children: [
-                                                    Text('60 - 100'),
-                                                  ],
-                                                ),
-                                                Row(
-                                                  children: [Text('bpm')],
-                                                )
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
+
                         ],
                       ),
                       SizedBox(height: ScreenUtil().setHeight(40)),

@@ -363,7 +363,7 @@ class _Edit_ProfileState extends State<Edit_Profile> {
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Icon(Icons.repeat),
+                                      Icon(Icons.person),
                                       Text("Save Profile Pic"),
                                     ],
                                   ),
@@ -386,7 +386,7 @@ class _Edit_ProfileState extends State<Edit_Profile> {
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Icon(Icons.delete),
+                                      Icon(Icons.repeat),
                                       Text("Save User Details"),
                                     ],
                                   ),

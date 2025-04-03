@@ -173,50 +173,55 @@ class _BloodGraphState extends State<BloodGraph> {
                   child: Column(
                     children: [
                       SizedBox(height: ScreenUtil().setHeight(20)),
+                      
                       Row(
                         children: [
-                          Container(
-                            height: ScreenUtil().setHeight(141),
-                            width: ScreenUtil().setWidth(189),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              color:  Color.fromRGBO(190, 227, 246, 0.2),
-                            ),
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Container(
-                                      margin: EdgeInsets.only(
-                                          top: ScreenUtil().setHeight(15),
-                                          left: ScreenUtil().setWidth(15)),
-                                      child: Text(
-                                        'Average Systolic',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w700,
-                                          fontSize: 18,
+                          Expanded(
+                            child: Container(
+                              height: ScreenUtil().setHeight(141),
+                              width: ScreenUtil().setWidth(189),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                color:  Color.fromRGBO(190, 227, 246, 0.2),
+                              ),
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.only(
+                                            top: ScreenUtil().setHeight(15),
+                                            left: ScreenUtil().setWidth(15)),
+                                        child: Text(
+                                          'Average Systolic',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w700,
+                                            fontSize: 18,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Container(
-                                      margin: EdgeInsets.only(
-                                          top: ScreenUtil().setHeight(15),
-                                          left: ScreenUtil().setWidth(15)),
-                                      child: Text(
-                                        '120', // Placeholder value
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w700,
-                                          fontSize: 40,
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: Container(
+                                          margin: EdgeInsets.only(
+                                              top: ScreenUtil().setHeight(15),
+                                              left: ScreenUtil().setWidth(15)),
+                                          child: Text(
+                                            '120', // Placeholder value
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.w700,
+                                              fontSize: 40,
+                                            ),
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                           SizedBox(

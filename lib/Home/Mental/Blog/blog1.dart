@@ -61,10 +61,10 @@ class _Blog1State extends State<Blog1> {
                             child: Text(
                               'Breaking Mental Health Stigmas',
                               style: TextStyle(
-                                  fontSize: ScreenUtil().setSp(30),
+                                  fontSize: ScreenUtil().setSp(20),
                                   fontWeight: FontWeight.bold,
                                   color: const Color.fromRGBO(203, 208, 222, 1),
-                                  overflow: TextOverflow.clip),
+                                  overflow: TextOverflow.ellipsis),
                               textAlign: TextAlign.center,
                             ),
                           ),

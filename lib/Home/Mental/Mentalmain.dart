@@ -23,33 +23,28 @@ class _MentalMainState extends State<MentalMain> {
 
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(30),
-            ),
-          ),
-          leading: InkWell(
-            borderRadius: BorderRadius.circular(90),
-            onTap: () {
-              Navigator.pop(context);
-            },
-            child: Icon(
-              Icons.arrow_back_ios,
-              size: 20,
-            ),
-          ),
-          //backgroundColor: Color.fromRGBO(171, 222, 232, 1),
-          //foregroundColor: Colors.white,
-          centerTitle: true,
-        ),
+
         body: Column(
+
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: InkWell(
+                borderRadius: BorderRadius.circular(90),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Icon(
+                  Icons.arrow_back_ios,
+                  size: 20,
+                ),
+              ),
+            ),
             // Greeting text
             Container(
               margin: EdgeInsets.only(
-                top: 77.h,
+                top: 50.h,
                 left: 15.w,
                 right: 33.w,
               ),
