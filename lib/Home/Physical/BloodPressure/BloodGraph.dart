@@ -24,6 +24,7 @@ class _BloodGraphState extends State<BloodGraph> {
   ).ref();
   final String? uid = FirebaseAuth.instance.currentUser?.uid;
 
+  
   @override
   void initState() {
     super.initState();
@@ -173,138 +174,54 @@ class _BloodGraphState extends State<BloodGraph> {
                   child: Column(
                     children: [
                       SizedBox(height: ScreenUtil().setHeight(20)),
-                      
                       Row(
                         children: [
-                          Expanded(
-                            child: Container(
-                              height: ScreenUtil().setHeight(141),
-                              width: ScreenUtil().setWidth(189),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color:  Color.fromRGBO(190, 227, 246, 0.2),
-                              ),
-                              child: Column(
-                                children: [
-                                  Row(
-                                    children: [
-                                      Container(
-                                        margin: EdgeInsets.only(
-                                            top: ScreenUtil().setHeight(15),
-                                            left: ScreenUtil().setWidth(15)),
-                                        child: Text(
-                                          'Average Systolic',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w700,
-                                            fontSize: 18,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: Container(
-                                          margin: EdgeInsets.only(
-                                              top: ScreenUtil().setHeight(15),
-                                              left: ScreenUtil().setWidth(15)),
-                                          child: Text(
-                                            '120', // Placeholder value
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.w700,
-                                              fontSize: 40,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: ScreenUtil().setWidth(10),
-                          ),
                           Container(
                             height: ScreenUtil().setHeight(141),
                             width: ScreenUtil().setWidth(189),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15),
-                              color:   Color.fromRGBO(190, 227, 246, 0.2),
+                              color:  Color.fromRGBO(190, 227, 246, 0.2),
                             ),
-                            child: Expanded(
-                              child: Column(
-                                children: [
-                                  Row(
-                                    children: [
-                                      Container(
-                                        margin: EdgeInsets.only(
-                                            top: ScreenUtil().setHeight(15),
-                                            left: ScreenUtil().setWidth(15)),
-                                        child: Text(
-                                          'Standard Limits',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w700,
-                                              fontSize: 18),
+                            child: Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    Container(
+                                      margin: EdgeInsets.only(
+                                          top: ScreenUtil().setHeight(15),
+                                          left: ScreenUtil().setWidth(15)),
+                                      child: Text(
+                                        'Average Systolic',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 18,
                                         ),
                                       ),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Container(
-                                        child: Padding(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 10),
-                                          child: Column(
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  Text(
-                                                    'Systolic: ',
-                                                    style: TextStyle(
-                                                      fontWeight: FontWeight.w400,
-                                                      fontSize: 14,
-                                                    ),
-                                                  ),
-                                                  Text(
-                                                    '<120 mmHg',
-                                                    style: TextStyle(
-                                                      fontWeight: FontWeight.w400,
-                                                      fontSize: 14,
-                                                    ),
-                                                  )
-                                                ],
-                                              ),
-                                              Row(
-                                                children: [
-                                                  Text(
-                                                    'Diastolic: ',
-                                                    style: TextStyle(
-                                                      fontWeight: FontWeight.w400,
-                                                      fontSize: 14,
-                                                    ),
-                                                  ),
-                                                  Text(
-                                                    '<80 mmHg',
-                                                    style: TextStyle(
-                                                      fontWeight: FontWeight.w400,
-                                                      fontSize: 14,
-                                                    ),
-                                                  )
-                                                ],
-                                              ),
-                                            ],
-                                          ),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Container(
+                                      margin: EdgeInsets.only(
+                                          top: ScreenUtil().setHeight(15),
+                                          left: ScreenUtil().setWidth(15)),
+                                      child: Text(
+                                        '120', // Placeholder value
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 40,
                                         ),
                                       ),
-                                    ],
-                                  ),
-                                ],
-                              ),
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
+                          ),
+                          SizedBox(
+                            width: ScreenUtil().setWidth(10),
                           ),
                         ],
                       ),

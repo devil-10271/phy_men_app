@@ -23,9 +23,9 @@ class _MentalMainState extends State<MentalMain> {
 
     return SafeArea(
       child: Scaffold(
-
+       
         body: Column(
-
+          
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
@@ -44,13 +44,13 @@ class _MentalMainState extends State<MentalMain> {
             // Greeting text
             Container(
               margin: EdgeInsets.only(
-                top: 50.h,
+                top: ScreenUtil().setHeight(30),
                 left: 15.w,
                 right: 33.w,
               ),
               child: RichText(
                 text: const TextSpan(
-                  text: 'Hello, Miss Norman\n',
+                  text: 'Hello \n',
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 24,

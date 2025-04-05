@@ -68,9 +68,9 @@ Self-care is not a luxury but a necessity for a healthy mind and body. By incorp
                         ),
                         Center(
                           child: Container(
-                            width: ScreenUtil().setWidth(350),
+                            width: ScreenUtil().setWidth(330),
                             child: Text(
-                              'Breaking Mental Health Stigmas',
+                              'Daily Self-Care Routines to Boost Mental Health',
                               style: TextStyle(
                                   fontSize: ScreenUtil().setSp(25),
                                   fontWeight: FontWeight.bold,

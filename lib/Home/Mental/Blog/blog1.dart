@@ -57,14 +57,14 @@ class _Blog1State extends State<Blog1> {
                         ),
                         Center(
                           child: Container(
-                            width: ScreenUtil().setWidth(340),
+                            width: ScreenUtil().setWidth(330),
                             child: Text(
                               'Breaking Mental Health Stigmas',
                               style: TextStyle(
-                                  fontSize: ScreenUtil().setSp(20),
+                                  fontSize: ScreenUtil().setSp(25),
                                   fontWeight: FontWeight.bold,
                                   color: const Color.fromRGBO(203, 208, 222, 1),
-                                  overflow: TextOverflow.ellipsis),
+                                  overflow: TextOverflow.clip),
                               textAlign: TextAlign.center,
                             ),
                           ),
